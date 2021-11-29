@@ -1,0 +1,40 @@
+@import "../variable";
+$top: $header-height + $color-line-height;
+.header {
+  position: fixed;
+  width: 100vw;
+  z-index: 100;
+}
+
+.menu {
+  position: fixed;
+  top: $top;
+  width: $menu-width;
+}
+
+.content {
+  position: relative;
+  top: $top;
+  left: $menu-width;
+  height: calc(100vh - #{$top});
+  width: calc(100% - #{$menu-width});
+  overflow: auto;
+  padding-bottom: 3em;
+}
+
+.content > app-nav {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+
+div.content > div {
+  margin-top: $nav-height + 1.4rem;
+}
+
+.toast {
+  position: absolute;
+  top: $top + $nav-height + 1rem;
+  right: 20px;
+  background-color: rgba(255,255,255,0);
+}

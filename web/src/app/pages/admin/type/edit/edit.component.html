@@ -1,0 +1,22 @@
+<form [formGroup]="typeForm" (ngSubmit)="submit()">
+  <div class="row">
+    <div class="col-md-6 offset-md-1">
+      <div class="row">
+        <div class="col-md-4 text-right">
+          <label for="college" class="form-text">名称<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="college" placeholder="请输入类型名称" formControlName="name" />
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="offset-md-6">
+          <button type="submit" class="btn btn-primary">
+            <i class="far fa-save"></i>
+            &nbsp;保存
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

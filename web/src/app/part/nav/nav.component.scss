@@ -1,0 +1,18 @@
+@import "../variable";
+.nav {
+  height: $nav-height;
+  line-height: $nav-height;
+  font-size: 0.86rem;
+  font-weight: bold;
+}
+
+a {
+  color: black;
+  margin-left: 1.2rem;
+  text-decoration: none;
+}
+
+p {
+  margin-left: 1.3rem;
+  font-weight: normal;
+}

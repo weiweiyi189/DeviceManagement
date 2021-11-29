@@ -1,0 +1,15 @@
+@import "../variable";
+
+.h2 {
+  text-align: center;
+}
+
+.header {
+  height: $header-height;
+}
+
+.color-line {
+  height: $color-line-height;
+  background-size: 100% 6px;
+  background: #f7f9fa linear-gradient(to right, #ffb606, #e67e22, #e74c3c, #9b59b6, #34495e) no-repeat 50% 100%;
+}

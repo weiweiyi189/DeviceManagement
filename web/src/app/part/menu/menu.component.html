@@ -1,0 +1,10 @@
+<ul class="menu">
+  <li *ngFor="let menu of menus" class="border-bottom">
+    <a href="javascript:void(0);" (click)="navigate(menu)">
+      <div class="inner" [style.background-color]="getBackgroundColor(menu)" [style.color]="getTextColor(menu)">
+        <i [className]="'icon ' + menu.icon"></i>
+        <span>{{ menu.name }}</span>
+      </div>
+    </a>
+  </li>
+</ul>

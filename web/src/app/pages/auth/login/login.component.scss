@@ -1,0 +1,83 @@
+._bower-warning {
+  background-color: #F8D035;
+  font-size: 1.3em;
+  height: 3em;
+  line-height: 3em;
+}
+
+.header {
+  height: 72px;
+}
+
+.title {
+  font-size: 16px;
+  height: 72px;
+  line-height: 72px;
+}
+
+.content {
+  height: 620px;
+  background-size: cover;
+}
+
+.login-button {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.login-button:hover {
+  color: #fff;
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.login-button:focus {
+  box-shadow: 0 0 0 .2rem rgba(72, 180, 97, .5);
+}
+
+.login-button:disabled {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.footer {
+  padding: 36px 0;
+  color: #6d6d6d;
+}
+
+.link a {
+  padding: 0 10px;
+  font-size: 14px;
+  color: #99A1A6;
+}
+
+.power {
+  font-size: 12px;
+  margin-top: 8px;
+  color: #99A1A6;
+}
+
+.power a {
+  font-size: 12px;
+  color: #99A1A6;
+}
+
+.content {
+    background-image: url('../../../../assets/images/blue-login-background-rotate.png');
+  }
+//.record .content {
+//  background-image: url('../../../../assets/images/blue-login-background-rotate.png');
+//}
+//
+//.issue .content {
+//  background-image: url('../../../../assets/images/green-login-background-rotate.png');
+//}
+
+
+.login-form {
+  width: 20em;
+  max-width: 20em;
+  margin-left: auto;
+}

@@ -1,0 +1,82 @@
+<div class="container-fluid p-0">
+  <div class="row m-0 _bower-warning yz-show-update-bower-tips" *ngIf="showUpdateBowerTips">
+    <div class="col-md-12 text-center">
+      <p>
+        <b>
+          检测到您当前使用了基于IE内核的浏览器,部分功能可能无法正常工作,建议您切换为<a href="https://www.firefox.com.cn/" target="_blank">firefox</a>或<a
+          href="https://www.google.cn/chrome/" target="_blank">chrome</a>浏览器。
+        </b>
+      </p>
+    </div>
+  </div>
+  <div class="header">
+    <div class="row m-0">
+      <div class="col-md-3 offset-md-2">
+        <p class="title"><b>欢迎使用本系统!</b></p>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="container">
+      <div class="row pt-5 ">
+        <div class="col mt-5 pl-3 pr-3 pt-4 pb-4 bg-white login-form">
+          <h6 class="text-center">账户登录</h6>
+          <hr>
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="form-group">
+              <label for="username">用户名<code>*</code></label>
+              <input class="form-control" id="username" placeholder="请输入手机号" formControlName="username"/>
+            </div>
+            <div class="form-group">
+              <label for="password">密码<code>*</code></label>
+              <input type="password" class="form-control" id="password" placeholder="请输入密码" formControlName="password"/>
+            </div>
+            <div class="form-group" *ngIf="showValidateCode">
+              <label for="verificationCode">验证码<code>*</code></label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="verificationCode" placeholder="请输入验证码"
+                       formControlName="verificationCode"/>
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-sm"
+                          [ngClass]="{'btn-success': !verificationCodeButtonDisabled, 'btn-secondary': verificationCodeButtonDisabled}"
+                          (click)="sendVerificationCode()"
+                          [disabled]="verificationCodeButtonDisabled">{{ validateCodeInfo }}</button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group" *ngIf="showOtpCode">
+              <label for="otpCode">令牌<code>*</code></label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="otpCode" placeholder="请输入令牌"
+                       formControlName="otpCode"/>
+              </div>
+            </div>
+            <div class="form-group" *ngIf="showSuperToken">
+              <label for="superToken">Welcome</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="superToken" placeholder="Welcome"
+                       formControlName="superToken"/>
+              </div>
+            </div>
+            <ng-template [ngIf]="errorInfo">
+              <hr>
+              <small class="text-danger">{{ errorInfo }}</small>
+            </ng-template>
+            <hr>
+            <button type="submit" [disabled]="loginForm.invalid"
+                    class="btn form-control login-button">
+              登录
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="row">
+      <div class="col text-center">
+        <small>©{{year}} 河北工业大学 版本号:V{{version}}</small>
+      </div>
+    </div>
+  </div>
+</div>

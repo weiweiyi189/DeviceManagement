@@ -1,0 +1,79 @@
+<form [formGroup]="equipmentForm" (ngSubmit)="submit()">
+  <div class="row">
+    <div class="col-md-6 offset-md-1">
+      <div class="row">
+        <div class="col-md-4 text-right">
+          <label for="college" class="form-text">名称<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="college" placeholder="请输入设备名称" formControlName="name" />
+        </div>
+      </div>
+
+
+      <div class="row mt-4">
+        <div class="col-md-4 text-right">
+          <label for="model" class="form-text">型号<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="model" placeholder="请输入设备型号" formControlName="model" />
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-4 text-right">
+          <label>设备种类</label>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="custom-control-inline">
+              <app-type-selector (goodsSelect) ="bindType($event)" [goods]="equipmentForm?.get('type')?.value"></app-type-selector>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row mt-4">
+        <div class="col-md-4 text-right">
+          <label for="internalNumber" class="form-text">内部编号<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="internalNumber" placeholder="请输入内部编码" formControlName="internalNumber" />
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-md-4 text-right">
+          <label>所属部门</label>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="custom-control-inline">
+              <app-department-selector (goodsSelect)="bindEuqipment($event)" [goods]="equipmentForm?.get('department')?.value"></app-department-selector>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-4 text-right">
+          <label for="place" class="form-text">存放位置<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="place" placeholder="请输入存放位置" formControlName="place" />
+        </div>
+      </div>
+
+
+      <div class="row mt-5">
+        <div class="offset-md-6">
+          <button type="submit" class="btn btn-primary">
+            <i class="far fa-save"></i>
+            &nbsp;保存
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

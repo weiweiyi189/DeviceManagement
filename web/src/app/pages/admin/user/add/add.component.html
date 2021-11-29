@@ -1,0 +1,128 @@
+<form [formGroup]="userForm" (ngSubmit)="submit()">
+  <div class="row">
+    <div class="col-md-6 offset-md-1">
+      <div class="row mt-4">
+        <div class="col-md-4 form-text text-right">
+          <label for="name">姓名<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" id="name" class="form-control" formControlName="name" placeholder="请输入姓名"/>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-md-4 text-right">
+          <label>性别：</label>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-2">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" name="sex" id="true" value="true" class="custom-control-input"
+                       [formControl]="sexForm">
+                <label class="custom-control-label" for="true">女</label>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" name="sex" id="false" value="false" class="custom-control-input"
+                       [formControl]="sexForm">
+                <label class="custom-control-label" for="false">男</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-4 form-text text-right">
+          <label for="username">用户名<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" id="username" class="form-control" formControlName="username" placeholder="请输入用户名"/>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-4 form-text text-right">
+          <label for="username">手机号<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+          <input type="number" id="phone" class="form-control" formControlName="phone" placeholder="请输入手机号码"/>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-4 form-text text-right">
+          <label for="code">编号<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" id="code" class="form-control" formControlName="code" placeholder="请输入人员编号"/>
+        </div>
+      </div>
+
+
+      <div class="row mt-5">
+        <div class="col-md-4 text-right">
+          <label>角色：</label>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" name="role" id="role0" value=0 class="custom-control-input"
+                       [formControl]="roleForm">
+                <label class="custom-control-label" for="role0">管理员</label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" name="role" id="role3" value=3 class="custom-control-input"
+                       [formControl]="roleForm">
+                <label class="custom-control-label" for="role3">部门经理</label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" name="role" id="role1" value=1 class="custom-control-input"
+                       [formControl]="roleForm">
+                <label class="custom-control-label" for="role1">员工</label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" name="role" id="role2" value=2 class="custom-control-input"
+                       [formControl]="roleForm">
+                <label class="custom-control-label" for="role2">维修员</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-md-4 text-right">
+          <label>所属部门：</label>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+              <div class="custom-control-inline">
+               <app-department-selector (goodsSelect)="bindEuqipment($event)"></app-department-selector>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row mt-5">
+        <div class="col-md-4 offset-md-4">
+          <button class="btn btn-primary btn-lg btn-block"
+                  type="submit">
+            <i class="far fa-save"></i>
+            &nbsp;保存
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

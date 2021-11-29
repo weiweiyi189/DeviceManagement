@@ -1,0 +1,110 @@
+
+<div class="row mt-2">
+  <div class="col-md-4 offset-md-2">
+    <div class="row">
+      <div class="col-md-4 text-right">
+        <label for="name">姓名：</label>
+      </div>
+      <div class="col-md-8">
+        <div id="name">
+          {{currentUser?.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row mt-2">
+  <div class="col-md-4 offset-md-2">
+    <div class="row">
+      <div class="col-md-4 text-right">
+        <label for="username">用户名：</label>
+      </div>
+      <div class="col-md-8">
+        <div id="username">
+          {{currentUser?.username}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col-md-4 offset-md-2">
+    <div class="row">
+      <div class="col-md-4 text-right">
+        <label for="phone">电话：</label>
+      </div>
+      <div class="col-md-8">
+        <div id="phone">
+          {{currentUser?.phone}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row mt-2">
+  <div class="col-md-4 offset-md-2">
+    <div class="row">
+      <div class="col-md-4 text-right">
+        <label for="code">编号：</label>
+      </div>
+      <div class="col-md-8">
+        <div id="code">
+          {{currentUser?.jobNumber}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row mt-2">
+  <div class="col-md-4 offset-md-2">
+    <div class="row">
+      <div class="col-md-4 text-right">
+        <label for="department">所在部门：</label>
+      </div>
+      <div class="col-md-8">
+        <div id="department">
+          {{currentUser?.department?.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row mt-2">
+  <div class="col-md-4 offset-md-2">
+    <div class="row">
+      <div class="col-md-4 text-right">
+        <label for="role">角色：</label>
+      </div>
+      <div class="col-md-8">
+        <div id="role">
+          <span *ngIf="currentUser.role === 0">管理员</span>
+          <span *ngIf="currentUser.role === 1">员工</span>
+          <span *ngIf="currentUser.role === 2">维修人员</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-4 offset-md-2">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <a class="btn btn-primary btn-sm mr-2" routerLink="/personalCenter/modifyPassword">
+          <i class="fas fa-edit"></i>
+          修改密码
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<form [formGroup]="departmentForm" (ngSubmit)="submit()">
+  <div class="row">
+    <div class="col-md-6 offset-md-1">
+      <div class="row">
+        <div class="col-md-4 text-right">
+          <label for="college" class="form-text">名称<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="college" placeholder="请输入部门名称" formControlName="name" />
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-4 text-right">
+          <label for="code" class="form-text">编码<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="code" placeholder="请输入部门编码" formControlName="code" />
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-4 text-right">
+          <label for="code" class="form-text">主管<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+      <select class="form-control" [formControl]="userId" >
+        <option *ngFor="let politicalClimate of state"  [ngValue]="politicalClimate.id">
+          {{politicalClimate.name}}
+        </option>
+      </select>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="offset-md-6">
+          <button type="submit" class="btn btn-primary">
+            <i class="far fa-save"></i>
+            &nbsp;保存
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

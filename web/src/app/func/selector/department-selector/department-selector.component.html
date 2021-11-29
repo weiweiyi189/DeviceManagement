@@ -1,0 +1,6 @@
+<select [compareWith]="comparedWithId" class="form-control" [(ngModel)]="this.state.department"
+        (change)="change(goods)">
+  <option [ngValue]="null">请选择部门...</option>
+  <option *ngFor="let _department of state.departments" [ngValue]="_department">{{_department.name}}</option>
+</select>
+
