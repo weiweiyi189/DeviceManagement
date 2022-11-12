@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private authService: AuthService) {
   }
   ngOnInit(): void {
-    this.color = 'blue';
+    this.color = '#FCF9F0';
     this.init();
   }
   init(): void {

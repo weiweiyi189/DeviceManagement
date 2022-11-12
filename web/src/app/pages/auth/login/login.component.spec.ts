@@ -1,7 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {LoginComponent} from './login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {YzSubmitButtonTestModule} from '../../../func/yz-submit-button/yz-submit-button-test.module';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {AuthService} from '../../../service/auth.service';
@@ -17,7 +16,6 @@ describe('LoginComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        YzSubmitButtonTestModule,
         RouterTestingModule,
         HttpClientTestingModule
       ]

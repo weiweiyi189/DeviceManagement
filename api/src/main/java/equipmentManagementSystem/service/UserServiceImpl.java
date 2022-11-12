@@ -2,6 +2,7 @@ package equipmentManagementSystem.service;
 
 import com.mengyunzhi.core.exception.ObjectNotFoundException;
 import com.mengyunzhi.core.service.YunzhiService;
+import equipmentManagementSystem.Mybatis.UserMapper;
 import equipmentManagementSystem.entity.User;
 import equipmentManagementSystem.input.PUser;
 import equipmentManagementSystem.input.VUser;
@@ -10,6 +11,7 @@ import equipmentManagementSystem.respority.Specs.UserSpecs;
 import equipmentManagementSystem.respority.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -36,6 +38,9 @@ public class UserServiceImpl implements UserService{
     private final DepartmentRepository departmentRepository;
 
     private final YunzhiService<User> yunzhiService;
+
+    @Autowired
+    private UserMapper userMapper;
 
     public UserServiceImpl(UserRepository userRepository,
                            DepartmentRepository departmentRepository, YunzhiService<User> yunzhiService) {
@@ -84,7 +89,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void delete(Long id) {
-        this.userRepository.deleteById(id);
+        this.userMapper.deleteById(id);
     }
 
     @Override

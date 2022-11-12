@@ -100,9 +100,9 @@ public class UserController {
     }
 
     /**
-     * 获取所有学生
+     * 获取所有
      * @param pageable 分页信息
-     * @return 所有学生
+     * @return 所有
      */
     @GetMapping("getAll")
     @JsonView(User.DepartmentJsonView.class)

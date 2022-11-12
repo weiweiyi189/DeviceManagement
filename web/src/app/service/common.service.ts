@@ -234,7 +234,6 @@ export class CommonService {
    * compareVersion('9.0.0.0,', '10.2.3.0') = -1;
    * @param version1 版本号1
    * @param version2 版本号2
-   * @author zhaokaiqiang
    */
   public compareVersion(version1: string, version2: string): number {
     Assert.isNotNullOrUndefined(version1, version2, '传入的参考不能为null');

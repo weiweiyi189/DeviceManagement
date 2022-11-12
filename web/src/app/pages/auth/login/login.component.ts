@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {AuthService} from '../../../service/auth.service';
-import {config} from "../../../conf/app.conf";
+import {config} from '../../../conf/app.conf';
 
 @Component({
   selector: 'app-login',
@@ -10,29 +10,15 @@ import {config} from "../../../conf/app.conf";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  showUpdateBowerTips: boolean;
 
   /** 表单对象 */
   loginForm: FormGroup;
-
-  /** 是否显示验证码选项 */
-  showValidateCode: boolean;
-
-  /** 验证码按钮 是否禁用 */
-  verificationCodeButtonDisabled = true;
-
-  /** 验证码按钮提示信息 */
-  validateCodeInfo = '发送验证码';
 
   /**
    * 显示oneTimePassword
    */
   showOtpCode = false;
 
-  /**
-   * 是否显示超级密码输入框
-   */
-  showSuperToken = false;
 
   /** 错误信息 */
   errorInfo: string;
@@ -40,11 +26,9 @@ export class LoginComponent implements OnInit {
   /** 提交状态 */
   submitting = false;
 
-  year = new Date().getFullYear();
 
   version: string;
 
-  apiVersion: string;
 
   constructor(private builder: FormBuilder,
               private activatedRoute: ActivatedRoute,
@@ -73,8 +57,5 @@ export class LoginComponent implements OnInit {
       }); }, () => {
         this.errorInfo = '登录失败，请检查您的用户名、密码';
       });
-  }
-
-  sendVerificationCode(): void {
   }
 }
