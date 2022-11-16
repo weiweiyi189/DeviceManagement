@@ -1,3 +1,5 @@
+0. 随便建一个分支，若已建，则不用建， 比如 git checkout -b weiweiyi
+
 1. equipmentManagementSystem/Mybatis 路径下，新建Mapper文件， 并声明函数
 
 2.  src/main/resources/mapper 路径下， 新建xml文件， 参考userMapper.xml 编写sql语句， 注意对应步骤一声明的方法
@@ -11,3 +13,25 @@
         this.userMapper.deleteById(id);
 
 4. 检查功能是否正常调用，逻辑是否有错误。启动前后台测试该方法。
+
+5. 提交代码步骤
+
+   在webstrom的terminal终端中，进入到api下
+
+   1.`git status` 查看目前自己修改的文件
+
+   2.`git add .` 注意有点
+
+   3.`git commit -m 提交`  提交两字可换成任意文字， 比如 “登陆页面”， 来表达自己所提交的代码功能
+
+   4.`git push origin weiweiyi` 提交该代码到仓库中, weiweiyi 为自己所在的分支， 请注意替换
+
+   之后仓库管理员进行代码审阅， 如无问题，进行合并
+
+
+   拉取代码步骤
+
+   1. `git status` 查看目前自己修改的文件。 若无文件修改，进行第二步。若有文件修改。 则先进行“提交代码步骤的第2,3步”,或者将该文件修改恢复。。
+   2. `git fetch --all` 拉取仓库代码
+   3. `git merge origin/main` 合并仓库代码
+
