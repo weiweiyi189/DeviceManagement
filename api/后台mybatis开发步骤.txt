@@ -1,0 +1,13 @@
+1. equipmentManagementSystem/Mybatis 路径下，新建Mapper文件， 并声明函数
+
+2.  src/main/resources/mapper 路径下， 新建xml文件， 参考userMapper.xml 编写sql语句， 注意对应步骤一声明的方法
+
+3.  开发完后， 进入src/main/java/equipmentManagementSystem/service, 可以参考 UserServiceImpl,
+    用@AutoWired 注入Mapper, 然后调用里面的方法。  替换原来userRepository的方法
+    例如
+        this.userRepository.deleteById(id);
+
+    改成
+        this.userMapper.deleteById(id);
+
+4. 检查功能是否正常调用，逻辑是否有错误。启动前后台测试该方法。

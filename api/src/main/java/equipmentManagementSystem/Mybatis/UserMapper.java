@@ -12,7 +12,6 @@ import java.util.List;
 @Repository
 public interface UserMapper {
 
-    // 自定义添加通过用户名称模糊查找用户信息
     List<User> findByName(String name);
 
     List<User> findAll();
