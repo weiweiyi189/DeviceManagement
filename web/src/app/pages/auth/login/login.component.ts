@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
     });
     this.errorInfo = '';
-    this.version = config.version;
   }
 
   login(): void {

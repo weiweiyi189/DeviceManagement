@@ -2,18 +2,17 @@ package equipmentManagementSystem.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.mengyunzhi.core.entity.YunzhiEntity;
 import equipmentManagementSystem.service.BeanService;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.io.Serializable;
 
 /**
  * 用户
  */
 
 @Entity
-public class User implements YunzhiEntity {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
