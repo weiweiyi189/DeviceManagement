@@ -10,7 +10,7 @@ export class MenuService {
     // tslint:disable-next-line:max-line-length
     new Menu({name: '类型管理', icon: 'fab fa-audible', url: 'type', roles: [Menu.ROLE_MANAGER]}),
     new Menu({name: '部门管理', icon: 'fas fa-landmark', url: 'department', roles: [Menu.ROLE_ADMIN]}),
-    new Menu({name: '转借审批', icon: 'far fa-money-check-edit', url: 'approval', roles: [Menu.ROLE_MANAGER]}),
+    new Menu({name: '转借审批', icon: 'fas fa-handshake', url: 'approval', roles: [Menu.ROLE_MANAGER]}),
     new Menu({name: '维修审批', icon: 'far fa-building', url: 'repair', roles: [Menu.ROLE_MANAGER]}),
     new Menu({name: '报废审批', icon: 'fas fa-chalkboard-teacher', url: 'scrap', roles: [Menu.ROLE_ADMIN,  Menu.ROLE_MANAGER]}),
     // tslint:disable-next-line:max-line-length

@@ -16,7 +16,6 @@ public interface UserMapper {
 
     List<User> findAll();
 
-    public void addUser(User user);
 
     void deleteById(Long id);
 
