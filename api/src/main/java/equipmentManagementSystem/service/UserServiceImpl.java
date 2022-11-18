@@ -147,7 +147,7 @@ public class UserServiceImpl implements UserService{
         }
        else {
            return this.userRepository.getAllByDepartment(this.getCurrentLoginUser().getDepartment(),
-                   pageable , this.getCurrentLoginUser().getId());
+                   pageable , id);
         }
     }
 

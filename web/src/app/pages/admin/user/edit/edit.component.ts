@@ -18,6 +18,7 @@ export class EditComponent implements OnInit {
   roleForm: FormControl;
   sexForm: FormControl;
   user: User;
+  currentUser: User;
 
   constructor(private builder: FormBuilder,
               private commonService: CommonService,
@@ -28,6 +29,9 @@ export class EditComponent implements OnInit {
 
   ngOnInit(): void {
         this.getEditUser();
+    this.userService.currentLoginUser$.subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   public createForm(): void {

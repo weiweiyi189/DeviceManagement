@@ -64,18 +64,18 @@
 
       <div class="row mt-5">
         <div class="col-md-4 text-right">
-          <label>角色：</label>
+          <label>角色：<code>*</code></label>
         </div>
         <div class="col-md-8">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4"  *ngIf="currentUser.role === 0">
               <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" name="role" id="role0" value=0 class="custom-control-input"
                        [formControl]="roleForm">
                 <label class="custom-control-label" for="role0">管理员</label>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4"  *ngIf="currentUser.role === 0">
               <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" name="role" id="role3" value=3 class="custom-control-input"
                        [formControl]="roleForm">
@@ -106,9 +106,12 @@
         </div>
         <div class="col-md-8">
           <div class="row">
-              <div class="custom-control-inline">
+              <div class="custom-control-inline" *ngIf="currentUser.role === 0">
                <app-department-selector (goodsSelect)="bindEuqipment($event)"></app-department-selector>
               </div>
+            <div class="custom-control-inline" *ngIf="currentUser.role !== 0">
+              {{currentUser.department.name}}
+            </div>
           </div>
         </div>
       </div>
@@ -116,7 +119,7 @@
 
       <div class="row mt-5">
         <div class="col-md-4 offset-md-4">
-          <button class="btn btn-primary btn-lg btn-block"
+          <button class="btn btn-primary btn-lg btn-block" [disabled]="userForm.invalid"
                   type="submit">
             <i class="far fa-save"></i>
             &nbsp;保存

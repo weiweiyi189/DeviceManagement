@@ -68,3 +68,30 @@ export class User {
 
   }
 }
+
+export interface UserInterface {
+  /** id */
+  id: number;
+
+  jobNumber: string;
+
+  department: Department;
+
+  /** 名称 */
+  name: string;
+
+  /** 用户名 */
+  username: string;
+
+  /** 密码 */
+  password: string;
+
+  /** 角色 */
+  role: number;
+
+  /** 是否为admin */
+  sex: boolean;
+
+  phone: string;
+}
+

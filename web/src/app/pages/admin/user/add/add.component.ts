@@ -18,6 +18,7 @@ export class AddComponent implements OnInit {
   roleForm: FormControl;
   sexForm: FormControl;
   user: User;
+  currentUser: User;
 
   constructor(private builder: FormBuilder,
               private commonService: CommonService,
@@ -27,6 +28,9 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.userService.currentLoginUser$.subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   public initForm(): void {
