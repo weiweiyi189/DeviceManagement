@@ -1,18 +1,32 @@
 <form (ngSubmit)="onQuery()">
-  <label>名称：<input name="name" [formControl]="queryParams.name" type="text"/></label>
-  &nbsp;
-  <label>编码：<input name="internalNumber" [formControl]="queryParams.internalNumber" type="text"/></label>
 
-  <label>存放位置：<input name="place" [formControl]="queryParams.place" type="text"/></label>
+  <div class="input-group mb-3">
 
-    <div class="row">
-        <label for="type" class="form-text">类别：</label>
-      <div class="col-md-5">
-        <app-type-selector id="type" (goodsSelect)="bindType($event)"></app-type-selector>
-      </div>
-    </div>
+      <label class="mt-1">名称：</label>
+    <input type="text" class="form-control rounded col-1 h-100" placeholder="" [formControl]="queryParams.name">
 
-  <button type="submit" class="btn btn-info btn-sm"><i class="fas fa-search"></i>查询</button>
+    <label class="mt-1 ml-5">编码：</label>
+    <input type="text" class="form-control col-1 rounded" placeholder="" [formControl]="queryParams.internalNumber">
+
+    <label class="mt-1 ml-5">存放位置：</label>
+    <input type="text" class="form-control col-1 rounded " placeholder="" [formControl]="queryParams.place">
+
+    <label class="mt-1 ml-5">设备大类：</label>
+    <app-type-selector id="type" class="rounded" (goodsSelect)="bindType($event)"></app-type-selector>
+
+    <button class="btn btn-sm btn-warning ml-5" (click)="clear()">
+      <i class="fas fa-trash-alt"></i>
+      清空
+    </button>
+  </div>
+<!--    <div class="row">-->
+<!--        <label for="type" class="form-text">类别：</label>-->
+<!--      <div class="col-md-5">-->
+<!--        <app-type-selector id="type" (goodsSelect)="bindType($event)"></app-type-selector>-->
+<!--      </div>-->
+<!--    </div>-->
+
+
   &nbsp;
   <div class="custom-control custom-radio custom-control-inline">
     <input type="radio" [checked]="1" (change)="onCheckBoxChange($event, 4)" id="customRadioInline5" name="customRadioInline1" class="custom-control-input">
@@ -33,18 +47,18 @@
   <div class="custom-control custom-radio custom-control-inline">
     <input type="radio" (change)="onCheckBoxChange($event, 3)" id="customRadioInline3" name="customRadioInline1" class="custom-control-input">
     <label class="custom-control-label" for="customRadioInline3">已报废</label>
+
+    <button type="submit" class="btn btn-success btn-sm ml-xl-5"><i class="fas fa-search">&nbsp;</i>查询</button>
   </div>
-  <button class="btn btn-sm btn-warning" (click)="clear()">
-    <i class="fas fa-trash-alt"></i>
-    清空
-  </button>
+
+
 </form>
 
 <div class="row">
   <div class="col-lg-4">
   </div>
   <div class="col-lg-8 text-right button-group">
-    <a class="btn btn-primary btn-sm" routerLink="/equipment/add">
+    <a class="btn btn-primary btn-sm text-white" routerLink="/equipment/add">
       <i class="fas fa-plus"></i>
       购入填报
     </a>
