@@ -17,9 +17,21 @@
           <input type="text" class="form-control" id="code" placeholder="请输入部门编码" formControlName="code" />
         </div>
       </div>
+      <div class="row mt-4">
+        <div class="col-md-4 text-right">
+          <label for="code" class="form-text">主管<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+          <select class="form-control" [formControl]="userId" >
+            <option *ngFor="let user of state"  [ngValue]="user.id">
+              {{user.name}}
+            </option>
+          </select>
+        </div>
+      </div>
       <div class="row mt-5">
         <div class="offset-md-6">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary" [disabled]="departmentForm.invalid">
             <i class="far fa-save"></i>
             &nbsp;保存
           </button>
