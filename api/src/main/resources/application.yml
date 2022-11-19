@@ -11,7 +11,7 @@ spring:
   datasource:
     url: jdbc:mysql://${datasource.url:127.0.0.1}:${datasource.port:3306}/${datasource.dbname:equipment_management}?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
     username: ${datasource.username:root}
-    password: ${datasource.password:}
+    password: ${datasource.password:123456}
   # 启用 flyway
   flyway:
     enabled: false

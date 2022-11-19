@@ -1,6 +1,7 @@
 package equipmentManagementSystem.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.mengyunzhi.core.entity.YunzhiEntity;
 
@@ -33,6 +34,7 @@ public class Equipment implements YunzhiEntity {
     /**
      * 内部编号
      */
+    @JsonProperty("internal_number")
     private String internalNumber;
 
     /**

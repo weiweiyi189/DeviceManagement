@@ -27,6 +27,7 @@ public class EquipmentController {
     @GetMapping("getAll")
     @JsonView(GetAllJsonView.class)
     public List<Equipment> page(@RequestParam int page, @RequestParam int size) {
+//        Equipment equipment = this.equipmentService.getEquipmentById(4L);
         return this.equipmentService.findAll(PageRequest.of(page, size));
     }
 

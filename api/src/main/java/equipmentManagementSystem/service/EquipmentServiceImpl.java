@@ -1,11 +1,14 @@
 package equipmentManagementSystem.service;
 
 import com.mengyunzhi.core.service.CommonService;
+import equipmentManagementSystem.Mybatis.EquipmentMapper;
+import equipmentManagementSystem.Mybatis.TypeMapper;
 import equipmentManagementSystem.entity.*;
 import equipmentManagementSystem.respority.ApprovalRepository;
 import equipmentManagementSystem.respority.EquipmentRepository;
 import equipmentManagementSystem.respority.TypeRepository;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.parameters.P;
@@ -25,6 +28,10 @@ public class EquipmentServiceImpl implements EquipmentService{
     private Type type;
     private final ApprovalRepository approvalRepository;
 
+    @Autowired
+    private EquipmentMapper equipmentMapper;
+
+
     public EquipmentServiceImpl(EquipmentRepository equipmentRepository,
                                 ApprovalRepository approvalRepository,
                                 UserService userService,
@@ -38,7 +45,8 @@ public class EquipmentServiceImpl implements EquipmentService{
     }
     @Override
     public List<Equipment> findAll(Pageable pageable) {
-        return this.equipmentRepository.findAll();
+        List<Equipment> equipments = this.equipmentRepository.findAll();
+        return equipments;
     }
 
     @Override
@@ -48,7 +56,9 @@ public class EquipmentServiceImpl implements EquipmentService{
 
     @Override
     public Equipment getEquipmentById(Long id) {
-        return this.equipmentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("找不到相关设备"));
+        Equipment equipment=this.equipmentMapper.findById(id);
+        if(equipment==null)throw new EntityNotFoundException("找不到相关设备");
+        return equipment;
     }
 
     @Override
@@ -93,7 +103,7 @@ public class EquipmentServiceImpl implements EquipmentService{
         Equipment equipment = this.equipmentRepository.findById(id).get();
         dingService.dingRequest("删除推送" + "\n" +
                 "用户  " + this.userService.getCurrentLoginUser().getName() + "   删除" + "\n" + "删除设备： " + equipment.getName());
-        this.equipmentRepository.deleteById(id);
+        this.equipmentMapper.deleteById(id);
     }
 
     @Override

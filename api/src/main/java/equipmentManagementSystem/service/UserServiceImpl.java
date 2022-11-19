@@ -265,7 +265,8 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public void resetPassword(Long id) {
-        User user = this.userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("实体未找到: " + id.toString()));
+        User user = this.userMapper.findById(id);
+        if(user==null)throw new ObjectNotFoundException("实体未找到: " + id);
         user.setPassword(DEFAULT_PASSWORD);
         this.userRepository.save(user);
     }

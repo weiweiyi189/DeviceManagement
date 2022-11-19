@@ -14,4 +14,10 @@
     <delete id="deleteById" parameterType="Long">
         delete from user where id=#{id}
     </delete>
+
+    <update id="findById" parameterType="equipmentManagementSystem.entity.User">
+        select *
+        from user
+        where id=#{id}
+    </update>
 </mapper>

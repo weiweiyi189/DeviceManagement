@@ -1,10 +1,13 @@
 package equipmentManagementSystem.service;
 
+import equipmentManagementSystem.Mybatis.ApprovalMapper;
+import equipmentManagementSystem.Mybatis.EquipmentMapper;
 import equipmentManagementSystem.entity.Approval;
 import equipmentManagementSystem.entity.Equipment;
 import equipmentManagementSystem.respority.ApprovalRepository;
 import equipmentManagementSystem.respority.EquipmentRepository;
 import equipmentManagementSystem.respority.Specs.ApprovalSpecs;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,10 @@ public class ApprovalServiceImpl implements ApprovalService {
   private final ApprovalRepository approvalRepository;
   private final EquipmentRepository equipmentRepository;
   private final UserService userService;
+  @Autowired
+  private ApprovalMapper approvalMapper;
+  @Autowired
+  private EquipmentMapper equipmentMapper;
 
   public ApprovalServiceImpl(ApprovalRepository approvalRepository,
                              EquipmentRepository equipmentRepository,
@@ -75,7 +82,9 @@ public class ApprovalServiceImpl implements ApprovalService {
 
   @Override
   public Approval getById(Long id) {
-    return this.approvalRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("实体未找到"));
+    Approval approval=this.approvalMapper.findById(id);
+    if(approval==null)throw new EntityNotFoundException("实体未找到");
+    return approval;
   }
 
   @Override
@@ -129,7 +138,7 @@ public class ApprovalServiceImpl implements ApprovalService {
   public void saleFail(Long id) {
     Approval approval = getById(id);
     Equipment equipment = approval.getEquipment();
-    this.equipmentRepository.deleteById(equipment.getId());
+    this.equipmentMapper.deleteById(equipment.getId());
     approval.setType((short)22);
     approval.setApprovalUser(userService.getCurrentLoginUser());
     this.approvalRepository.save(approval);
@@ -139,8 +148,8 @@ public class ApprovalServiceImpl implements ApprovalService {
   public void upSaleFail(Long id) {
     Approval approval = getById(id);
     Equipment equipment = approval.getEquipment();
-    this.equipmentRepository.deleteById(equipment.getId());
-    this.approvalRepository.deleteById(id);
+    this.equipmentMapper.deleteById(equipment.getId());
+    this.approvalMapper.deleteById(id);
   }
 
   @Override
