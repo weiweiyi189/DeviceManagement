@@ -76,7 +76,7 @@ const routes: Routes = [
         path: 'sale',
         loadChildren: () => import('./pages/admin/sale/sale.module').then(m => m.SaleModule),
         data: {
-          title: '设备管理'
+          title: '购入审批'
         }
       },
       {
