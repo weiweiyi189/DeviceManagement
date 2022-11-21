@@ -18,6 +18,9 @@ import { BorrowComponent } from './borrow/borrow.component';
     EquipmentRoutingModule,
     FuncModule,
     FormsModule
+  ],
+  exports: [
+    EquipmentComponent
   ]
 })
 export class EquipmentModule {

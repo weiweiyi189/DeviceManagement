@@ -12,7 +12,6 @@ import { RepairComponent } from './pages/user/repair/repair.component';
 import { UserComponent } from './pages/user/user/user.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-
 @NgModule({
   declarations: [
     AppComponent,
