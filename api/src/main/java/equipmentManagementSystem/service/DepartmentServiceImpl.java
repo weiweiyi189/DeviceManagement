@@ -5,6 +5,7 @@ import equipmentManagementSystem.entity.Department;
 import equipmentManagementSystem.entity.Equipment;
 import equipmentManagementSystem.respority.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import equipmentManagementSystem.respority.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,14 @@ import java.util.List;
 public class DepartmentServiceImpl implements DepartmentService{
 
     private DepartmentRepository departmentRepository;
+    private UserService userService;
     @Autowired
     private DepartmentMapper departmentMapper;
-    public DepartmentServiceImpl(DepartmentRepository departmentRepository) {
+
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository,
+                                 UserService userService) {
         this.departmentRepository = departmentRepository;
+        this.userService = userService;
     }
 
 
@@ -30,7 +35,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public List<Department> getAll() {
-        return this.departmentMapper.findAll();
+        return (List<Department>) this.departmentRepository.findAll();
     }
 
     @Override
@@ -40,9 +45,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public Department getDepartmentById(Long id) {
-        Department department=this.departmentMapper.findById(id);
-        if(department==null)throw new EntityNotFoundException("找不到相关设备");
-        return department;
+        return this.departmentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("找不到相关设备"));
     }
 
     @Override

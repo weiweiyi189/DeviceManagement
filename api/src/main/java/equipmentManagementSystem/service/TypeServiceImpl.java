@@ -53,7 +53,7 @@ public class TypeServiceImpl implements TypeService{
     @Override
     public Type update(Long id, Type type) {
         Type oldType= this.getTypeById(id);
-      oldType.setName(type.getName());
-        return this.typeRepository.save(type);
+        oldType.setName(type.getName());
+        return this.typeRepository.save(oldType);
     }
 }

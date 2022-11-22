@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {User} from '../../../../func/User';
 import {CommonService} from '../../../../service/common.service';
@@ -30,17 +30,15 @@ export class AddComponent implements OnInit {
     this.userService.getAllCharge()
       .subscribe((data) => {
       this.state = data;
-      console.log(data);
-      console.log(this.state);
     });
     this.initForm();
   }
 
   initForm(): void {
     this.departmentForm = this.builder.group({
-      name: [''],
-      code: [''],
-      userId: [''],
+      name: ['', Validators.required],
+      code: ['', Validators.required],
+      userId: ['',],
     });
   }
 

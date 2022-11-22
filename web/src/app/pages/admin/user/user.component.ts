@@ -47,7 +47,6 @@ export class UserComponent implements OnInit {
       this.params.size)
       .subscribe((response: { totalPages: number, content: Array<User> }) => {
         this.users = response;
-        console.log(response);
         // this.pages = this.makePagesByTotalPages(this.params.page, response.totalPages);
       });
   }

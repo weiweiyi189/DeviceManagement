@@ -88,7 +88,7 @@ public class EquipmentServiceImpl implements EquipmentService{
     @Override
     public void add(Equipment equipment) {
         dingService.dingRequest("新增推送" + "\n" + "用户  " +
-                this.userService.getCurrentLoginUser().getName() + "   新增" + "\n" + "新增设备： " + equipment.getName());
+                this.userService.getCurrentLoginUser().getName() + " 新增" + "\n" + "新增设备： " + equipment.getName());
         equipment.setStates(4);
         Approval approval = new Approval();
         approval.setCreateUser(userService.getCurrentLoginUser());

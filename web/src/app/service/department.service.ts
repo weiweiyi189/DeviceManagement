@@ -40,6 +40,7 @@ export class DepartmentService {
    * 更新
    */
   public update(userId: number, department: Department): Observable<Department> {
+    console.log(department);
     return this.httpClient.put<Department>(`${this.url}/${userId.toString()}`, department);
   }
 

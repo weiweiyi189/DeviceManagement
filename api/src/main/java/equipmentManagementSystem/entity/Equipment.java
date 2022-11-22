@@ -6,9 +6,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.mengyunzhi.core.entity.YunzhiEntity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Equipment implements YunzhiEntity {
+public class Equipment implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

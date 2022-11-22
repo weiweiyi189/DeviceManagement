@@ -3,6 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="equipmentManagementSystem.Mybatis.UserMapper">
+
+    <!-- 注意id和mapper层定义的方法一致-->
     <select id="findByName" resultType="equipmentManagementSystem.entity.User">
         select * from user where name like concat('%',#{name},'%')
     </select>
