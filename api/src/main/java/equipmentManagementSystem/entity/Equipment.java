@@ -35,7 +35,7 @@ public class Equipment implements Serializable {
     /**
      * 内部编号
      */
-    @JsonProperty("internal_number")
+    //@JsonProperty("internal_number")
     private String internalNumber;
 
     /**

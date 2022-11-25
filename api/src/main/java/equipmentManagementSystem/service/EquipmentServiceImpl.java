@@ -7,7 +7,6 @@ import equipmentManagementSystem.entity.*;
 import equipmentManagementSystem.respority.ApprovalRepository;
 import equipmentManagementSystem.respority.EquipmentRepository;
 import equipmentManagementSystem.respority.TypeRepository;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,7 +44,7 @@ public class EquipmentServiceImpl implements EquipmentService{
     }
     @Override
     public List<Equipment> findAll(Pageable pageable) {
-        List<Equipment> equipments = this.equipmentRepository.findAll();
+        List<Equipment> equipments = this.equipmentMapper.findAll();
         return equipments;
     }
 
@@ -100,7 +99,7 @@ public class EquipmentServiceImpl implements EquipmentService{
 
     @Override
     public void delete(Long id) {
-        Equipment equipment = this.equipmentRepository.findById(id).get();
+        Equipment equipment = this.equipmentMapper.findById(id);
         dingService.dingRequest("删除推送" + "\n" +
                 "用户  " + this.userService.getCurrentLoginUser().getName() + "   删除" + "\n" + "删除设备： " + equipment.getName());
         this.equipmentMapper.deleteById(id);
