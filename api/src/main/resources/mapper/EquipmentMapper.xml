@@ -9,14 +9,16 @@
             <!-- property对应实体类的属性名称，column为数据库字段名 -->
             <result column="internal_number" property="internalNumber"/>
             <result column="type_id" property="type.id"/>
-            <!-- 集合中的property须为oftype定义的pojo对象的属性-->
-<!--            <collection property="pojo的集合属性" ofType="集合中的pojo对象">-->
-<!--            <collection property="type" ofType="equipmentManagementSystem.entity.Type">-->
-<!--                <id column="集合中pojo对象对应的表的主键字段" jdbcType="字段类型" property="集合中pojo对象的主键属性" />-->
-<!--                <result column="可以为任意表的字段" jdbcType="字段类型" property="集合中的pojo对象的属性" />-->
-<!--            </collection>-->
+            <association property="user" javaType="equipmentManagementSystem.entity.Equipment">
+                <id column="user_id" property="id"></id>
+                <result column="name" property="name"></result>
+                <result column="pwd" property="pwd"></result>
+                <result column="phone" property="phone"></result>
+                <result column="head_img" property="head_img"></result>
+                <result column="create_time_u" property="create_time"></result>
+            </association>
         </resultMap>
-    <select id="findAll" resultMap="equipmentMap">
+    <select id="findAll" resultMap="equipmentMap">-
         select *
         from equipment
     </select>
