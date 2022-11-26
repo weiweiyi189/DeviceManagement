@@ -38,7 +38,7 @@ public class EquipmentController {
     }
 
     @GetMapping("getBorrow")
-    @JsonView(Department.UserJsonView.class)
+    @JsonView(GetAllJsonView.class)
     public Page<Equipment> getBorrow(@RequestParam int page, @RequestParam int size) {
         return this.equipmentService.getBorrow(PageRequest.of(page, size));
     }

@@ -3,7 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="equipmentManagementSystem.Mybatis.TypeMapper">
-    <select id="findAll" resultType="equipmentManagementSystem.entity.Type">
+    <resultMap id="typeResultMap" type="equipmentManagementSystem.entity.Type">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"/>
+    </resultMap>
+    <select id="findAll" resultMap="typeResultMap">
         select *
         from type
     </select>
@@ -14,7 +18,7 @@
         where id=#{id}
     </delete>
     
-    <select id="findById" resultType="equipmentManagementSystem.entity.Type">
+    <select id="findById" resultMap="typeResultMap">
         select *
         from type
         where id=#{id}
