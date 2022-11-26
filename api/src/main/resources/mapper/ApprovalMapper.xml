@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="equipmentManagementSystem.Mybatis.ApprovalMapper">
+    <resultMap id="approvalResultMap" type="equipmentManagementSystem.entity.Approval">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="create_time" property="createTime"/>
+        <association property="lendDepartment" column="lend_department_id" select="equipmentManagementSystem.Mybatis.DepartmentMapper.findById"/>
+        <association property="equipment" column="equipment_id" select="equipmentManagementSystem.Mybatis.EquipmentMapper.findById"/>
+        <association property="createUser" column="create_user_id" select="equipmentManagementSystem.Mybatis.UserMapper.findById"/>
+        <association property="approvalUser" column="approval_user_id" select="equipmentManagementSystem.Mybatis.UserMapper.findById"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="approvalResultMap">
+        select *
+        from approval
+    </select>
+
+    <delete id="deleteById" parameterType="Long">
+        delete
+        from approval
+        where id=#{id}
+    </delete>
+
+    <select id="findById" resultMap="approvalResultMap">
+        select *
+        from approval
+        where id=#{id}
+    </select>
+</mapper>

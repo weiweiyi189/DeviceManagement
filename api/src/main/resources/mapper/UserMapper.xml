@@ -4,16 +4,34 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="equipmentManagementSystem.Mybatis.UserMapper">
 
+    <resultMap type="equipmentManagementSystem.entity.User" id="userResultMap">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"/>
+        <result column="job_number" property="jobNumber"/>
+        <result column="phone" property="phone"/>
+        <result column="password" property="password"/>
+        <result column="username" property="username"/>
+        <result column="role" property="role"/>
+        <result column="sex" property="sex"/>
+        <association property="department" column="department_id" select="equipmentManagementSystem.Mybatis.DepartmentMapper.findById"/>
+    </resultMap>
+
     <!-- 注意id和mapper层定义的方法一致-->
     <select id="findByName" resultType="equipmentManagementSystem.entity.User">
         select * from user where name like concat('%',#{name},'%')
     </select>
 
-    <select id="findAll" resultType="equipmentManagementSystem.entity.User">
+    <select id="findAll" resultMap="userResultMap">
         select * from user
     </select>
 
     <delete id="deleteById" parameterType="Long">
         delete from user where id=#{id}
     </delete>
+
+    <select id="findById" resultMap="userResultMap">
+        select *
+        from user
+        where id=#{id}
+    </select>
 </mapper>

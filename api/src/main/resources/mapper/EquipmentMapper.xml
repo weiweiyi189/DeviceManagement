@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="equipmentManagementSystem.Mybatis.EquipmentMapper">
+
+<!--         type指向javabean类，id可自定义 -->
+        <resultMap id="equipmentMap" type="equipmentManagementSystem.entity.Equipment">
+            <!-- property对应实体类的属性名称，column为数据库字段名 -->
+            <id column="id" property="id"></id>
+            <result column="name" property="name"/>
+            <result column="model" property="model"/>
+            <result column="place" property="place"/>
+            <result column="states" property="states"/>
+            <result column="sale_time" property="saleTime"/>
+            <result column="internal_number" property="internalNumber"/>
+            <association property="type" column="type_id" select="equipmentManagementSystem.Mybatis.TypeMapper.findById"/>
+            <association property="department" column="department_id" select="equipmentManagementSystem.Mybatis.DepartmentMapper.findById"/>
+            <association property="user" column="user_id"  select="equipmentManagementSystem.Mybatis.UserMapper.findById"/>
+        </resultMap>
+    <select id="findAll" resultMap="equipmentMap">
+        select * from equipment
+    </select>
+
+    <delete id="deleteById" parameterType="Long">
+        delete
+        from equipment
+        where id=#{id}
+    </delete>
+
+    <select id="findById" resultMap="equipmentMap">
+        select *
+        from equipment
+        where id=#{id}
+    </select>
+</mapper>

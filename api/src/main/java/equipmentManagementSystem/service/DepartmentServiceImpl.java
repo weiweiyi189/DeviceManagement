@@ -1,9 +1,12 @@
 package equipmentManagementSystem.service;
 
+import equipmentManagementSystem.Mybatis.DepartmentMapper;
+import equipmentManagementSystem.Mybatis.UserMapper;
 import equipmentManagementSystem.entity.Department;
 import equipmentManagementSystem.entity.Equipment;
 import equipmentManagementSystem.entity.User;
 import equipmentManagementSystem.respority.DepartmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import equipmentManagementSystem.respority.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +20,11 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     private DepartmentRepository departmentRepository;
     private UserService userService;
+    @Autowired
+    private DepartmentMapper departmentMapper;
+    @Autowired
+    private UserMapper userMapper;
+
     public DepartmentServiceImpl(DepartmentRepository departmentRepository,
                                  UserService userService) {
         this.departmentRepository = departmentRepository;
@@ -49,7 +57,7 @@ public class DepartmentServiceImpl implements DepartmentService{
         Department oldDepartment= this.getDepartmentById(id);
         oldDepartment.setName(department.getName());
         oldDepartment.setCode(department.getCode());
-        User user = this.userService.getUserById(department.getUser().getId());
+        User user=this.userMapper.findById(department.getUser().getId());
         oldDepartment.setUser(user);
         return this.departmentRepository.save(oldDepartment);
     }

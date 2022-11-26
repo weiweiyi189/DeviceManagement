@@ -1,9 +1,11 @@
 package equipmentManagementSystem.service;
 
+import equipmentManagementSystem.Mybatis.TypeMapper;
 import equipmentManagementSystem.entity.Department;
 import equipmentManagementSystem.entity.Equipment;
 import equipmentManagementSystem.entity.Type;
 import equipmentManagementSystem.respority.TypeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ import java.util.List;
 @Service
 public class TypeServiceImpl implements TypeService{
     private TypeRepository typeRepository;
+
+    @Autowired
+    private TypeMapper typeMapper;
 
     public TypeServiceImpl(TypeRepository typeRepository){
         this.typeRepository = typeRepository;
@@ -30,17 +35,19 @@ public class TypeServiceImpl implements TypeService{
 
     @Override
     public List<Type> getAll() {
-        return (List<Type>) this.typeRepository.findAll();
+        return this.typeMapper.findAll();
     }
 
     @Override
     public void delete(Long id) {
-        this.typeRepository.deleteById(id);
+        this.typeMapper.deleteById(id);
     }
 
     @Override
     public Type getTypeById(Long id) {
-        return this.typeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("找不到相关设备"));
+        Type type=this.typeMapper.findById(id);
+        if(type==null)throw new EntityNotFoundException("找不到相关设备");
+        return type;
     }
 
     @Override
