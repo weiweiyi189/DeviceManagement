@@ -7,6 +7,7 @@
         <id column="id" property="id"></id>
         <result column="name" property="name"/>
         <result column="type" property="type"/>
+        <result column="status" property="status"/>
         <result column="create_time" property="createTime"/>
         <association property="lendDepartment" column="lend_department_id" select="equipmentManagementSystem.Mybatis.DepartmentMapper.findById"/>
         <association property="equipment" column="equipment_id" select="equipmentManagementSystem.Mybatis.EquipmentMapper.findById"/>

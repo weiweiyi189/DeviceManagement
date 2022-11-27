@@ -8,22 +8,22 @@ export class StatusPipe implements PipeTransform {
     switch (value) {
       case 0:
         return `正常`;
-        break;
       case 1:
         return `借出`;
-        break;
       case 2:
         return `维修中`;
-        break;
       case 3:
         return `报废`;
-        break;
       case 4:
         return `购入待上报`;
-        break;
       case 5:
         return `购入待审批`;
-        break;
+      case 6:
+        return `借用待审批`;
+      case 7:
+        return `维修待审批`;
+      case 8:
+        return `报废待审批`;
     }
   }
 }

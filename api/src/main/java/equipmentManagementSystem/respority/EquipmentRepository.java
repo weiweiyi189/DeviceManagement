@@ -29,7 +29,7 @@ public interface EquipmentRepository extends JpaRepository<Equipment, Long>, Pag
 
     default Page<Equipment> getBorrow(User user, Pageable pageable) {
         Assert.notNull(pageable, "pageable不能为null");
-        Specification<Equipment> specification = EquipmentSpecs.isCurrentUser(user).and(EquipmentSpecs.isStatus(1L));
+        Specification<Equipment> specification = EquipmentSpecs.isCurrentUser(user).or(EquipmentSpecs.isStatus(1L)).or(EquipmentSpecs.isStatus(6L));
         return this.findAll(specification, pageable);
     };
 

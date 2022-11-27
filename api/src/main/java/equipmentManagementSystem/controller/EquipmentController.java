@@ -32,7 +32,7 @@ public class EquipmentController {
     }
 
     @GetMapping("getToRepair")
-    @JsonView(Department.UserJsonView.class)
+    @JsonView(GetAllJsonView.class)
     public Page<Equipment> getToRepair(@RequestParam int page, @RequestParam int size) {
         return this.equipmentService.getToRepair(PageRequest.of(page, size));
     }
@@ -51,7 +51,7 @@ public class EquipmentController {
     }
 
     @GetMapping("{id}")
-    @JsonView(Department.UserJsonView.class)
+    @JsonView(GetAllJsonView.class)
     public Equipment getEquipmentById(@PathVariable Long id) {
         return this.equipmentService.getEquipmentById(id);
     }

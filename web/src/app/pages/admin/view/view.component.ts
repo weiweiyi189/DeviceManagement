@@ -57,18 +57,19 @@ export class ViewComponent implements OnInit {
     this.approvalService.allPage(this.params.page,
       this.params.size).subscribe((response: { totalPages: number, content: Array<Approval> }) => {
       this.approvals = response;
+      console.log(response);
       // this.pages = this.makePagesByTotalPages(this.params.page, response.totalPages);
     });
   }
 
   getFontColor(status: number): any {
-    if (status === 11 || status === 1 || status === 16 || status === 21) {
+    if (status === 1) {
       this.fontColor = '#37be2e';
     }
-    else if (status === 0 || status === 10 || status === 15 || status === 20) {
+    else if (status === 0) {
       this.fontColor = '#ac3d09';
     }
-    else if (status === 2 || status === 17 || status === 12 || status === 22 || status === 23) {
+    else if (status === 2) {
       this.fontColor = '#df2e2e';
     }
     return this.fontColor;

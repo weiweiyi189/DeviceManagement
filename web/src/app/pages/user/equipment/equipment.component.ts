@@ -80,10 +80,19 @@ export class EquipmentComponent implements OnInit {
       this.fontColor = '#df2e2e';
     }
     else if (status === 4) {
-      this.fontColor = '#dffe2e';
+      this.fontColor = '#fe9d2e';
     }
     else if (status === 5) {
-      this.fontColor = '#fffffe';
+      this.fontColor = '#fe9d2e';
+    }
+    else if (status === 6) {
+      this.fontColor = '#fe9d2e';
+    }
+    else if (status === 7) {
+      this.fontColor = '#fe9d2e';
+    }
+    else if (status === 8) {
+      this.fontColor = '#fe9d2e';
     }
     return this.fontColor;
   }
@@ -188,21 +197,21 @@ export class EquipmentComponent implements OnInit {
           this.commonService.httpError(response);
         });
       }
-    }, '是否确认报废');
+    }, '是否确认报修设备');
   }
 
-  borrow(equipment: Equipment): void {
+  scrap(equipment: Equipment): void {
     // 确认框
-    // this.commonService.confirm((confirm: boolean) => {
-    //   if (confirm) {
-    //     this.equipmentService.borrow(equipment.id, equipment).subscribe(() => {
-    //       this.commonService.success(() => {
-    //       }, '借用成功');
-    //       this.pageAll();
-    //     }, (response: HttpErrorResponse) => {
-    //       this.commonService.httpError(response);
-    //     });
-    //   }
-    // }, '是否确认借用');
+    this.commonService.confirm((confirm: boolean) => {
+      if (confirm) {
+        this.equipmentService.scrap(equipment.id, equipment).subscribe(() => {
+          this.commonService.success(() => {
+          }, '报废成功');
+          this.pageAll();
+        }, (response: HttpErrorResponse) => {
+          this.commonService.httpError(response);
+        });
+      }
+    }, '是否报废设备');
   }
 }

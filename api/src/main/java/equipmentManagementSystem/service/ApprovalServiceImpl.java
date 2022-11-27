@@ -34,36 +34,42 @@ public class ApprovalServiceImpl implements ApprovalService {
 
   @Override
   public Page<Approval> page(Pageable pageable) {
-    Short type = 0;
-    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type), pageable);
+    Short type = 1;
+    Short status = Approval.PENDING_APPROVEAl;
+    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)), pageable);
     return approvals;
   }
 
   @Override
   public Page<Approval> repairPage(Pageable pageable) {
-    Short type = 10;
-    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type), pageable);
+    Short type = 2;
+    Short status = Approval.PENDING_APPROVEAl;
+    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)), pageable);
     return approvals;
   }
 
   @Override
   public Page<Approval> salePage(Pageable pageable) {
-    Short type = 23;
-    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type), pageable);
+    Short type = 4;
+    Short status = Approval.PENDING_APPROVEAl;
+    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)), pageable);
     return approvals;
   }
 
   @Override
   public Page<Approval> upSalePage(Pageable pageable) {
-    Short type = 20;
-    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type), pageable);
+    Short type = 5;
+    Short status = Approval.PENDING_APPROVEAl;
+    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)), pageable);
     return approvals;
   }
 
   @Override
   public void salePass(Long id) {
     Approval approval = getById(id);
-    approval.setType((short)21);
+    approval.setType((short)4);
+    approval.setStatus(Approval.PASSED);
+    approval.setApprovalUser(this.userService.getCurrentLoginUser());
     Equipment equipment = approval.getEquipment();
     equipment.setStates(0);
     this.equipmentRepository.save(equipment);
@@ -73,11 +79,22 @@ public class ApprovalServiceImpl implements ApprovalService {
   @Override
   public void upSalePass(Long id) {
     Approval approval = getById(id);
-    approval.setType((short)23);
+    approval.setType((short)5);
+    approval.setStatus(Approval.PASSED);
+    approval.setApprovalUser(this.userService.getCurrentLoginUser());
     Equipment equipment = approval.getEquipment();
     equipment.setStates(5);
-    this.equipmentRepository.save(equipment);
+
     this.approvalRepository.save(approval);
+    this.equipmentRepository.save(equipment);
+
+
+    Approval approval1 = new Approval();
+    approval1.setType((short)4);
+    approval1.setStatus(Approval.PENDING_APPROVEAl);
+    approval1.setEquipment(approval.getEquipment());
+    approval1.setCreateUser(this.userService.getCurrentLoginUser());
+    this.approvalRepository.save(approval1);
   }
 
   @Override
@@ -90,16 +107,24 @@ public class ApprovalServiceImpl implements ApprovalService {
   @Override
   public void repairPass(Long id) {
     Approval approval = getById(id);
-    approval.setType((short)11);
+    approval.setType((short)2);
+    approval.setStatus(Approval.PASSED);
+    approval.setApprovalUser(this.userService.getCurrentLoginUser());
+    Equipment equipment = approval.getEquipment();
+    equipment.setStates(2);
     this.approvalRepository.save(approval);
+    this.equipmentRepository.save(equipment);
   }
 
   @Override
   public void pass(Long id) {
     Approval approval = getById(id);
-    approval.setType(Approval.PASSED);
+    approval.setStatus(Approval.PASSED);
     approval.setApprovalUser(userService.getCurrentLoginUser());
+    Equipment equipment = approval.getEquipment();
+    equipment.setStates(1);
     this.approvalRepository.save(approval);
+    this.equipmentRepository.save(equipment);
   }
 
   @Override
@@ -108,9 +133,10 @@ public class ApprovalServiceImpl implements ApprovalService {
     Equipment equipment = approval.getEquipment();
     equipment.setStates(3);
     this.equipmentRepository.save(equipment);
-    approval.setType((short)16);
+    approval.setStatus(Approval.PASSED);
     approval.setApprovalUser(userService.getCurrentLoginUser());
     this.approvalRepository.save(approval);
+    this.equipmentRepository.save(equipment);
   }
 
   @Override
@@ -128,7 +154,7 @@ public class ApprovalServiceImpl implements ApprovalService {
     Approval approval = getById(id);
     Equipment equipment = approval.getEquipment();
     equipment.setStates(0);
-    approval.setType(Approval.FAILDED);
+    approval.setStatus(Approval.FAILDED);
     approval.setApprovalUser(userService.getCurrentLoginUser());
     equipmentRepository.save(equipment);
     this.approvalRepository.save(approval);
@@ -139,7 +165,7 @@ public class ApprovalServiceImpl implements ApprovalService {
     Approval approval = getById(id);
     Equipment equipment = approval.getEquipment();
     this.equipmentMapper.deleteById(equipment.getId());
-    approval.setType((short)22);
+    approval.setStatus(Approval.FAILDED);
     approval.setApprovalUser(userService.getCurrentLoginUser());
     this.approvalRepository.save(approval);
   }
@@ -148,8 +174,9 @@ public class ApprovalServiceImpl implements ApprovalService {
   public void upSaleFail(Long id) {
     Approval approval = getById(id);
     Equipment equipment = approval.getEquipment();
+    approval.setStatus(Approval.FAILDED);
     this.equipmentMapper.deleteById(equipment.getId());
-    this.approvalMapper.deleteById(id);
+    this.approvalRepository.save(approval);
   }
 
   @Override
@@ -158,7 +185,7 @@ public class ApprovalServiceImpl implements ApprovalService {
     Equipment equipment = approval.getEquipment();
     equipment.setStates(0);
     equipmentRepository.save(equipment);
-    approval.setType((short) 12);
+    approval.setStatus(Approval.FAILDED);
     approval.setApprovalUser(userService.getCurrentLoginUser());
     this.approvalRepository.save(approval);
   }
@@ -168,7 +195,7 @@ public class ApprovalServiceImpl implements ApprovalService {
     Approval approval = getById(id);
     Equipment equipment = approval.getEquipment();
     equipment.setStates(0);
-    approval.setType((short)17);
+    approval.setStatus(Approval.FAILDED);
     approval.setApprovalUser(userService.getCurrentLoginUser());
     this.equipmentRepository.save(equipment);
     this.approvalRepository.save(approval);
@@ -176,8 +203,9 @@ public class ApprovalServiceImpl implements ApprovalService {
 
   @Override
   public Page<Approval> scrapPage(Pageable pageable) {
-    Short type = 15;
-    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type), pageable);
+    Short type = 3;
+    Short status = Approval.PENDING_APPROVEAl;
+    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)), pageable);
     return approvals;
   }
 

@@ -1,4 +1,4 @@
-<form [formGroup]="equipmentForm" (ngSubmit)="submit()">
+<form [formGroup]="equipmentForm" (ngSubmit)="submit()" *ngIf="equipment">
   <div class="row">
     <div class="col-md-6 offset-md-1">
       <div class="row">
@@ -33,7 +33,7 @@
 
       <div class="row mt-5">
         <div class="offset-md-6">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary" [disabled]="!department">
             <i class="far fa-save"></i>
             &nbsp;保存
           </button>

@@ -24,7 +24,7 @@
     <td>{{equipment?.states | status}}</td>
     <td>
       <button type="button" class="btn btn-primary btn-sm mr-2" (click)="repair(equipment)"
-              [disabled]="equipment.states== 1 || currentUser?.department?.id == equipment?.department?.id">
+              [disabled]="equipment.states !== 2 || currentUser?.department?.id !== equipment?.department?.id">
         <i class="fas fa-trash-alt"></i>
         维修
       </button>

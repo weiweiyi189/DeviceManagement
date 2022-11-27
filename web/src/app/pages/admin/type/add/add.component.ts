@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../func/User';
 import {CommonService} from '../../../../service/common.service';
 import {AuthService} from '../../../../service/auth.service';
@@ -31,7 +31,7 @@ export class AddComponent implements OnInit {
 
   initForm(): void {
     this.typeForm = this.builder.group({
-      name: [''],
+      name: ['', Validators.required],
     });
   }
 
