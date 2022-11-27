@@ -22,14 +22,12 @@
 
       <div class="row mt-4">
         <div class="col-md-4 text-right">
-          <label>设备种类</label>
+          <label>设备种类<code>*</code></label>
         </div>
         <div class="col-md-8">
-          <div class="row">
             <div class="custom-control-inline">
               <app-type-selector (goodsSelect) ="bindType($event)" [goods]="equipmentForm?.get('type')?.value"></app-type-selector>
             </div>
-          </div>
         </div>
       </div>
 
@@ -45,14 +43,12 @@
 
       <div class="row mt-5">
         <div class="col-md-4 text-right">
-          <label>所属部门</label>
+          <label>所属部门<code>*</code></label>
         </div>
         <div class="col-md-8">
-          <div class="row">
             <div class="custom-control-inline">
               <app-department-selector (goodsSelect)="bindEuqipment($event)" [goods]="equipmentForm?.get('department')?.value"></app-department-selector>
             </div>
-          </div>
         </div>
       </div>
 
@@ -68,7 +64,7 @@
 
       <div class="row mt-5">
         <div class="offset-md-6">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary" [disabled]="equipmentForm.invalid">
             <i class="far fa-save"></i>
             &nbsp;保存
           </button>

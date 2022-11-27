@@ -78,6 +78,15 @@ export class DetailComponent implements OnInit {
     else if (status === 3) {
       this.fontColor = '#df2e2e';
     }
+    else if (status === 4) {
+      this.fontColor = '#fe9d2e';
+    }
+    else if (status === 5) {
+      this.fontColor = '#fe9d2e';
+    }
+    else if (status === 6) {
+      this.fontColor = '#fe9d2e';
+    }
     return this.fontColor;
   }
 
@@ -168,6 +177,7 @@ export class DetailComponent implements OnInit {
       }
     }, '是否确认报修');
   }
+
 
   return(equipment: Equipment): void {
     // 确认框

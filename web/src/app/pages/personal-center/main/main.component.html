@@ -87,9 +87,10 @@
       </div>
       <div class="col-md-8">
         <div id="role">
-          <span *ngIf="currentUser.role === 0">管理员</span>
-          <span *ngIf="currentUser.role === 1">员工</span>
-          <span *ngIf="currentUser.role === 2">维修人员</span>
+          <span *ngIf="currentUser?.role === 0">管理员</span>
+          <span *ngIf="currentUser?.role === 1">员工</span>
+          <span *ngIf="currentUser?.role === 2">维修人员</span>
+          <span *ngIf="currentUser?.role === 3">部门经理</span>
         </div>
       </div>
     </div>

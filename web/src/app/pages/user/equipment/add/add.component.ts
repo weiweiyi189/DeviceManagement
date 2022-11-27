@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../func/User';
 import {CommonService} from '../../../../service/common.service';
 import {AuthService} from '../../../../service/auth.service';
@@ -33,12 +33,12 @@ export class AddComponent implements OnInit {
 
   initForm(): void {
     this.equipmentForm = this.builder.group({
-      name: [''],
-      model: [''],
-      type: null,
-      internalNumber: [''],
-      place: [''],
-      department: null,
+      name: ['', Validators.required],
+      model: ['', Validators.required],
+      type: [null, Validators.required],
+      internalNumber: ['', Validators.required],
+      place: ['', Validators.required],
+      department: [null, Validators.required],
     });
   }
 

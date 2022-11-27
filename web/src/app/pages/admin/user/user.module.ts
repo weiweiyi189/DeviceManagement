@@ -15,6 +15,9 @@ import { UserComponent } from './user.component';
     ReactiveFormsModule,
     FuncModule,
     FormsModule
+  ],
+  exports: [
+    AddComponent
   ]
 })
 export class UserModule {

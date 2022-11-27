@@ -89,7 +89,7 @@
     <td>{{equipment?.place}}</td>
     <td [style.color]="getFontColor(equipment.states)">{{equipment?.states | status}}</td>
     <td>
-      <button type="button" class="btn btn-primary btn-sm mr-2" routerLink="/equipment/edit/{{equipment.id}}"
+      <button type="button" class="btn btn-primary btn-sm mr-2" routerLink="/equipment/edit/{{equipment.id}}" *ngIf="(currentUser.role == 0 || currentUser.role == 3)"
               [disabled]="equipment.states != 0">
         <i class="far fa-edit"></i>
         编辑
@@ -99,18 +99,19 @@
         <i class="fab fa-strava"></i>
         借用
       </button>
-      <button type="button" class="btn btn-light btn-sm mr-2" (click)="repair(equipment)"
-              [disabled]="equipment.states != 0">
-        <i class="fab fa-strava"></i>
-        维修
-      </button>
       <button type="button" class="btn btn-warning btn-sm mr-2" (click)="report(equipment)"
               [disabled]="equipment.states != 0">
         <i class="fas fa-tools"></i>
-       报废
+        报修
       </button>
-      <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete(equipment)"
-              [disabled]="equipment.states == 1|| equipment.states == 2">
+      <button type="button" class="btn btn-warning btn-sm mr-2" (click)="scrap(equipment)"
+              [disabled]="equipment.states != 0">
+        <i class="fab fa-strava"></i>
+        报废
+      </button>
+
+      <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete(equipment)" *ngIf="(currentUser.role == 0 || currentUser.role == 3)"
+              [disabled]="equipment.states != 0">
         <i class="fas fa-trash-alt"></i>
         删除
       </button>

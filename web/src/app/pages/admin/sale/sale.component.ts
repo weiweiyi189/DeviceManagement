@@ -53,6 +53,7 @@ export class SaleComponent implements OnInit {
     this.approvalService.salePage(this.params.page,
       this.params.size).subscribe((response: { totalPages: number, content: Array<Approval> }) => {
       this.approvals = response;
+      console.log(response);
       // this.pages = this.makePagesByTotalPages(this.params.page, response.totalPages);
     });
   }

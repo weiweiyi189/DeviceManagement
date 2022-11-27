@@ -45,7 +45,7 @@ export class EquipmentService {
    * 更新
    */
   public report(equipmentId: number, equipment: Equipment): Observable<Equipment> {
-    return this.httpClient.put<Equipment>(`${this.url}/scrap/${equipmentId.toString()}`, equipment);
+    return this.httpClient.put<Equipment>(`${this.url}/report/${equipmentId.toString()}`, equipment);
   }
 
   /**

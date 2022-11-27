@@ -3,6 +3,7 @@ package equipmentManagementSystem.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import equipmentManagementSystem.entity.Approval;
 import equipmentManagementSystem.entity.Equipment;
+import equipmentManagementSystem.entity.User;
 import equipmentManagementSystem.service.ApprovalService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -116,9 +117,9 @@ public class ApprovalController {
     this.approvalService.scrapFail(id);
   }
 
-  public class PageJsonView implements Approval.CreateUserJsonView, Approval.EquipmentJsonView, Approval.LendDepartmentJsonView, Approval.IdJsonView, Equipment.DepartmentJsonView {
+  public class PageJsonView implements Approval.CreateUserJsonView, Approval.EquipmentJsonView, Approval.LendDepartmentJsonView, Approval.IdJsonView, Equipment.DepartmentJsonView,  User.DepartmentJsonView, Approval.ApprovalUserJsonView  {
   }
 
-  public class ReturnPageJsonView implements Approval.CreateUserJsonView, Approval.EquipmentJsonView, Approval.LendDepartmentJsonView, Approval.IdJsonView, Equipment.DepartmentJsonView {
+  public class ReturnPageJsonView implements Approval.CreateUserJsonView, Approval.EquipmentJsonView, Approval.LendDepartmentJsonView, Approval.IdJsonView, Equipment.DepartmentJsonView, User.DepartmentJsonView, Approval.ApprovalUserJsonView {
   }
 }

@@ -28,7 +28,6 @@ public class Equipment implements Serializable {
     /**
      * 种类
      */
-
     @OneToOne
     private Type type;
 
@@ -62,6 +61,24 @@ public class Equipment implements Serializable {
     /**
      * 状态
      */
+//    case 0:
+//            return `正常`;
+//      case 1:
+//              return `借出`;
+//      case 2:
+//              return `维修中`;
+//      case 3:
+//              return `报废`;
+//      case 4:
+//              return `购入待上报`;
+//      case 5:
+//              return `购入待审批`;
+//      case 6:
+//              return `借用待审批`;
+//      case 7:
+//              return `维修待审批`;
+//      case 8:
+//              return `报废待审批`;
     private Integer states;
 
 

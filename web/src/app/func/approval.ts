@@ -28,4 +28,6 @@ export class Approval {
    * 审批者
    */
    approvalUser: User ;
+
+  status: number;
 }

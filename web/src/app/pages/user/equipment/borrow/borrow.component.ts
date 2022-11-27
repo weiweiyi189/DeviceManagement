@@ -32,6 +32,7 @@ export class BorrowComponent implements OnInit {
               private builder: FormBuilder){    this.createForm(); }
 
   ngOnInit(): void {
+    console.log(this.department);
     this.getEditEquipment();
   }
 
@@ -55,7 +56,6 @@ export class BorrowComponent implements OnInit {
       type: null,
       internalNumber: [''],
       place: [''],
-      department: null,
     });
   }
 
@@ -66,7 +66,6 @@ export class BorrowComponent implements OnInit {
       type: equipment.type,
       internalNumber: equipment.internalNumber,
       place: equipment.place,
-      department: equipment.department,
     });
   }
 

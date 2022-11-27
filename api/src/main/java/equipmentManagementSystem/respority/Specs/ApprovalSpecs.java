@@ -13,4 +13,8 @@ public class ApprovalSpecs {
   public static Specification<Approval> equalType(Short type) {
     return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("type"), type);
   }
+
+  public static Specification<Approval> equalStatus(Short status) {
+    return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("status"), status);
+  }
 }

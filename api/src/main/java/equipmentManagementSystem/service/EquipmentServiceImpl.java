@@ -86,15 +86,22 @@ public class EquipmentServiceImpl implements EquipmentService{
 
     @Override
     public void add(Equipment equipment) {
-        dingService.dingRequest("新增推送" + "\n" + "用户  " +
-                this.userService.getCurrentLoginUser().getName() + " 新增" + "\n" + "新增设备： " + equipment.getName());
-        equipment.setStates(4);
-        Approval approval = new Approval();
-        approval.setCreateUser(userService.getCurrentLoginUser());
-        Equipment equipment1 = this.equipmentRepository.save(equipment);
-        approval.setEquipment(equipment1);
-        approval.setType((short) 20);
-        this.approvalRepository.save(approval);
+        // 管理员不用审批
+        if (this.userService.getCurrentLoginUser().getRole() == 0) {
+            equipment.setStates(0);
+            this.equipmentRepository.save(equipment);
+        } else {
+            dingService.dingRequest("新增推送" + "\n" + "用户  " +
+                    this.userService.getCurrentLoginUser().getName() + " 提交审批" + "\n" + "新增设备： " + equipment.getName());
+            equipment.setStates(4);
+            Approval approval = new Approval();
+            approval.setCreateUser(userService.getCurrentLoginUser());
+            Equipment equipment1 = this.equipmentRepository.save(equipment);
+            approval.setEquipment(equipment1);
+            approval.setType((short) 5);
+            approval.setStatus(Approval.PENDING_APPROVEAl);
+            this.approvalRepository.save(approval);
+        }
     }
 
     @Override
@@ -110,8 +117,14 @@ public class EquipmentServiceImpl implements EquipmentService{
         Equipment equipment1 = this.equipmentRepository.findById(id).get();
 
         dingService.dingRequest("报修推送" + "\n" +"用户  "
-                + this.userService.getCurrentLoginUser().getName() + "   报修" +"\n" + "报修设备： " + equipment1.getName());
-        equipment1.setStates(2);
+                + this.userService.getCurrentLoginUser().getName() + "申请报修" +"\n" + "报修设备： " + equipment1.getName());
+        Approval approval = new Approval();
+        approval.setEquipment(equipment1);
+        equipment1.setStates(7);
+        approval.setType((short)2);
+        approval.setStatus(Approval.PENDING_APPROVEAl);
+        approval.setCreateUser(userService.getCurrentLoginUser());
+        this.approvalRepository.save(approval);
         return this.equipmentRepository.save(equipment1);
     }
 
@@ -121,7 +134,8 @@ public class EquipmentServiceImpl implements EquipmentService{
         Department department = new Department();
         department.setId(departmentId);
         Approval approval = new Approval();
-        approval.setType((short)0);
+        approval.setType((short)1);
+        approval.setStatus(Approval.PENDING_APPROVEAl);
         approval.setEquipment(equipment);
         approval.setCreateUser(userService.getCurrentLoginUser());
         approval.setLendDepartment(department);
@@ -132,10 +146,10 @@ public class EquipmentServiceImpl implements EquipmentService{
         Equipment equipment1 = this.equipmentRepository.findById(id).get();
 
         dingService.dingRequest("借用推送" + "\n" +"用户  "
-                + this.userService.getCurrentLoginUser().getName() + "   借用" +"\n" + "借用设备： " + equipment1.getName() + "\n"
+                + this.userService.getCurrentLoginUser().getName() + " 申请借用" +"\n" + "借用设备： " + equipment1.getName() + "\n"
         + "借用时间： " + dateString);
-        equipment1.setUser(this.userService.getCurrentLoginUser());
-        equipment1.setStates(1);
+//        equipment1.setUser(this.userService.getCurrentLoginUser());
+        equipment1.setStates(6);
         return this.equipmentRepository.save(equipment1);
     }
 
@@ -164,10 +178,11 @@ public class EquipmentServiceImpl implements EquipmentService{
     @Override
     public Equipment repair(Long id) {
         Approval approval = new Approval();
-        approval.setType((short) 10);
+        approval.setType((short) 2);
+        approval.setStatus(Approval.PENDING_APPROVEAl);
 
         Equipment equipment = equipmentRepository.findById(id).get();
-        equipment.setStates(2);
+        equipment.setStates(7);
         approval.setEquipment(equipment);
         approval.setCreateUser(userService.getCurrentLoginUser());
         this.approvalRepository.save(approval);
@@ -178,11 +193,12 @@ public class EquipmentServiceImpl implements EquipmentService{
     public Equipment scrap(Long id, Equipment equipment) {
         Equipment equipment1 = this.equipmentRepository.findById(id).get();
         dingService.dingRequest("报废推送" + "\n"
-                +"报废设备： " + equipment1.getName() + "\n" + "用户  " + this.userService.getCurrentLoginUser().getName() + "  执行操作");
+                +"申请报废设备： " + equipment1.getName() + "\n" + "用户  " + this.userService.getCurrentLoginUser().getName() + "  执行操作");
         Approval approval = new Approval();
         approval.setEquipment(equipment1);
-        equipment1.setStates(3);
-        approval.setType((short)15);
+        equipment1.setStates(8);
+        approval.setType((short)3);
+        approval.setStatus(Approval.PENDING_APPROVEAl);
         approval.setCreateUser(userService.getCurrentLoginUser());
         this.approvalRepository.save(approval);
         return this.equipmentRepository.save(equipment1);
