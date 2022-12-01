@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {CommonService} from './common.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, ReplaySubject} from 'rxjs';
 import {Router} from '@angular/router';
 import {catchError, map, tap} from 'rxjs/operators';
@@ -62,6 +62,30 @@ export class UserService {
    */
   public update(userId: number, user: User): Observable<User> {
     return this.httpClient.put<User>(`${this.url}/${userId.toString()}`, user);
+  }
+
+// 发送验证码
+  public getcode(staffNumber: string, mailAddress: string): Observable<void> {
+    // const headers = new HttpParams();
+    // headers.append('staffNumber', staffNumber);
+    // headers.append('mailAddress', mailAddress);
+    const params: { [key: string]: any } = {
+      staffNumber: String(staffNumber),
+      mailAddress: String(mailAddress),
+    };
+    console.log({params});
+    return this.httpClient.get<void>(`mail/getCode`, {params});
+  }
+
+  // 验证找回
+  public codeUpdatePwd(num: string, codes: string, password: string): Observable<void> {
+    const params: { [key: string]: any } = {
+      num: String(num),
+      codes: String(codes),
+      password: String(password),
+    };
+    console.log({params});
+    return this.httpClient.get<void>(`user/codeUpdatePwd`, {params});
   }
 
   login(user: User): Observable<User> {

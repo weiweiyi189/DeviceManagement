@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../../../func/User";
 import {Department} from "../../../func/Department";
 import {DepartmentService} from "../../../service/department.service";
 
