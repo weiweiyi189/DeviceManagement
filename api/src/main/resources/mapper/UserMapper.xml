@@ -17,6 +17,12 @@
     </resultMap>
 
     <!-- 注意id和mapper层定义的方法一致-->
+    <!-- 修改用户密码 -->
+    <update id="updatePwdByStaffNumber">
+        update user
+        set password = #{password}
+        where username = #{staffNumber}
+    </update>
     <select id="findByName" resultType="equipmentManagementSystem.entity.User">
         select * from user where name like concat('%',#{name},'%')
     </select>

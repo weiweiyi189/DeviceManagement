@@ -1,11 +1,12 @@
 package equipmentManagementSystem.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import equipmentManagementSystem.entity.Department;
-import equipmentManagementSystem.entity.Equipment;
-import equipmentManagementSystem.entity.Type;
-import equipmentManagementSystem.entity.User;
+import equipmentManagementSystem.entity.*;
 import equipmentManagementSystem.service.EquipmentService;
+import equipmentManagementSystem.entity.CodeUpdatePwdVo;
+import equipmentManagementSystem.service.MailService;
+import equipmentManagementSystem.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.PrimitiveIterator;
 
 @RestController
 @RequestMapping("equipment")
@@ -20,14 +22,20 @@ public class EquipmentController {
 
     private final EquipmentService equipmentService;
 
-    public EquipmentController(EquipmentService equipmentService) {
+    private final UserService userService;
+
+
+    public EquipmentController(EquipmentService equipmentService,UserService userService) {
         this.equipmentService = equipmentService;
+        this.userService=userService;
     }
 
     @GetMapping("getAll")
     @JsonView(GetAllJsonView.class)
     public List<Equipment> page(@RequestParam int page, @RequestParam int size) {
 //        Equipment equipment = this.equipmentService.getEquipmentById(4L);
+//        CodeUpdatePwdVo codeUpdatePwdVo = new CodeUpdatePwdVo("chenyu","511393","chenyu");
+//        userService.codeUpdatePwd(codeUpdatePwdVo);
         return this.equipmentService.findAll(PageRequest.of(page, size));
     }
 

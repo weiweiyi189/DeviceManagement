@@ -3,9 +3,13 @@ package equipmentManagementSystem.service;
 import com.mengyunzhi.core.exception.ObjectNotFoundException;
 import com.mengyunzhi.core.service.YunzhiService;
 import equipmentManagementSystem.Mybatis.UserMapper;
+import equipmentManagementSystem.entity.AjaxResult;
+import equipmentManagementSystem.entity.CodeUpdatePwdVo;
+import equipmentManagementSystem.entity.Constants;
 import equipmentManagementSystem.entity.User;
 import equipmentManagementSystem.input.PUser;
 import equipmentManagementSystem.input.VUser;
+import equipmentManagementSystem.redis.RedisCache;
 import equipmentManagementSystem.respority.DepartmentRepository;
 import equipmentManagementSystem.respority.Specs.UserSpecs;
 import equipmentManagementSystem.respority.UserRepository;
@@ -42,11 +46,57 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserMapper userMapper;
 
+
+    @Autowired
+    private RedisCache redisCache;
+
     public UserServiceImpl(UserRepository userRepository,
-                           DepartmentRepository departmentRepository, YunzhiService<User> yunzhiService) {
+                           DepartmentRepository departmentRepository, YunzhiService<User> yunzhiService,RedisCache redisCache) {
         this.userRepository = userRepository;
         this.departmentRepository = departmentRepository;
         this.yunzhiService = yunzhiService;
+        this.redisCache = redisCache;
+    }
+
+    /**
+     * 邮箱验证码重置密码
+     *
+     * @return
+     */
+    @Override
+    public AjaxResult codeUpdatePwd(String num,String codes ,String password) {
+        String staffNumber = num;
+        String code = codes;
+        String loginPassword = password;
+        // 非空校验
+        if (null == staffNumber || "".equals(staffNumber)) throw new EntityNotFoundException("账号不能为空!");
+        if (null == code || "".equals(code)) throw new EntityNotFoundException("验证码不能为空！");
+        if (null == loginPassword || "".equals(loginPassword)) throw new EntityNotFoundException("密码不能为空！");
+
+        // 账号存在校验
+        User user = userRepository.findByUsername(staffNumber);
+        if (null == user) throw new EntityNotFoundException("账号不存在！");
+
+        // 验证码过期校验
+        String cacheCode = redisCache.getCacheObject(Constants.MAIL_CODE_KEY + staffNumber); // 获取缓存中该账号的验证码
+        if (cacheCode == null) {
+            throw new EntityNotFoundException("验证码已过期，请重新获取！");
+        }
+
+        // 验证码正确性校验
+        if (!cacheCode.equals(code)) {
+            throw new EntityNotFoundException("验证码错误！");
+        }
+
+        // 修改密码
+        int result = userMapper.updatePwdByStaffNumber(staffNumber, BeanService.getPasswordEncoder().encode(loginPassword));
+        if (result > 0) {
+            // 将验证码过期
+            redisCache.expire(Constants.MAIL_CODE_KEY + staffNumber, 0);
+            return AjaxResult.success("密码重置成功！请牢记您的密码！");
+        }
+
+        throw new EntityNotFoundException("未知错误，密码修改失败，请重试！");
     }
 
     @Override
