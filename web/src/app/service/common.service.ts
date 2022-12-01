@@ -236,7 +236,6 @@ export class CommonService {
    * @param version2 版本号2
    */
   public compareVersion(version1: string, version2: string): number {
-    Assert.isNotNullOrUndefined(version1, version2, '传入的参考不能为null');
     const versionArray1 = version1.split('\.'); // 注意此处为正则匹配，不能用"."；
     const versionArray2 = version2.split('\.');
     const minLength = Math.min(versionArray1.length, versionArray2.length); // 取最小长度值

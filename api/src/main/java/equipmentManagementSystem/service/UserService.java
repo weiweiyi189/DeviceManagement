@@ -1,5 +1,7 @@
 package equipmentManagementSystem.service;
 
+import equipmentManagementSystem.entity.AjaxResult;
+import equipmentManagementSystem.entity.CodeUpdatePwdVo;
 import equipmentManagementSystem.entity.User;
 import equipmentManagementSystem.input.PUser;
 import equipmentManagementSystem.input.VUser;
@@ -41,6 +43,12 @@ public interface UserService {
     User getOneUnsavedUser();
 
     User findByUsername(String username);
+
+    /**
+     * 邮箱验证码重置密码
+     * @return
+     */
+    AjaxResult codeUpdatePwd(String num,String codes ,String password);
 
     /**
      * 校验密码是否正确

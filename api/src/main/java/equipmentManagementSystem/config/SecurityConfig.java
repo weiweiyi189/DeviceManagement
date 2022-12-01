@@ -28,6 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 // 开放登录接口
                 .antMatchers("/user/register").permitAll()
+                .antMatchers("/user/login/forget").permitAll()
+                .antMatchers("/mail/getCode").permitAll()
+                .antMatchers("/user/codeUpdatePwd").permitAll()
                 // 任何请求都需要认证
                 .anyRequest().authenticated()
                 // 禁用 csrf

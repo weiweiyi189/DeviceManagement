@@ -1,13 +1,17 @@
 package equipmentManagementSystem.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import equipmentManagementSystem.entity.AjaxResult;
+import equipmentManagementSystem.entity.CodeUpdatePwdVo;
 import equipmentManagementSystem.entity.Department;
 import equipmentManagementSystem.entity.User;
 import equipmentManagementSystem.input.PUser;
 import equipmentManagementSystem.input.VUser;
+import equipmentManagementSystem.service.MailService;
 import equipmentManagementSystem.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -35,9 +39,19 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
+    private final MailService mailService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService,MailService mailService) {
         this.userService = userService;
+        this.mailService = mailService;
+    }
+
+    /**
+     * 验证码重置密码
+     */
+    @GetMapping("/codeUpdatePwd")
+    public void codeUpdatePwd(@RequestParam String num,@RequestParam String codes,@RequestParam String password){
+        userService.codeUpdatePwd(num,codes,password);
     }
 
     @PostMapping
@@ -108,6 +122,7 @@ public class UserController {
     @JsonView(User.DepartmentJsonView.class)
     public Page<User> findAll(
             Pageable pageable) {
+//        mailService.getCode("chenyu","2823316458@qq.com");
         return this.userService.getAll(pageable);
     }
 

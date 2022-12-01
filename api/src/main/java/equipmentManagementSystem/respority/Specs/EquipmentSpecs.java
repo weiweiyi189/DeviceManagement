@@ -3,6 +3,7 @@ package equipmentManagementSystem.respority.Specs;
 import equipmentManagementSystem.entity.Equipment;
 import equipmentManagementSystem.entity.Type;
 import equipmentManagementSystem.entity.User;
+import equipmentManagementSystem.service.MailService;
 import org.springframework.data.jpa.domain.Specification;
 
 public class EquipmentSpecs {
