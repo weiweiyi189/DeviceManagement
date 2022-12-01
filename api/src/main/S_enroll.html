@@ -1,0 +1,306 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户注册页面</title>
+
+
+    <!--JQuery在线引用-->
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <style type="text/css">
+        body,
+        html {
+            width: 100%;
+            text-align: center;
+        }
+
+        #picyzm {
+            width: 100px;
+            height: 40px;
+            display: inline-block;
+            margin: 0 30px;
+        }
+
+        #code_input {
+            width: 30%;
+            height: 45px;
+            margin-top: 0px;
+            margin-left: 28px;
+            border-radius: 0.5rem;
+            border-width: 3px;
+            padding-left: 30px;
+        }
+
+        #verifyCodeDemo {
+            width: 100%;
+            display: flex;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        #btn {
+            margin: 30px auto;
+            background-color: #427fed;
+            color: #fff;
+            border-radius: 5px;
+            border: 0;
+            width: 200px;
+            height: 40px;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(225, 225, 225, 0.4);
+        }
+
+        .login-form {
+            width: 25%;
+            height: 60%;
+            background: white;
+            text-align: center;
+            border-radius: 4%;
+        }
+
+        /* 标题 */
+        .title {
+            height: 25px;
+            line-height: 35px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        /* 输入框 */
+        .login-form input {
+            width: 70%;
+            height: 5%;
+            margin-top: 15px;
+            border-radius: 0.5rem;
+            border-width: 1.5px;
+            padding-left: 10px;
+        }
+
+        /* 超链接 */
+        .forget {
+            display: block;
+            margin-top: 1px;
+            color: royalblue;
+            text-decoration: none;
+            margin-left: 260px;
+        }
+
+        .enroll {
+            display: block;
+            margin-top: 0px;
+            color: royalblue;
+            text-decoration: none;
+            margin-right:270px;
+        }
+
+        /* 按钮样式 */
+        .login-form button {
+            width: 70%;
+            height: 13%;
+            margin-top: 24px;
+            background: cornflowerblue;
+            border-style: none;
+            font-size: 18px;
+            border-radius: 0.7rem;
+        }
+
+        /* 按钮鼠标悬浮样式 */
+        .login-form button:hover {
+          background-color: #427fed;
+        }
+        /* 超链接的按钮 */
+        .button {
+            text-decoration: none;
+            color: #fff;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="login-form">
+        <h2 class="title">用户注册</h2>
+        <input type="text" placeholder="姓名" id="m_name">
+        <input type="text" placeholder="工号/学号(数字：小于等于7位)" id="m_userId" maxlength="7" oninput="value=value.replace(/[^\d]/g,'')">
+        <input type="password" placeholder="密码(要求包含数字、字母，不少于8位)" id="m_password">
+        <input type="password" placeholder="重复密码" id="passwordRepeat">
+        <input type="text" placeholder="邮箱：用于找回密码" id="email">
+        <br/><br/>
+        <select id="instituteId" style="width:250px" onmousedown="if(options.length>6){size=5}" onchange="size=0" onclick="getIntype()">
+            <option value="" disabled selected hidden>请选择您的学院</option>
+            <option value="1">理学院</option>
+            <option value="2">机械工程学院</option>
+            <option value="3">能源与环境工程学院</option>
+            <option value="4">电气工程学院</option>
+            <option value="5">化工学院</option>
+            <option value="6">土木与交通学院</option>
+            <option value="7">经济管理学院</option>
+            <option value="8">材料科学与工程学院</option>
+            <option value="9">电子信息工程学院</option>
+            <option value="10">人文与法律学院</option>
+            <option value="11">外国语学院</option>
+            <option value="12">建筑与艺术设计学院</option>
+            <option value="13">国际教育学院（芬兰校区）</option>
+            <option value="14">马克思主义学院</option>
+            <option value="15">人工智能与数据科学学院 </option>
+            <option value="16">生命科学与健康工程学院</option>
+            <option value="17">亚利桑那工业学院</option>
+
+        </select>
+
+        <br/><br/>
+
+        <select id="majorId"  style="width:250px" onmousedown="if(options.length>6){size=5}" onchange="size=0">
+            <option value="" disabled selected hidden>请选择您的专业(请先选择学院)</option>
+        </select>
+        <br/><br/>
+        <input type="button" value="注册" id="btn">
+        <a class="forget" href="login.html"  style="float: right">返回登陆&nbsp&nbsp&nbsp</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $.ajax({
+        url: 'http://localhost:8080/mail/getCode',
+        data: JSON.stringify({
+            staffNumber:"1",
+            mailAddress:"2823316458@qq.com"
+        }),
+        contentType: 'form-data',
+        type: 'get',
+        dataType: 'json',
+        success: function (data) {
+            alert("success");
+        }
+    })
+
+window.selectFocus = function(that) {
+$(that).attr("size", 5);
+};
+window.selectClick = function(that) {
+$(that).parent().removeAttr("size");
+$(that).parent().blur();
+$(that).parent().children("[selected='selected']").removeAttr("selected");
+$(that).attr("selected", "");
+};
+
+
+        //点击注册验证
+        var code = document.getElementById("code_input");
+        var btn = document.getElementById("btn");
+        btn.onclick = function () {
+         console.log($("#sel").find("option:selected").val());
+        console.log($("#email").val());
+        var pwdRegex = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}');
+        if (!pwdRegex.test($("#m_password").val())) {
+        alert("您的密码复杂度太低（密码中必须包含字母、数字,且长度必须为8到30字符）！");
+        }
+        else{
+                $.ajax({
+                url: 'http://'+localStorage.getItem('IP')+':'+localStorage.getItem('port')+'/project/user/register',
+                data: JSON.stringify({
+                 "email": $("#email").val(),
+                 "instituteId":$("#instituteId").find("option:selected").val(),
+                 "majorId":$("#majorId").find("option:selected").val(),
+                 "name": $("#m_name").val(),
+                 "password":$("#m_password").val(),
+                 "passwordRepeat":$("#passwordRepeat").val(),
+                 "userId": $("#m_userId").val()
+                }),
+                contentType: 'application/json',
+                type: 'post',
+                dataType: 'json',
+                success: function (data) {
+                if(data.code==0){
+                alert("注册成功！");
+                window.location.href = "login.html"
+                }
+                 else
+                alert(data.msg);
+
+                }
+            })
+        }
+        }
+
+
+ function getIntype(){
+ $("#majorId").empty();
+    $.ajax({
+        url:'http://'+localStorage.getItem('IP')+':'+localStorage.getItem('port')+'/project/institute-major-relation/showMajor',
+         data: JSON.stringify({
+                         "instituteId": $("#instituteId").find("option:selected").val()
+}),
+  contentType: 'application/json',
+                type: 'post',
+                dataType: 'json',
+        success:function(data){
+             for (i in data.data){
+                var option=document.createElement("option");
+                $("#majorId").append(('<option value='+data.data[i].majorId+'>'+data.data[i].majorName+'</option>'));
+            }
+        },
+        error:function(data){
+            console.log(data);
+        }
+    });
+}
+    </script>
+</body>
+
+</html>
+<script>
+    //body初始化事件
+    //body标签加οnlοad='方法名()'
+    //function 方法名(){
+    //   初始化操作
+    //   }
+    function init(){
+        //获取显示器宽度
+        var widths=window.screen.width;
+        //body的宽与显示器一致(浏览器最大化的时候可以用)
+        document.body.style.width=widths+'px';
+    }
+    //监听浏览器的宽度变化
+    window.onresize=function(){
+        //获取浏览器当前的宽度
+        var innerwidths =window.innerWidth;
+        //获取当前显示器的宽度(一般情况下显示器的宽度是不会变得的)
+        var widths=window.screen.width;
+
+        //如果显示器宽度等于浏览器宽度那么这个情况大多数是最大化的时候
+        if(innerwidths==widths){
+            //所以直接把显示器的宽度赋给body
+            document.body.style.width=widths+'px';
+        }
+
+        //如果浏览器的宽度不等于显示器的宽度时有两种情况
+        // 第一种就是 缩小
+        // 第二种就是 放大
+        if(innerwidths!=widths){
+            //先处理缩小的，因为浏览器在缩小的时候它的宽度会一直累加，这个时候浏览器宽度就大于显示器宽度了
+            if (innerwidths>widths) {
+                //这里给body赋值是模拟缩小页面的操作，幅度不能太大，要不然有点奇怪
+                document.body.style.width=innerwidths*10%-widths*10%+'px';
+                return;
+            }
+
+            //放大的操作就重新给body宽度赋显示器的宽度
+            document.body.style.width=widths+'px';
+        }
+    }
+
+</script>
