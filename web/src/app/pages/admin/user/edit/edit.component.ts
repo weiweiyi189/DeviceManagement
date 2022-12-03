@@ -51,14 +51,12 @@ export class EditComponent implements OnInit {
     this.userForm.setValue({
       name: user.name,
       phone: user.phone,
-      role: user.role,
-      sex: user.sex,
       username: user.username,
       jobNumber: user.jobNumber,
       department: user.department
     });
-    this.roleForm.setValue(user.role),
-      this.sexForm.setValue(user.sex);
+    this.roleForm.setValue(user.role);
+    this.sexForm.setValue(user.sex);
   }
 
   /**

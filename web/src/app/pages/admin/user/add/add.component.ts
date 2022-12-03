@@ -71,6 +71,9 @@ export class AddComponent implements OnInit {
     this.user.role = this.roleForm.value;
     this.user.sex = this.sexForm.value;
     this.user.department = this.userForm.get('department').value;
+    if (!this.user.department && this.currentUser.role === 3) {
+      this.user.department = this.currentUser.department;
+    }
     this.userService.save(this.user).subscribe(() => {
       this.commonService.success(() => {
         this.commonService.back();
