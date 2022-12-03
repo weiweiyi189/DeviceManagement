@@ -1,4 +1,4 @@
-<form [formGroup]="userForm" (ngSubmit)="submit()">
+<form [formGroup]="userForm" (ngSubmit)="submit()" *ngIf="currentUser">
     <div class="col-md-6 offset-md-1">
       <div class="row mt-4">
         <div class="col-md-4 form-text text-right">
