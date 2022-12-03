@@ -59,7 +59,7 @@ export class AddComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.userForm.get('department').value.user && this.roleForm.value === 3) {
+    if (this.userForm.get('department').value?.user && this.roleForm.value === 3) {
       this.commonService.error(() => {}, '所选部门已有经理');
       return;
     }
