@@ -45,9 +45,19 @@ spring:
         max-wait: -1ms
   # 配置邮箱服务器，账号密码等
   mail:
-    host: smtp.163.com
-    username: chenyu99jia@163.com
-    password: IOWRLTYRUSKWUIIQ
+    host: smtp.qq.com
+    username: 2823316458@qq.com
+    password: wozajkravvlhdcce
+    port:
+    default-encoding: UTF-8
+    protocol: smtp
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.socketFactory.port: 465
+      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+      mail.smtp.socketFactory.fallback: false
 
 # 找回密码邮箱验证码过期时间（分钟）
 mail:

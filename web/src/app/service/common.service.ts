@@ -471,8 +471,8 @@ export class CommonService {
   }
 
   /**
-   * 判断当前 字符串 是否是手机号
-   * @param mobile 手机号字符串
+   * 判断当前 字符串 是否是邮箱
+   * @param mobile 邮箱字符串
    */
   isMobile(mobile: string): boolean {
     const regex = /^(((13[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(17[0-8]{1})|(18[0-9]{1})|(19[0-9]{1})|(14[5-9]{1}))+\d{8})$/;

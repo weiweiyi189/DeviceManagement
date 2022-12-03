@@ -58,6 +58,7 @@ public class MailServiceImpl implements MailService {
         // 账号存在校验
         User user = userRepository.findByUsername(staffNumber);
         if (null == user) throw new EntityNotFoundException("账号不存在！");
+        if(null == user.getPhone()) throw new EntityNotFoundException("邮箱不存在！");
         if (!user.getPhone().equals(mailAddress)) throw new EntityNotFoundException("输入邮箱和预留邮箱不一致！");
 
         String verifyCode = redisCache.getCacheObject(Constants.MAIL_CODE_KEY + staffNumber);
@@ -72,7 +73,7 @@ public class MailServiceImpl implements MailService {
         stringBuilder.append("<html><head><title></title></head><body>");
         stringBuilder.append("您好<br/>");
         stringBuilder.append("您的验证码是：").append(verifyCode).append("<br/>");
-        stringBuilder.append("您可以复制此验证码并返回至设备管理系统找回密码页面，以验证您的邮箱。<br/>");
+        stringBuilder.append("您可以复制此验证码并返回至 设备管理系统 找回密码页面，以验证您的邮箱。<br/>");
         stringBuilder.append("此验证码只能使用一次，在");
         stringBuilder.append(overtime.toString());
         stringBuilder.append("分钟内有效。验证成功则自动失效。<br/>");

@@ -116,7 +116,6 @@ export class ForgetComponent implements OnInit {
 /** 显示倒计时 */
 // tslint:disable-next-line:typedef
 function setting() {
-  console.log('ces');
 // 常量 input: HTMLInputElement | null
   const input = document.getElementById('getCode') as HTMLInputElement | null;
 
