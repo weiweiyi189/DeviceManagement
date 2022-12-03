@@ -30,9 +30,8 @@ export class AddComponent implements OnInit {
     this.authService.getCurrentLoginUser$()
       .subscribe((user: User) => {
         this.currentUser = user;
-        console.log(user);
+        this.initForm();
       });
-    this.initForm();
   }
 
   public initForm(): void {
