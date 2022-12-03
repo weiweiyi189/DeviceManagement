@@ -40,7 +40,7 @@ export class EditComponent implements OnInit {
       department: null,
       name: ['', Validators.required],
       username: ['', Validators.required],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.email]],
       jobNumber: ['', Validators.required],
     });
     this.sexForm = new FormControl();

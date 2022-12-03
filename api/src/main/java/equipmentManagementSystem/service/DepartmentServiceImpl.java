@@ -44,6 +44,8 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public Department add(Department department) {
+        User user=this.userMapper.findById(department.getUser().getId());
+        department.setUser(user);
         return this.departmentRepository.save(department);
     }
 

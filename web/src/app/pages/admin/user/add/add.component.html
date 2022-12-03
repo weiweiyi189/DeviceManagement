@@ -44,10 +44,11 @@
 
       <div class="row mt-4">
         <div class="col-md-4 form-text text-right">
-          <label for="username">手机号<code>*</code></label>
+          <label for="username">邮箱<code>*</code></label>
         </div>
         <div class="col-md-8">
-          <input type="number" id="phone" class="form-control" formControlName="phone" placeholder="请输入手机号码"/>
+          <input type="text" id="phone" class="form-control" formControlName="phone" placeholder="请输入邮箱"/>
+          <small *ngIf="userForm.get('phone').value && userForm.get('phone').invalid"><code>邮箱格式不对，请重新输入</code></small>
         </div>
       </div>
 

@@ -148,7 +148,7 @@ public class EquipmentServiceImpl implements EquipmentService{
         dingService.dingRequest("借用推送" + "\n" +"用户  "
                 + this.userService.getCurrentLoginUser().getName() + " 申请借用" +"\n" + "借用设备： " + equipment1.getName() + "\n"
         + "借用时间： " + dateString);
-//        equipment1.setUser(this.userService.getCurrentLoginUser());
+        equipment1.setUser(this.userService.getCurrentLoginUser());
         equipment1.setStates(6);
         return this.equipmentRepository.save(equipment1);
     }

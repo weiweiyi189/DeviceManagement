@@ -124,14 +124,13 @@ public class UserServiceImpl implements UserService{
     @Override
     public void add(User user) {
         Assert.notNull(user.getName(), "name不能为空");
-        Assert.notNull(user.getDepartment(), "部门不能为空");
         Assert.notNull(user.getSex(), "性别不能为空");
         Assert.notNull(user.getJobNumber(), "工号不能为空");
-        Assert.notNull(user.getPhone(), "手机号不能为空");
+        Assert.notNull(user.getPhone(), "邮箱不能为空");
         Assert.notNull(user.getRole(), "角色不能为空");
         user.setPassword(DEFAULT_PASSWORD);
         this.userRepository.save(user);
-        if (user.getRole().equals(3L)) {
+        if (user.getRole().equals(3L) && user.getDepartment() != null) {
             user.getDepartment().setUser(user);
             this.departmentRepository.save(user.getDepartment());
         }
@@ -219,16 +218,17 @@ public class UserServiceImpl implements UserService{
     @Override
     public User update(Long id, User user) {
         Assert.notNull(user.getName(), "name不能为空");
-        Assert.notNull(user.getDepartment(), "部门不能为空");
         Assert.notNull(user.getSex(), "性别不能为空");
         Assert.notNull(user.getJobNumber(), "工号不能为空");
-        Assert.notNull(user.getPhone(), "手机号不能为空");
+        Assert.notNull(user.getPhone(), "邮箱不能为空");
         Assert.notNull(user.getRole(), "角色不能为空");
         User oldUser = this.getUserById(id);
         oldUser.setUsername(user.getUsername());
         oldUser.setName(user.getName());
         oldUser.setSex(user.getSex());
-        oldUser.setDepartment(user.getDepartment());
+        if (user.getDepartment() != null) {
+            oldUser.setDepartment(user.getDepartment());
+        }
         oldUser.setJobNumber(user.getJobNumber());
         oldUser.setPhone(user.getPhone());
         oldUser.setRole(user.getRole());

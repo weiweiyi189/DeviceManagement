@@ -7,6 +7,7 @@ import {AuthService} from '../../../../service/auth.service';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {DepartmentService} from '../../../../service/department.service';
 import {UserService} from '../../../../service/user.service';
+import {Department} from '../../../../func/Department';
 
 @Component({
   selector: 'app-add',
@@ -58,7 +59,15 @@ export class AddComponent implements OnInit {
 
 
   submit(): void {
-    this.departmentService.save(this.departmentForm.value).subscribe(() => {
+    const department = new Department({
+        name: this.name.value,
+        code: this.code.value,
+        user: new User({
+          id: this.userId.value
+        })
+      }
+    );
+    this.departmentService.save(department).subscribe(() => {
       this.commomService.success(() => {
         this.commonService.back();
       }, '部门新增成功');

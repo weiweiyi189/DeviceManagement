@@ -44,6 +44,7 @@ public class InitUsers implements ApplicationListener<ContextRefreshedEvent> {
         user.setName("系统管理员");
         user.setUsername(this.username);
         user.setPassword(this.password);
+        user.setPhone("1589654294@qq.com");
         user.setJobNumber("00000");
         user.setRole(0L);
         users.add(user);
