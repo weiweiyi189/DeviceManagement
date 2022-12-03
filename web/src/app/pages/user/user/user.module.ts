@@ -17,6 +17,9 @@ import {PartModule} from '../../../part/part.module';
     FuncModule,
     FormsModule,
     PartModule
+  ],
+  exports: [
+    AddComponent
   ]
 })
 export class UserModule {

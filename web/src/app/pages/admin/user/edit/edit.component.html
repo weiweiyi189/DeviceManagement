@@ -1,4 +1,4 @@
-<form [formGroup]="userForm" (ngSubmit)="submit()">
+<form [formGroup]="userForm" (ngSubmit)="submit()" *ngIf="currentUser">
   <div class="row">
     <div class="col-md-6 offset-md-1">
       <div class="row mt-4">
@@ -119,7 +119,7 @@
 
       <div class="row mt-5">
         <div class="col-md-4 offset-md-4">
-          <button class="btn btn-primary btn-lg btn-block" [disabled]="userForm.invalid"
+          <button class="btn btn-primary btn-lg btn-block" [disabled]="userForm.invalid || sexForm.invalid || roleForm.invalid"
                   type="submit">
             <i class="far fa-save"></i>
             &nbsp;保存

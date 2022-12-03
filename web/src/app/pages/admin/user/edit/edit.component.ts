@@ -28,10 +28,11 @@ export class EditComponent implements OnInit {
               private authService: AuthService) {  this.createForm(); }
 
   ngOnInit(): void {
+    this.authService.getCurrentLoginUser$()
+      .subscribe((user: User) => {
+        this.currentUser = user;
         this.getEditUser();
-    this.userService.currentLoginUser$.subscribe(user => {
-      this.currentUser = user;
-    });
+      });
   }
 
   public createForm(): void {
@@ -39,8 +40,6 @@ export class EditComponent implements OnInit {
       department: null,
       name: ['', Validators.required],
       username: ['', Validators.required],
-      role: ['', Validators.required],
-      sex: ['', Validators.required],
       phone: ['', Validators.required],
       jobNumber: ['', Validators.required],
     });
@@ -60,8 +59,6 @@ export class EditComponent implements OnInit {
     });
     this.roleForm.setValue(user.role),
       this.sexForm.setValue(user.sex);
-    console.log(this.roleForm.value);
-    console.log(this.sexForm.value);
   }
 
   /**

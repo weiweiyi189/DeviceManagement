@@ -22,18 +22,20 @@ export class AddComponent implements OnInit {
 
   constructor(private builder: FormBuilder,
               private commonService: CommonService,
-              private userService: UserService) { }
+              private userService: UserService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.initForm();
-    this.userService.currentLoginUser$.subscribe(user => {
-      this.currentUser = user;
-    });
+    this.authService.getCurrentLoginUser$()
+      .subscribe((user: User) => {
+        this.currentUser = user;
+        this.initForm();
+      });
   }
 
   public initForm(): void {
     this.userForm = this.builder.group({
-      department: [null, Validators.required],
+      department: [null],
       name: ['', Validators.required],
       username: ['', Validators.required],
       phone: ['', Validators.required],
@@ -57,7 +59,7 @@ export class AddComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.userForm.get('department').value.user) {
+    if (this.userForm.get('department').value.user && this.roleForm.value === 3) {
       this.commonService.error(() => {}, '所选部门已有经理');
       return;
     }

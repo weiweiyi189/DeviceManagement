@@ -6,7 +6,7 @@ import {CommonService} from '../../../../service/common.service';
 import {AuthService} from '../../../../service/auth.service';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {DepartmentService} from '../../../../service/department.service';
-import {UserService} from "../../../../service/user.service";
+import {UserService} from '../../../../service/user.service';
 
 @Component({
   selector: 'app-add',
@@ -38,7 +38,7 @@ export class AddComponent implements OnInit {
     this.departmentForm = this.builder.group({
       name: ['', Validators.required],
       code: ['', Validators.required],
-      userId: ['',],
+      userId: [''],
     });
   }
 

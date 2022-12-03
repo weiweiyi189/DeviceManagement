@@ -53,7 +53,7 @@ export class EditComponent implements OnInit {
     this.departmentForm = this.builder.group({
       name: ['', Validators.required],
       code: ['', Validators.required],
-      userId: ['', Validators.required],
+      userId: [''],
     });
   }
 
@@ -61,7 +61,7 @@ export class EditComponent implements OnInit {
     this.departmentForm.setValue({
       name: department.name,
       code: department.code,
-      userId: department.user.id
+      userId: department.user?.id ? department.user?.id : null
     });
   }
 
