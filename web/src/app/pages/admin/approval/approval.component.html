@@ -14,7 +14,7 @@
   <tbody>
   <tr *ngFor="let approval of approvals.content; let $index = index;">
     <td>{{$index + 1}}</td>
-    <td>{{approval.equipment?.model}}</td>
+    <td>{{approval.equipment?.name}}</td>
     <td>{{approval?.createUser?.name}}</td>
     <td>{{approval?.equipment.model}}</td>
     <td>{{approval?.equipment.department.name}}</td>

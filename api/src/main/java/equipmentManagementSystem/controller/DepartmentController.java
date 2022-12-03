@@ -51,6 +51,7 @@ public class DepartmentController {
     }
 
     @PostMapping
+    @JsonView(Department.UserJsonView.class)
     public Department add(@RequestBody Department department) {
        return this.departmentService.add(department);
     }

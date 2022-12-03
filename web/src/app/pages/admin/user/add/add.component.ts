@@ -38,7 +38,7 @@ export class AddComponent implements OnInit {
       department: [null],
       name: ['', Validators.required],
       username: ['', Validators.required],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.email]],
       code: ['', Validators.required],
     });
     this.sexForm = new FormControl(null, Validators.required);
