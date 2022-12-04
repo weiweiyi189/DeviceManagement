@@ -4,6 +4,7 @@ import equipmentManagementSystem.Mybatis.ApprovalMapper;
 import equipmentManagementSystem.Mybatis.EquipmentMapper;
 import equipmentManagementSystem.entity.Approval;
 import equipmentManagementSystem.entity.Equipment;
+import equipmentManagementSystem.entity.User;
 import equipmentManagementSystem.respority.ApprovalRepository;
 import equipmentManagementSystem.respority.EquipmentRepository;
 import equipmentManagementSystem.respority.Specs.ApprovalSpecs;
@@ -36,6 +37,7 @@ public class ApprovalServiceImpl implements ApprovalService {
   public Page<Approval> page(Pageable pageable) {
     Short type = 1;
     Short status = Approval.PENDING_APPROVEAl;
+    User user = this.userService.getCurrentLoginUser();
     Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)), pageable);
     return approvals;
   }
