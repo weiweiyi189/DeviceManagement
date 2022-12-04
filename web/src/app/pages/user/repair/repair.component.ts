@@ -46,7 +46,7 @@ export class RepairComponent implements OnInit {
       .subscribe((response: { totalPages: number, content: Array<Equipment> }) => {
         this.equipments = response;
         console.log(this.equipments);
-        console.log(this.currentUser)
+        console.log(this.currentUser);
       });
   }
 

@@ -17,9 +17,9 @@
     <td *ngIf="approval.equipment === null">购买失败</td>
     <td>{{approval?.createUser?.name}}</td>
     <td >{{approval.type | applyStatus}}</td>
-    <td>{{approval?.createUser.department?.name}}</td>
+    <td>{{approval?.equipment.department?.name}}</td>
     <td>{{approval?.approvalUser?.name}}</td>
-    <td [style.color]="getFontColor(approval.type)">{{approval.status | resultStatus}}</td>
+    <td [style.color]="getFontColor(approval.status)">{{approval.status | resultStatus}}</td>
   </tr>
   </tbody>
 </table>
