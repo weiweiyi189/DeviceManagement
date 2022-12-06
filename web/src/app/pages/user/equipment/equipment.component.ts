@@ -57,14 +57,6 @@ export class EquipmentComponent implements OnInit {
     this.loadData();
   }
 
-
-  public pageAll(): void {
-    this.equipmentService.query(this.queryParams)
-      .subscribe((response: { totalPages: number, content: Array<Equipment> }) => {
-        this.equipments = response;
-      });
-  }
-
   onPageSelected(page: number): void {
     this.queryParams.page = page;
     this.loadData();
@@ -170,7 +162,7 @@ export class EquipmentComponent implements OnInit {
         this.equipmentService.delete(equipment.id).subscribe(() => {
           this.commonService.success(() => {
           }, '删除成功');
-          this.pageAll();
+          this.loadData();
         }, (response: HttpErrorResponse) => {
           this.commonService.httpError(response);
         });
@@ -185,7 +177,7 @@ export class EquipmentComponent implements OnInit {
         this.equipmentService.repair(equipment.id, equipment).subscribe(() => {
           this.commonService.success(() => {
           }, '申请成功');
-          this.pageAll();
+          this.loadData();
         }, (response: HttpErrorResponse) => {
           this.commonService.httpError(response);
         });
@@ -200,7 +192,7 @@ export class EquipmentComponent implements OnInit {
         this.equipmentService.report(equipment.id, equipment).subscribe(() => {
           this.commonService.success(() => {
           }, '申请成功');
-          this.pageAll();
+          this.loadData();
         }, (response: HttpErrorResponse) => {
           this.commonService.httpError(response);
         });
@@ -215,7 +207,7 @@ export class EquipmentComponent implements OnInit {
         this.equipmentService.scrap(equipment.id, equipment).subscribe(() => {
           this.commonService.success(() => {
           }, '报废成功');
-          this.pageAll();
+          this.loadData();
         }, (response: HttpErrorResponse) => {
           this.commonService.httpError(response);
         });
