@@ -61,6 +61,16 @@ export class ApprovalComponent implements OnInit {
     });
   }
 
+  onPageSelected(page: number): void {
+    this.params.page = page;
+    this.page();
+  }
+
+  onSizeSelected(size: number): void {
+    this.params.size = size;
+    this.page();
+  }
+
   getFontColor(status: number): any {
     if (status === 0) {
       this.fontColor = '#2e5fee';

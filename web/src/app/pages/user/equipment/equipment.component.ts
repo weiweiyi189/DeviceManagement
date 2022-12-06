@@ -9,6 +9,7 @@ import {AuthService} from '../../../service/auth.service';
 import {User} from '../../../func/User';
 import {FormControl} from '@angular/forms';
 import {config} from '../../../conf/app.conf';
+import {Approval} from "../../../func/approval";
 
 @Component({
   selector: 'app-equipment',
@@ -21,7 +22,7 @@ export class EquipmentComponent implements OnInit {
    */
   public params = {
     page: 0,
-    size: 10,
+    size: 5,
   };
 
   /* 分页数据 */
@@ -53,17 +54,25 @@ export class EquipmentComponent implements OnInit {
         this.currentUser = user;
         console.log(user);
       });
-    this.pageAll();
+    this.loadData();
   }
 
 
   public pageAll(): void {
-    this.equipmentService.getAll(this.params.page,
-      this.params.size)
-      .subscribe((response: Array<Equipment> ) => {
-        this.equipments.content = response;
-        console.log(this.equipments);
+    this.equipmentService.query(this.queryParams)
+      .subscribe((response: { totalPages: number, content: Array<Equipment> }) => {
+        this.equipments = response;
       });
+  }
+
+  onPageSelected(page: number): void {
+    this.queryParams.page = page;
+    this.loadData();
+  }
+
+  onSizeSelected(size: number): void {
+    this.queryParams.size = size;
+    this.loadData();
   }
 
   getFontColor(status: number): any {
@@ -139,15 +148,14 @@ export class EquipmentComponent implements OnInit {
    */
   loadData(): void {
     const queryParams = {
-      page: this.params.page,
-      size: config.size,
+      page: this.queryParams.page,
+      size: this.queryParams.size,
       name: this.queryParams.name.value,
       internalNumber: this.queryParams.internalNumber.value,
       type: this.queryParams.type,
       place: this.queryParams.place.value,
       states: this.queryParams.states
     };
-    console.log(queryParams);
     this.equipmentService.query(queryParams)
       .subscribe((response: { totalPages: number, content: Array<Equipment> }) => {
         this.equipments = response;

@@ -73,6 +73,12 @@ public class UserController {
         return this.userService.findByUsername(username);
     }
 
+    @GetMapping("existByUsername")
+    public Boolean usernameExist(@RequestParam String username) {
+        return this.userService.existByUsername(username);
+    }
+
+
     @GetMapping("logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) {
         logger.info("用户注销");
@@ -173,13 +179,9 @@ public class UserController {
     }
 
 
-    /**
-     * 获取所有作业
-     * @param pageable 分页信息
-     * @return 所有作业
-     */
+
     @GetMapping("query")
-    @JsonView(Department.UserJsonView.class)
+    @JsonView(User.DepartmentJsonView.class)
     public Page<User> findAll(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String jobNumber,

@@ -6,7 +6,8 @@
     <th scope="col">申请人</th>
     <th scope="col">类型</th>
     <th scope="col">所属部门</th>
-    <th scope="col">处理人</th>
+    <th scope="col">审批员</th>
+    <th scope="col">发起时间</th>
     <th scope="col">结果</th>
   </tr>
   </thead>
@@ -19,7 +20,10 @@
     <td >{{approval.type | applyStatus}}</td>
     <td>{{approval?.equipment.department?.name}}</td>
     <td>{{approval?.approvalUser?.name}}</td>
+    <td>{{approval?.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
     <td [style.color]="getFontColor(approval.status)">{{approval.status | resultStatus}}</td>
   </tr>
   </tbody>
 </table>
+<app-page *ngIf="approvals.totalPages != 0" [setTotalPages]="approvals.totalPages" [setPage]="params.page" [setSize]="params.size" (selectedPage)="onPageSelected($event)" (selectedSize)="onSizeSelected($event)"></app-page>
+

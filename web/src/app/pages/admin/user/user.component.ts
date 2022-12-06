@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
    */
   public params = {
     page: 0,
-    size: 10,
+    size: 5,
   };
 
 
@@ -39,6 +39,16 @@ export class UserComponent implements OnInit {
               private commonService: CommonService) { }
 
   ngOnInit(): void {
+    this.pageAll();
+  }
+
+  onPageSelected(page: number): void {
+    this.params.page = page;
+    this.pageAll();
+  }
+
+  onSizeSelected(size: number): void {
+    this.params.size = size;
     this.pageAll();
   }
 
@@ -81,7 +91,7 @@ export class UserComponent implements OnInit {
   loadData(): void {
     const queryParams = {
       page: this.params.page,
-      size: config.size,
+      size:  this.params.size,
       name: this.queryParams.name.value,
       jobNumber: this.queryParams.jobNumber.value
     };

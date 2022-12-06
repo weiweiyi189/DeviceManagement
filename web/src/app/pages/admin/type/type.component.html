@@ -33,3 +33,4 @@
   </tr>
   </tbody>
 </table>
+<app-page *ngIf="types.totalPages != 0" [setTotalPages]="types.totalPages" [setPage]="params.page" [setSize]="params.size" (selectedPage)="onPageSelected($event)" (selectedSize)="onSizeSelected($event)"></app-page>

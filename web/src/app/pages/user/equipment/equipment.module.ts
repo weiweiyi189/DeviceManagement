@@ -9,16 +9,18 @@ import {EquipmentComponent} from './equipment.component';
 import { DetailComponent } from '../detail/detail.component';
 import {StatusPipe} from '../../../func/pipe/Status.pipe';
 import { BorrowComponent } from './borrow/borrow.component';
+import {PartModule} from "../../../part/part.module";
 
 @NgModule({
   declarations: [EquipmentComponent, AddComponent, EditComponent, BorrowComponent],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    EquipmentRoutingModule,
-    FuncModule,
-    FormsModule
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        EquipmentRoutingModule,
+        FuncModule,
+        FormsModule,
+        PartModule
+    ],
   exports: [
     EquipmentComponent
   ]

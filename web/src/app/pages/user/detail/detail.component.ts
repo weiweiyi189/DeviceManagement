@@ -133,7 +133,7 @@ export class DetailComponent implements OnInit {
   loadData(): void {
     const queryParams = {
       page: this.params.page,
-      size: config.size,
+      size: this.params.size,
       name: this.queryParams.name.value,
       internalNumber: this.queryParams.internalNumber.value,
       type: this.queryParams.type,

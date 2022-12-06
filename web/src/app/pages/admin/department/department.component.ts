@@ -25,7 +25,16 @@ export class DepartmentComponent implements OnInit {
   constructor(private departmentService: DepartmentService) { }
 
   ngOnInit(): void {
-    console.log()
+    this.pageAll();
+  }
+
+  onPageSelected(page: number): void {
+    this.params.page = page;
+    this.pageAll();
+  }
+
+  onSizeSelected(size: number): void {
+    this.params.size = size;
     this.pageAll();
   }
 

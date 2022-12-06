@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.persistence.EntityNotFoundException;
 import javax.xml.bind.ValidationException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -304,6 +305,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public Boolean existByPhone(String phoneNumber) {
         return this.userRepository.findByUsername(phoneNumber) != null;
+    }
+
+    @Override
+    public Boolean existByUsername(String username) {
+        return this.userRepository.findByUsername(username) != null && !Objects.equals(username, this.getCurrentLoginUser().getUsername());
     }
 
 

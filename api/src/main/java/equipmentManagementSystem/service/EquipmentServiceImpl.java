@@ -55,7 +55,7 @@ public class EquipmentServiceImpl implements EquipmentService{
 
     @Override
     public Equipment getEquipmentById(Long id) {
-        Equipment equipment=this.equipmentMapper.findById(id);
+        Equipment equipment = this.equipmentMapper.findById(id);
         if(equipment==null)throw new EntityNotFoundException("找不到相关设备");
         return equipment;
     }

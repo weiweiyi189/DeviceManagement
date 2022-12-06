@@ -24,7 +24,7 @@ public class EquipmentSpecs {
         if (place == null) {
             return Specification.where(null);
         }
-        return (Specification<Equipment>) (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("place").as(String.class),  place);
+        return (Specification<Equipment>) (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("place").as(String.class),  String.format("%%%s%%", place));
     }
     public static Specification<Equipment> containingName(String name) {
         if (name != null) {

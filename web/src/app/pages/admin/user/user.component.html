@@ -3,7 +3,7 @@
     <label class="mt-1">姓名：</label>
     <input type="text" class="form-control rounded col-1 h-100" placeholder="" [formControl]="queryParams.name">
 
-    <label class="mt-1 ml-5">工号：</label>
+    <label class="mt-1 ml-5">编号：</label>
     <input type="text" class="form-control col-1 rounded" placeholder="" [formControl]="queryParams.jobNumber" >
 
     <button class="btn btn-sm btn-warning ml-xl-5" (click)="clear()">
@@ -59,3 +59,4 @@
   </tr>
   </tbody>
 </table>
+<app-page *ngIf="users.totalPages != 0" [setTotalPages]="users.totalPages" [setPage]="params.page" [setSize]="params.size" (selectedPage)="onPageSelected($event)" (selectedSize)="onSizeSelected($event)"></app-page>

@@ -39,6 +39,7 @@
         </div>
         <div class="col-md-8">
           <input type="text" id="username" class="form-control" formControlName="username" placeholder="请输入用户名"/>
+          <small  *ngIf="userForm.get('username')?.errors && userForm.get('username')?.value"><code>用户名已存在</code></small>
         </div>
       </div>
 
