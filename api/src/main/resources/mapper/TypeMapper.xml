@@ -9,14 +9,12 @@
     </resultMap>
     <select id="findAll" resultMap="typeResultMap">
         select *
-        from type
+        from type where deleted = 0
     </select>
 
-    <delete id="deleteById" parameterType="Long">
-        delete
-        from type
-        where id=#{id}
-    </delete>
+    <update id="deleteById" parameterType="Long">
+        update type set deleted = 1 where id=#{id}
+    </update>
     
     <select id="findById" resultMap="typeResultMap">
         select *

@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService{
         if (null == loginPassword || "".equals(loginPassword)) throw new EntityNotFoundException("密码不能为空！");
 
         // 账号存在校验
-        User user = userRepository.findByUsername(staffNumber);
+        User user = userRepository.findByUsernameAndDeletedIsFalse(staffNumber);
         if (null == user) throw new EntityNotFoundException("账号不存在！");
 
         // 验证码过期校验
@@ -157,7 +157,7 @@ public class UserServiceImpl implements UserService{
 
         logger.debug("根据认证信息查询用户");
         if (authentication != null && authentication.isAuthenticated()) {
-            user = userRepository.findByUsername(authentication.getName());
+            user = userRepository.findByUsernameAndDeletedIsFalse(authentication.getName());
         }
 
         return user;
@@ -205,7 +205,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public Boolean isUsernameExist(String username) {
         logger.debug("根据新手机号查询用户");
-        User user = this.userRepository.findByUsername(username);
+        User user = this.userRepository.findByUsernameAndDeletedIsFalse(username);
 
         logger.debug("验证用户是否存在");
         if (user != null) {
@@ -239,7 +239,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findByUsername(String username) {
-        return this.userRepository.findByUsername(username);
+        return this.userRepository.findByUsernameAndDeletedIsFalse(username);
     }
 
     @Override
@@ -304,12 +304,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Boolean existByPhone(String phoneNumber) {
-        return this.userRepository.findByUsername(phoneNumber) != null;
+        return this.userRepository.findByUsernameAndDeletedIsFalse(phoneNumber) != null;
     }
 
     @Override
     public Boolean existByUsername(String username) {
-        return this.userRepository.findByUsername(username) != null && !Objects.equals(username, this.getCurrentLoginUser().getUsername());
+        return this.userRepository.findByUsernameAndDeletedIsFalse(username) != null && !Objects.equals(username, this.getCurrentLoginUser().getUsername());
     }
 
 

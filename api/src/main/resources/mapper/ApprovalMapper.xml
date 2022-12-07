@@ -17,14 +17,13 @@
 
     <select id="findAll" resultMap="approvalResultMap">
         select *
-        from approval
+        from approval where deleted = 0
     </select>
 
-    <delete id="deleteById" parameterType="Long">
-        delete
-        from approval
-        where id=#{id}
-    </delete>
+    <update id="deleteById" parameterType="Long">
+        update approval set deleted = 1 where id=#{id}
+    </update>
+
 
     <select id="findById" resultMap="approvalResultMap">
         select *

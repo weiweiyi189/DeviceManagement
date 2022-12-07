@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.hibernate.annotations.SQLDelete;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -11,7 +12,8 @@ import java.sql.Timestamp;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Approval {
+@SQLDelete(sql = "update `approval` set deleted = 1 where id = ?")
+public class Approval implements SoftDelete {
   public final static Short PENDING_APPROVEAl = 0;
   public final static Short PASSED = 1;
   public final static Short FAILDED = 2;
@@ -32,6 +34,8 @@ public class Approval {
   @JsonView(LendDepartmentJsonView.class)
   @ManyToOne
   private Department lendDepartment;
+
+  private Boolean deleted = false;
 
   /**
    * 借出设备
@@ -113,6 +117,16 @@ public class Approval {
 
   public void setStatus(Short status) {
     this.status = status;
+  }
+
+  @Override
+  public Boolean getDeleted() {
+    return this.deleted;
+  }
+
+  // 设置为私有
+  private void setDeleted(Boolean deleted) {
+    this.deleted = deleted;
   }
 
   public interface ApprovalUserJsonView {}

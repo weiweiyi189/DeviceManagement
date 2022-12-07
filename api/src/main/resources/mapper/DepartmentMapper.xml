@@ -12,14 +12,14 @@
 
     <select id="findAll" resultMap="departmentResultMap">
         select *
-        from department
+        from department where deleted = 0
     </select>
 
-    <delete id="deleteById" parameterType="Long">
-        delete
-        from department
-        where id=#{id}
-    </delete>
+
+    <update id="deleteById" parameterType="Long">
+        update department set deleted = 1 where id=#{id}
+    </update>
+
 
     <select id="findById" resultMap="departmentResultMap">
         select *

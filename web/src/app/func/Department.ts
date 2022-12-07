@@ -13,9 +13,12 @@ export class Department {
   /** 编号 */
   code: string;
 
+  deleted: boolean;
+
+
   /** 部门经理 */
   user: User;
-  constructor(data?: { id?: number, name?: string, code?: string, user?: User}) {
+  constructor(data?: { id?: number, name?: string, code?: string, user?: User, deleted?: boolean}) {
     if (data) {
       if (data.id) {
         this.id = data.id;
@@ -31,6 +34,10 @@ export class Department {
 
       if (data.user) {
         this.user = data.user;
+      }
+
+      if (data.deleted) {
+        this.deleted = data.deleted;
       }
     }
 

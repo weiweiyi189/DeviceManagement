@@ -3,6 +3,7 @@ package equipmentManagementSystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import equipmentManagementSystem.service.BeanService;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,7 +13,8 @@ import java.io.Serializable;
  */
 
 @Entity
-public class User implements Serializable {
+@SQLDelete(sql = "update `user` set deleted = 1 where id = ?")
+public class User implements Serializable,SoftDelete {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -36,6 +38,8 @@ public class User implements Serializable {
     private String name;
 
     private String phone;
+
+    private Boolean deleted = false;
 
     /**
      * 密码
@@ -143,6 +147,16 @@ public class User implements Serializable {
 
     public void setSex(Boolean sex) {
         this.sex = sex;
+    }
+
+    @Override
+    public Boolean getDeleted() {
+        return this.deleted;
+    }
+
+    // 设置为私有
+    private void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 
 

@@ -30,7 +30,7 @@ public class UserServiceAuth implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         logger.debug("根据用户名查询用户");
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsernameAndDeletedIsFalse(username);
 
         if (user == null) {
             logger.error("用户名不存在");

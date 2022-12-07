@@ -2,11 +2,13 @@ package equipmentManagementSystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.mengyunzhi.core.entity.YunzhiEntity;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 
 @Entity
-public class Department implements YunzhiEntity {
+@SQLDelete(sql = "update `department` set deleted = 1 where id = ?")
+public class Department implements SoftDelete {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -18,6 +20,8 @@ public class Department implements YunzhiEntity {
     private String name;
 
     private String code;
+
+    private Boolean deleted = false;
 
     @OneToOne
     @JsonView(UserJsonView.class)
@@ -52,6 +56,16 @@ public class Department implements YunzhiEntity {
     }
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public Boolean getDeleted() {
+        return this.deleted;
+    }
+
+    // 设置为私有
+    private void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 
     public interface UserJsonView{}

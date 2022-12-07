@@ -24,13 +24,13 @@ public interface UserRepository extends JpaRepository<User, Long>, PagingAndSort
      * 根据用户名查询用户
      */
     @Transactional
-    User findByUsername(String username);
+    User findByUsernameAndDeletedIsFalse(String username);
 
     @Transactional
-    Optional<User> findById(Long id);
+    Optional<User> findByIdAndDeletedIsFalse(Long id);
 
     @Transactional
-    default boolean existsById(Long id) {
+    default boolean existsByIdAndDeletedIsFalse(Long id) {
         return this.findById(id).isPresent();
     }
 

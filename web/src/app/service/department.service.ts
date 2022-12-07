@@ -29,6 +29,10 @@ export class DepartmentService {
     return this.httpClient.get<Page<Department>>(`${this.url}/getAll`, {params});
   }
 
+  public delete(id: number): Observable<null> {
+    return this.httpClient.delete<null>(`${this.url}/${id.toString()}`);
+  }
+
   /**
    * 通过Id获取用户
    */

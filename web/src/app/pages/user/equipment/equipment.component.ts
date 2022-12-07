@@ -52,7 +52,6 @@ export class EquipmentComponent implements OnInit {
     this.authService.getCurrentLoginUser$()
       .subscribe((user: User) => {
         this.currentUser = user;
-        console.log(user);
       });
     this.loadData();
   }
@@ -151,6 +150,7 @@ export class EquipmentComponent implements OnInit {
     this.equipmentService.query(queryParams)
       .subscribe((response: { totalPages: number, content: Array<Equipment> }) => {
         this.equipments = response;
+        console.log(response);
         // this.pages = this.makePagesByTotalPages(this.params.page, response.totalPages);
       });
   }
