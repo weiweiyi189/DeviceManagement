@@ -39,17 +39,17 @@ export class UserComponent implements OnInit {
               private commonService: CommonService) { }
 
   ngOnInit(): void {
-    this.pageAll();
+    this.loadData();
   }
 
   onPageSelected(page: number): void {
     this.params.page = page;
-    this.pageAll();
+    this.loadData();
   }
 
   onSizeSelected(size: number): void {
     this.params.size = size;
-    this.pageAll();
+    this.loadData();
   }
 
   public pageAll(): void {
@@ -80,8 +80,8 @@ export class UserComponent implements OnInit {
     this.loadData();
   }
   clear(): void {
-    this.queryParams.name = new FormControl();
-    this.queryParams.jobNumber = new FormControl();
+    this.queryParams.name = new FormControl('');
+    this.queryParams.jobNumber = new FormControl('');
     this.loadData();
   }
 
