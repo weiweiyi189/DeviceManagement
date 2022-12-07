@@ -38,7 +38,7 @@ public class ApprovalServiceImpl implements ApprovalService {
     Short type = 1;
     Short status = Approval.PENDING_APPROVEAl;
     User user = this.userService.getCurrentLoginUser();
-    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)), pageable);
+    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)).and(ApprovalSpecs.isBelongMyDepartment(user.getDepartment())), pageable);
     return approvals;
   }
 
@@ -46,7 +46,8 @@ public class ApprovalServiceImpl implements ApprovalService {
   public Page<Approval> repairPage(Pageable pageable) {
     Short type = 2;
     Short status = Approval.PENDING_APPROVEAl;
-    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)), pageable);
+    User user = this.userService.getCurrentLoginUser();
+    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)).and(ApprovalSpecs.isBelongMyDepartment(user.getDepartment())), pageable);
     return approvals;
   }
 
@@ -62,7 +63,8 @@ public class ApprovalServiceImpl implements ApprovalService {
   public Page<Approval> upSalePage(Pageable pageable) {
     Short type = 5;
     Short status = Approval.PENDING_APPROVEAl;
-    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)), pageable);
+    User user = this.userService.getCurrentLoginUser();
+    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)).and(ApprovalSpecs.isBelongMyDepartment(user.getDepartment())), pageable);
     return approvals;
   }
 
@@ -207,7 +209,8 @@ public class ApprovalServiceImpl implements ApprovalService {
   public Page<Approval> scrapPage(Pageable pageable) {
     Short type = 3;
     Short status = Approval.PENDING_APPROVEAl;
-    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)), pageable);
+    User user = this.userService.getCurrentLoginUser();
+    Page<Approval> approvals = this.approvalRepository.findAll(ApprovalSpecs.equalType(type).and(ApprovalSpecs.equalStatus(status)).and(ApprovalSpecs.isBelongMyDepartment(user.getDepartment())), pageable);
     return approvals;
   }
 

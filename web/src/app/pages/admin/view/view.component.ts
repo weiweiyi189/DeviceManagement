@@ -62,6 +62,16 @@ export class ViewComponent implements OnInit {
     });
   }
 
+  onPageSelected(page: number): void {
+    this.params.page = page;
+    this.page();
+  }
+
+  onSizeSelected(size: number): void {
+    this.params.size = size;
+    this.page();
+  }
+
   getFontColor(status: number): any {
     if (status === 1) {
       this.fontColor = '#37be2e';

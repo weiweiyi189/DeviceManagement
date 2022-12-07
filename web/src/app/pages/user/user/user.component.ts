@@ -42,6 +42,7 @@ export class UserComponent implements OnInit {
               private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.paramsInit();
     this.pageAll();
   }
 
@@ -61,7 +62,7 @@ export class UserComponent implements OnInit {
   }
 
   onSizeSelected(size: number): void {
-    config.size = size;
+    this.params.size = size;
     this.ngOnInit();
   }
 

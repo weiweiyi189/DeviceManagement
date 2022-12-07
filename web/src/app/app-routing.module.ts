@@ -55,7 +55,7 @@ const routes: Routes = [
         path: 'scrap',
         loadChildren: () => import('./pages/admin/scrap/scrap.module').then(m => m.ScrapModule),
         data: {
-          title: '维修审批'
+          title: '报废审批'
         }
       },
       {
@@ -76,7 +76,7 @@ const routes: Routes = [
         path: 'sale',
         loadChildren: () => import('./pages/admin/sale/sale.module').then(m => m.SaleModule),
         data: {
-          title: '设备管理'
+          title: '购入审批'
         }
       },
       {

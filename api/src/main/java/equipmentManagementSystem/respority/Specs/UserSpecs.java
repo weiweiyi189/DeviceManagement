@@ -6,7 +6,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 public class UserSpecs {
     public static Specification<User> containingName(String name) {
-        if (name != null) {
+        if (name != null && !name.isEmpty()) {
             return (Specification<User>) (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("name").as(String.class), String.format("%%%s%%", name));
         } else {
             return Specification.where(null);
@@ -22,7 +22,7 @@ public class UserSpecs {
     }
 
     public static Specification<User> containingJobNumber(String jobNumber) {
-        if (jobNumber != null) {
+        if (jobNumber != null && !jobNumber.isEmpty()) {
             return (Specification<User>) (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("jobNumber").as(String.class), String.format("%%%s%%", jobNumber));
         } else {
             return Specification.where(null);

@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../../../service/auth.service';
 import {Department} from '../../../../func/Department';
 import {HttpErrorResponse} from '@angular/common/http';
+import {CommonValidators} from '../../../user/user/CommonValidators';
 
 @Component({
   selector: 'app-edit',
@@ -20,12 +21,15 @@ export class EditComponent implements OnInit {
   user: User;
   currentUser: User;
 
+
+
   constructor(private builder: FormBuilder,
               private commonService: CommonService,
               private userService: UserService,
               private route: ActivatedRoute,
               private router: Router,
-              private authService: AuthService) {  this.createForm(); }
+              private authService: AuthService,
+              private commonValidators: CommonValidators) {}
 
   ngOnInit(): void {
     this.authService.getCurrentLoginUser$()
@@ -39,7 +43,7 @@ export class EditComponent implements OnInit {
     this.userForm = this.builder.group({
       department: null,
       name: ['', Validators.required],
-      username: ['', Validators.required],
+      username: ['', Validators.required, this.commonValidators.usernameNotExist(this.user)],
       phone: ['', [Validators.required, Validators.email]],
       jobNumber: ['', Validators.required],
     });
@@ -65,7 +69,8 @@ export class EditComponent implements OnInit {
   public getEditUser(): void {
     this.route.params.subscribe(params => {
       this.userService.getUserById(params.id).subscribe((user: User) => {
-        console.log(user);
+        this.user = user;
+        this.createForm();
         this.initForm(user);
       });
     });
@@ -86,16 +91,15 @@ export class EditComponent implements OnInit {
 
 
   submit(): any {
-    this.user = new User();
-    this.user.name = this.userForm.get('name')?.value;
-    this.user.username = this.userForm.get('username')?.value;
-    this.user.jobNumber = this.userForm.get('jobNumber')?.value;
-    this.user.phone = this.userForm.get('phone')?.value;
-    this.user.role = this.roleForm.value;
-    this.user.sex = this.sexForm.value;
-    this.user.department = this.userForm.get('department').value;
-    console.log(this.user);
-    this.updateUser(this.user);
+    const user = new User();
+    user.name = this.userForm.get('name')?.value;
+    user.username = this.userForm.get('username')?.value;
+    user.jobNumber = this.userForm.get('jobNumber')?.value;
+    user.phone = this.userForm.get('phone')?.value;
+    user.role = this.roleForm.value;
+    user.sex = this.sexForm.value;
+    user.department = this.userForm.get('department').value;
+    this.updateUser(user);
   }
 
   public updateUser(user: User): any {

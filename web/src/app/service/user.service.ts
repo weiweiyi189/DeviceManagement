@@ -25,6 +25,12 @@ export class UserService {
     this.getCurrentLoginUser();
   }
 
+
+  public existByUsername(username: string): Observable<boolean> {
+    const params = new HttpParams().append('username', username);
+    return this.httpClient.get<boolean>(this.url + '/existByUsername', {params});
+  }
+
   private getCurrentLoginUser(): void {
     const appOnReadyItem = this.commonService.getAppOnReadyItem();
 

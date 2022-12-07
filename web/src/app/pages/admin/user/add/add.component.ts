@@ -7,6 +7,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../func/User';
 import {UserService} from '../../../../service/user.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {CommonValidators} from '../../../user/user/CommonValidators';
 
 @Component({
   selector: 'app-add',
@@ -23,7 +24,8 @@ export class AddComponent implements OnInit {
   constructor(private builder: FormBuilder,
               private commonService: CommonService,
               private userService: UserService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private commonValidators: CommonValidators) { }
 
   ngOnInit(): void {
     this.authService.getCurrentLoginUser$()
@@ -37,7 +39,7 @@ export class AddComponent implements OnInit {
     this.userForm = this.builder.group({
       department: [null],
       name: ['', Validators.required],
-      username: ['', Validators.required],
+      username: ['', Validators.required, this.commonValidators.usernameNotExist()],
       phone: ['', [Validators.required, Validators.email]],
       code: ['', Validators.required],
     });

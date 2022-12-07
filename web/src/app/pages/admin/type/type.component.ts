@@ -32,6 +32,16 @@ export class TypeComponent implements OnInit {
     this.pageAll();
   }
 
+  onPageSelected(page: number): void {
+    this.params.page = page;
+    this.pageAll();
+  }
+
+  onSizeSelected(size: number): void {
+    this.params.size = size;
+    this.pageAll();
+  }
+
   public pageAll(): void {
     this.typeService.getAll(this.params.page,
       this.params.size)

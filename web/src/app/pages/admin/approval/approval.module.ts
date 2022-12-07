@@ -6,16 +6,18 @@ import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
 import {ApprovalRoutingModule} from './approval-routing.module';
 import {ApprovalComponent} from './approval.component';
+import {PartModule} from '../../../part/part.module';
 
 @NgModule({
   declarations: [ApprovalComponent, AddComponent, EditComponent],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    ApprovalRoutingModule,
-    FuncModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        ApprovalRoutingModule,
+        FuncModule,
+        FormsModule,
+        PartModule
+    ]
 })
 export class ApprovalModule {
 }

@@ -6,15 +6,17 @@ import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
 import { TypeComponent } from './type.component';
 import { TypeRoutingModule } from './type-routing.module';
+import {PartModule} from "../../../part/part.module";
 
 @NgModule({
   declarations: [TypeComponent, AddComponent, EditComponent],
-  imports: [
-    CommonModule,
-    TypeRoutingModule,
-    ReactiveFormsModule,
-    FuncModule
-  ]
+    imports: [
+        CommonModule,
+        TypeRoutingModule,
+        ReactiveFormsModule,
+        FuncModule,
+        PartModule
+    ]
 })
 export class TypeModule {
 }

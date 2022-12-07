@@ -3,6 +3,7 @@
  */
 import {Department} from './Department';
 import {Type} from './Type';
+import {User} from './User';
 
 export class Equipment {
   /** id */
@@ -17,6 +18,8 @@ export class Equipment {
   /** 型号 */
   model: string;
 
+  user: User;
+
   /** 内部编号 */
   internalNumber: string;
 
@@ -27,7 +30,7 @@ export class Equipment {
   states: number;
 
   // tslint:disable-next-line:max-line-length
-  constructor(data?: { id?: number, name?: string, type?: Type, model?: string,  internalNumber?: string, department?: Department, place?: string, states: number}) {
+  constructor(data?: { id?: number, name?: string, type?: Type, model?: string,  internalNumber?: string, department?: Department, place?: string, states?: number, user?: User}) {
     if (data) {
       if (data.id) {
         this.id = data.id;
@@ -56,6 +59,10 @@ export class Equipment {
       }
       if (data.place) {
         this.place = data.place;
+      }
+
+      if (data.user) {
+        this.user = data.user;
       }
     }
 

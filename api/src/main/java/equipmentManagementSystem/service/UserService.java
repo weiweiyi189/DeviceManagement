@@ -44,6 +44,7 @@ public interface UserService {
 
     User findByUsername(String username);
 
+    Boolean existByUsername(String username);
     /**
      * 邮箱验证码重置密码
      * @return

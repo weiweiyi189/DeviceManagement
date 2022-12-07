@@ -130,5 +130,5 @@ public class EquipmentController {
         return this.equipmentService.scrap(id, equipment);
     }
 
-    public class GetAllJsonView implements Equipment.DepartmentJsonView, Equipment.UserJsonView {}
+    public class GetAllJsonView implements Equipment.DepartmentJsonView, Equipment.UserJsonView, Department.UserJsonView {}
 }
