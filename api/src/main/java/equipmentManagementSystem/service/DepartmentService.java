@@ -15,6 +15,13 @@ public interface DepartmentService {
 
     Department add(Department department);
 
+    /**
+     * 删除
+     *
+     * @param id
+     */
+    void delete(Long id);
+
     Department update(Long id, Department department);
 
     Department getDepartmentById(Long id);

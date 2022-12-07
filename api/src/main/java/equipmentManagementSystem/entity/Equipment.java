@@ -4,12 +4,14 @@ package equipmentManagementSystem.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.mengyunzhi.core.entity.YunzhiEntity;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Equipment implements Serializable {
+@SQLDelete(sql = "update `equipment` set deleted = 1 where id = ?")
+public class Equipment implements Serializable, SoftDelete {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -48,6 +50,8 @@ public class Equipment implements Serializable {
      * 存放位置
      */
     private String place;
+
+    private Boolean deleted = false;
 
     /**
      * 购入时间
@@ -160,6 +164,16 @@ public class Equipment implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public Boolean getDeleted() {
+        return this.deleted;
+    }
+
+    // 设置为私有
+    private void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 
     public interface DepartmentJsonView{}

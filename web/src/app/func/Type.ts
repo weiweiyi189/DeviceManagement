@@ -8,7 +8,9 @@ export class Type {
   /** 名称 */
   name: string;
 
-  constructor(data?: { id?: number, name?: string}) {
+  deleted: boolean;
+
+  constructor(data?: { id?: number, name?: string, deleted?: boolean}) {
     if (data) {
       if (data.id) {
         this.id = data.id;
@@ -16,6 +18,10 @@ export class Type {
 
       if (data.name) {
         this.name = data.name;
+      }
+
+      if (data.deleted) {
+        this.deleted = data.deleted;
       }
     }
 

@@ -28,12 +28,12 @@
     </select>
 
     <select id="findAll" resultMap="userResultMap">
-        select * from user
+        select * from user where deleted = 0
     </select>
 
-    <delete id="deleteById" parameterType="Long">
-        delete from user where id=#{id}
-    </delete>
+    <update id="deleteById" parameterType="Long">
+        update user set deleted = 1 where id=#{id}
+    </update>
 
     <select id="findById" resultMap="userResultMap">
         select *

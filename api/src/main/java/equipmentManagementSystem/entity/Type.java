@@ -1,6 +1,7 @@
 package equipmentManagementSystem.entity;
 
 import com.mengyunzhi.core.entity.YunzhiEntity;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +10,8 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class Type implements Serializable {
+@SQLDelete(sql = "update `type` set deleted = 1 where id = ?")
+public class Type implements Serializable,SoftDelete {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -18,6 +20,8 @@ public class Type implements Serializable {
      * 设备类型名称
      */
     private String name;
+
+    private Boolean deleted = false;
 
     public Long getId() {
         return id;
@@ -33,5 +37,15 @@ public class Type implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public Boolean getDeleted() {
+        return this.deleted;
+    }
+
+    // 设置为私有
+    private void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 }

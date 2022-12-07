@@ -30,4 +30,6 @@ export class Approval {
    approvalUser: User ;
 
   status: number;
+
+  deleted: boolean;
 }

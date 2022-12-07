@@ -32,6 +32,12 @@ public class DepartmentController {
         return this.departmentService.findAll(PageRequest.of(page, size));
     }
 
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Long id) {
+        this.departmentService.delete(id);
+    }
+
+
     @PutMapping("{id}")
     @JsonView(Department.UserJsonView.class)
     public Department update(@PathVariable Long id, @RequestBody Department department) {

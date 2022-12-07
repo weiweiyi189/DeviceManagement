@@ -22,11 +22,9 @@
         select * from equipment
     </select>
 
-    <delete id="deleteById" parameterType="Long">
-        delete
-        from equipment
-        where id=#{id}
-    </delete>
+    <update id="deleteById" parameterType="Long">
+        update equipment set deleted = 1 where id=#{id}
+    </update>
 
     <select id="findById" resultMap="equipmentMap">
         select *

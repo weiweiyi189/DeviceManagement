@@ -56,7 +56,7 @@ public class MailServiceImpl implements MailService {
         if (null == mailAddress || "".equals(mailAddress)) throw new EntityNotFoundException("邮箱不能为空！");
 
         // 账号存在校验
-        User user = userRepository.findByUsername(staffNumber);
+        User user = userRepository.findByUsernameAndDeletedIsFalse(staffNumber);
         if (null == user) throw new EntityNotFoundException("账号不存在！");
         if (!user.getPhone().equals(mailAddress)) throw new EntityNotFoundException("输入邮箱和预留邮箱不一致！");
 

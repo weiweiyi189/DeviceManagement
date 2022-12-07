@@ -29,8 +29,12 @@ export class Equipment {
 
   states: number;
 
+  deleted: boolean;
+
   // tslint:disable-next-line:max-line-length
-  constructor(data?: { id?: number, name?: string, type?: Type, model?: string,  internalNumber?: string, department?: Department, place?: string, states?: number, user?: User}) {
+  constructor(data?: { id?: number, name?: string, type?: Type, model?: string,
+    internalNumber?: string, department?: Department, place?: string,
+    states?: number, user?: User, deleted?: boolean}) {
     if (data) {
       if (data.id) {
         this.id = data.id;
@@ -63,6 +67,10 @@ export class Equipment {
 
       if (data.user) {
         this.user = data.user;
+      }
+
+      if (data.deleted) {
+        this.deleted = data.deleted;
       }
     }
 

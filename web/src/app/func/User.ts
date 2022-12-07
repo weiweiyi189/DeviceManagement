@@ -28,9 +28,11 @@ export class User {
 
   phone: string;
 
+  deleted: boolean;
+
   // tslint:disable-next-line:max-line-length
   constructor(data?: { id?: number, name?: string, username?: string, password?: string, role?: number,
-    sex?: boolean, jobNumber?: string, phone?: string, department?: Department}) {
+    sex?: boolean, jobNumber?: string, phone?: string, department?: Department, deleted?: boolean}) {
     if (data) {
       if (data.id) {
         this.id = data.id;
@@ -63,6 +65,9 @@ export class User {
       }
       if (data.phone) {
         this.phone = data.phone;
+      }
+      if (data.deleted) {
+        this.deleted = data.deleted;
       }
     }
 
