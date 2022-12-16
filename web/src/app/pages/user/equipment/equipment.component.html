@@ -79,7 +79,6 @@
     <th scope="col">所属部门</th>
     <th scope="col">存放位置</th>
     <th scope="col">状态</th>
-    <th scope="col">用途</th>
     <th scope="col">相关人</th>
     <th scope="col">操作</th>
   </tr>
@@ -94,7 +93,6 @@
     <td>{{equipment?.department?.name}}</td>
     <td>{{equipment?.place}}</td>
     <td [style.color]="getFontColor(equipment.states)">{{equipment?.states | status}}</td>
-    <td>{{equipment?.purpose}}</td>
     <td >
       <label *ngIf="equipment?.states === 1"><label class="text-primary">借用人：</label>{{equipment?.user?.name}}</label>
       <label *ngIf="equipment?.states >= 4"><label class="text-primary">审批员：</label>{{equipment?.department?.user?.name}}</label>
