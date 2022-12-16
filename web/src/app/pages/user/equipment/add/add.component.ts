@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../func/User';
 import {CommonService} from '../../../../service/common.service';
@@ -9,6 +9,7 @@ import {DepartmentService} from '../../../../service/department.service';
 import {EquipmentService} from '../../../../service/equipment.service';
 import {Department} from '../../../../func/Department';
 import {Type} from '../../../../func/Type';
+import {Equipment} from "../../../../func/Equipment";
 
 @Component({
   selector: 'app-add',
@@ -19,13 +20,17 @@ export class AddComponent implements OnInit {
   equipmentForm: FormGroup;
   state: Array<User>;
 
+  purpose: string;
+
+
   constructor(private commomService: CommonService,
               private commonService: CommonService,
               private authService: AuthService,
               private httpClient: HttpClient,
               private router: Router,
               private equipmentService: EquipmentService,
-              private builder: FormBuilder){ }
+              private builder: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -38,6 +43,7 @@ export class AddComponent implements OnInit {
       type: [null, Validators.required],
       internalNumber: ['', Validators.required],
       place: ['', Validators.required],
+      purpose: ['', Validators.required],
       department: [null, Validators.required],
     });
   }
@@ -50,7 +56,6 @@ export class AddComponent implements OnInit {
   get code(): AbstractControl {
     return this.equipmentForm.get('code');
   }
-
 
 
   submit(): void {
@@ -77,7 +82,7 @@ export class AddComponent implements OnInit {
   }
 
   bindType(thType: Type): void {
-    if ( thType && thType.id) {
+    if (thType && thType.id) {
       // 合法，设置 college
       this.equipmentForm.patchValue({
         type: thType
