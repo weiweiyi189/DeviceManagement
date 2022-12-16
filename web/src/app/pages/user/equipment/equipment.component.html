@@ -58,6 +58,10 @@
   <div class="col-lg-4">
   </div>
   <div class="col-lg-8 text-right button-group">
+    <a class="btn btn-info btn-sm text-white mr-2" routerLink="/equipment/recommend">
+      <i class="fas fa-thumbs-up"></i>
+      借用推荐
+    </a>
     <a class="btn btn-primary btn-sm text-white" routerLink="/equipment/add">
       <i class="fas fa-plus"></i>
       购入填报
@@ -75,6 +79,7 @@
     <th scope="col">所属部门</th>
     <th scope="col">存放位置</th>
     <th scope="col">状态</th>
+    <th scope="col">用途</th>
     <th scope="col">相关人</th>
     <th scope="col">操作</th>
   </tr>
@@ -89,6 +94,7 @@
     <td>{{equipment?.department?.name}}</td>
     <td>{{equipment?.place}}</td>
     <td [style.color]="getFontColor(equipment.states)">{{equipment?.states | status}}</td>
+    <td>{{equipment?.purpose}}</td>
     <td >
       <label *ngIf="equipment?.states === 1"><label class="text-primary">借用人：</label>{{equipment?.user?.name}}</label>
       <label *ngIf="equipment?.states >= 4"><label class="text-primary">审批员：</label>{{equipment?.department?.user?.name}}</label>

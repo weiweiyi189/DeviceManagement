@@ -17,6 +17,7 @@ import javax.persistence.EntityNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class EquipmentServiceImpl implements EquipmentService{
@@ -61,7 +62,7 @@ public class EquipmentServiceImpl implements EquipmentService{
     }
 
     @Override
-    public Page<Equipment> quaryAll(String name, Long states, String place, String internalNumber, Pageable pageable, Long typeId) {
+    public Page<Equipment> quaryAll(String name, Long states, String place,String purpose, String internalNumber, Pageable pageable, Long typeId) {
         if (typeId != null){
             this.type = new Type();
             Type type1 = this.typeRepository.findById(typeId).get();
@@ -69,7 +70,7 @@ public class EquipmentServiceImpl implements EquipmentService{
         }else {
             this.type = null;
         }
-        return this.equipmentRepository.query(name,states, place, internalNumber, pageable, this.type);
+        return this.equipmentRepository.query(name,states, place,purpose, internalNumber, pageable, this.type);
     }
 
     @Override
@@ -79,6 +80,7 @@ public class EquipmentServiceImpl implements EquipmentService{
        oldEquipment.setInternalNumber(equipment.getInternalNumber());
        oldEquipment.setModel(equipment.getModel());
        oldEquipment.setName(equipment.getName());
+       oldEquipment.setPurpose(equipment.getPurpose());
        oldEquipment.setPlace(equipment.getPlace());
        oldEquipment.setType(equipment.getType());
         return this.equipmentRepository.save(oldEquipment);
@@ -163,6 +165,15 @@ public class EquipmentServiceImpl implements EquipmentService{
         dingService.dingRequest("归还推送" + "\n" +"用户  "
                 + this.userService.getCurrentLoginUser().getName() + "   归还" +"\n" + "归还设备： " + equipment1.getName() + "\n"
                 + "归还时间： " + dateString);
+
+        if(equipment1.getPurpose() == null || equipment1.getNumber() == null) {
+            equipment1.setScore(equipment.getScore());
+            equipment1.setNumber(1);
+        } else {
+            Double score = (equipment1.getScore() + equipment.getScore()) / (equipment1.getNumber()+1);
+            equipment1.setScore(score);
+            equipment1.setNumber(equipment1.getNumber()+1);
+        }
         equipment1.setUser(null);
         equipment1.setStates(0);
         return this.equipmentRepository.save(equipment1);

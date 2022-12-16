@@ -31,10 +31,18 @@ export class Equipment {
 
   deleted: boolean;
 
+  // 用途
+  purpose: string;
+
+  // 评分 满分5
+  score: string;
+
   // tslint:disable-next-line:max-line-length
-  constructor(data?: { id?: number, name?: string, type?: Type, model?: string,
+  constructor(data?: {
+    id?: number, name?: string, type?: Type, model?: string,
     internalNumber?: string, department?: Department, place?: string,
-    states?: number, user?: User, deleted?: boolean}) {
+    states?: number, user?: User, deleted?: boolean, purpose?: string;
+  }) {
     if (data) {
       if (data.id) {
         this.id = data.id;
@@ -71,6 +79,10 @@ export class Equipment {
 
       if (data.deleted) {
         this.deleted = data.deleted;
+      }
+
+      if (data.purpose) {
+        this.purpose = data.purpose;
       }
     }
 

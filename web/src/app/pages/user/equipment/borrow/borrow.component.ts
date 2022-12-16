@@ -85,7 +85,7 @@ export class BorrowComponent implements OnInit {
       if (confirm) {
         this.equipmentService.borrow(this.equipment.id, this.equipment, this.department).subscribe(() => {
           this.commonService.success(() => {
-            this.commonService.back();
+            this.router.navigateByUrl('equipment').then();
           }, '借用成功');
         }, (response: HttpErrorResponse) => {
           this.commonService.httpError(response);

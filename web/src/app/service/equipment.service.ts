@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Page} from '../base/page';
 import {User} from '../func/User';
@@ -13,9 +13,35 @@ import {Department} from "../func/Department";
 })
 export class EquipmentService {
   private url = 'equipment';
+
   constructor(private commonService: CommonService,
               private httpClient: HttpClient,
-              private router: Router) { }
+              private router: Router) {
+  }
+
+  getFontColor(status: number): any {
+    let fontColor: string;
+    if (status === 0) {
+      fontColor = '#2e5fee';
+    } else if (status === 1) {
+      fontColor = '#37be2e';
+    } else if (status === 2) {
+      fontColor = '#ac3d09';
+    } else if (status === 3) {
+      fontColor = '#df2e2e';
+    } else if (status === 4) {
+      fontColor = '#fe9d2e';
+    } else if (status === 5) {
+      fontColor = '#fe9d2e';
+    } else if (status === 6) {
+      fontColor = '#fe9d2e';
+    } else if (status === 7) {
+      fontColor = '#fe9d2e';
+    } else if (status === 8) {
+      fontColor = '#fe9d2e';
+    }
+    return fontColor;
+  }
 
   /**
    * 分页方法
@@ -75,7 +101,7 @@ export class EquipmentService {
     return this.httpClient.put<Equipment>(`${this.url}/scrap/${equipmentId.toString()}`, equipment);
   }
 
-  query(params: { size?: number; name?: any; page?: number; internalNumber?: any; type?: any, place?: any; states?: any }): any {
+  query(params: { size?: number; name?: any; page?: number; internalNumber?: any; type?: any, place?: any; states?: any; purpose?: any }): any {
     /** 初始化分页参数 */
     const PARAMS: { [key: string]: any } = {
       page: String(params.page),
@@ -88,8 +114,8 @@ export class EquipmentService {
     if (params.states) {
       console.log(params.states);
       PARAMS.states = params.states;
-    }else {
-      if (params.states === 0){
+    } else {
+      if (params.states === 0) {
         PARAMS.states = 0;
       }
     }
@@ -101,6 +127,9 @@ export class EquipmentService {
     }
     if (params.place) {
       PARAMS.place = params.place;
+    }
+    if (params.purpose) {
+      PARAMS.purpose = params.purpose;
     }
     console.log(PARAMS);
     return this.httpClient.get<{ totalPages: number, content: Array<User> }>(`${this.url}/query`, {params: PARAMS});

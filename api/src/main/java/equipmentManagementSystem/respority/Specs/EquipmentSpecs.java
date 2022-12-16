@@ -26,6 +26,13 @@ public class EquipmentSpecs {
         }
         return (Specification<Equipment>) (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("place").as(String.class),  String.format("%%%s%%", place));
     }
+
+    public static Specification<Equipment> containPurpose(String purpose) {
+        if (purpose == null) {
+            return Specification.where(null);
+        }
+        return (Specification<Equipment>) (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("purpose").as(String.class),  String.format("%%%s%%", purpose));
+    }
     public static Specification<Equipment> containingName(String name) {
         if (name != null) {
             return (Specification<Equipment>) (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get("name").as(String.class), String.format("%%%s%%", name));

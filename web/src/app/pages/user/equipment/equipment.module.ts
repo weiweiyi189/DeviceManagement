@@ -9,17 +9,19 @@ import {EquipmentComponent} from './equipment.component';
 import { DetailComponent } from '../detail/detail.component';
 import {StatusPipe} from '../../../func/pipe/Status.pipe';
 import { BorrowComponent } from './borrow/borrow.component';
-import {PartModule} from "../../../part/part.module";
+import {PartModule} from '../../../part/part.module';
+import {RecommendModule} from "./recommend/recommend.module";
+import {RecommendComponent} from "./recommend/recommend.component";
 
 @NgModule({
-  declarations: [EquipmentComponent, AddComponent, EditComponent, BorrowComponent],
+  declarations: [EquipmentComponent, AddComponent, EditComponent, BorrowComponent, RecommendComponent],
     imports: [
         CommonModule,
         ReactiveFormsModule,
         EquipmentRoutingModule,
         FuncModule,
         FormsModule,
-        PartModule
+        PartModule,
     ],
   exports: [
     EquipmentComponent

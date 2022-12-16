@@ -23,12 +23,33 @@
     <td>{{equipment?.place}}</td>
     <td [style.color]="getFontColor(equipment.states)">{{equipment?.states | status}}</td>
     <td>
-      <button type="button" class="btn btn-info btn-sm mr-2" (click)="return(equipment)"
+      <button type="button" class="btn btn-info btn-sm mr-2" (click)="open()"
               [disabled]="equipment.states != 1 || equipment.states === 6">
         <i class="fab fa-strava"></i>
         归还
       </button>
     </td>
+
+    <yz-modal *ngIf="showModel">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">归还设备</h5>
+        </div>
+        <div class="modal-body" >
+          <label class="mt-1">您的体验评分：</label>
+          <input type="number" max="5" min="0" [formControl]="scoreFormControl" class="form-control rounded" placeholder="请输入0~5的数字">
+          <small *ngIf="scoreFormControl.touched && (scoreFormControl.value > 5 ||  scoreFormControl.value < 0)"><code>
+            请输入0~5的数字
+          </code></small>
+        </div>
+        <div class="modal-footer">
+          <button (click)="onClose()" class="btn btn-default" type="button">取消</button>
+          <button [disabled]="scoreFormControl.invalid || scoreFormControl.pending === true || ((scoreFormControl.value > 5 ||  scoreFormControl.value < 0))"
+                  class="btn btn-primary" type="button" (click)="return(equipment)">确认归还</button>
+        </div>
+      </div>
+    </yz-modal>
+
   </tr>
   </tbody>
 </table>
