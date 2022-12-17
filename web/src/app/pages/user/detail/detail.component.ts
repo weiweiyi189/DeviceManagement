@@ -9,12 +9,27 @@ import {Type} from '../../../func/Type';
 import {config} from '../../../conf/app.conf';
 import {HttpErrorResponse} from '@angular/common/http';
 
+class HttpService {
+}
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
+
 export class DetailComponent implements OnInit {
+
+  constructor(private equipmentService: EquipmentService,
+              private commonService: CommonService,
+              private authService: AuthService) {
+    if (this.score > 0) {
+      for (let i = 0; i < this.score; i++) {
+        this.lists[i].flag = 1;
+      }
+    }
+  }
+
   /**
    * 分页信息
    */
@@ -47,10 +62,36 @@ export class DetailComponent implements OnInit {
   currentUser: User;
   fontColor: any;
 
-  constructor(private equipmentService: EquipmentService,
-              private commonService: CommonService,
-              private authService: AuthService) {
-  }
+
+
+  // 总体评价
+  public score = 0;
+  public lists: any = [{
+    grayStar: './assets/images/icon/starg2.png',
+    yellowStar: './assets/images/icon/stary2.png',
+    flag: 0
+  },
+    {
+      grayStar: './assets/images/icon/starg2.png',
+      yellowStar: './assets/images/icon/stary2.png',
+      flag: 0
+    },
+    {
+      grayStar: './assets/images/icon/starg2.png',
+      yellowStar: './assets/images/icon/stary2.png',
+      flag: 0
+    },
+    {
+      grayStar: './assets/images/icon/starg2.png',
+      yellowStar: './assets/images/icon/stary2.png',
+      flag: 0
+    },
+    {
+      grayStar: './assets/images/icon/starg2.png',
+      yellowStar: './assets/images/icon/stary2.png',
+      flag: 0
+    }
+  ];
 
   ngOnInit(): void {
     this.authService.getCurrentLoginUser$()
@@ -188,7 +229,7 @@ export class DetailComponent implements OnInit {
     }, '是否确认报修');
   }
 
-  open():void {
+  open(): void {
     this.showModel = true;
   }
 
@@ -197,7 +238,8 @@ export class DetailComponent implements OnInit {
     // 确认框
     this.commonService.confirm((confirm: boolean) => {
       if (confirm) {
-        equipment.score = this.scoreFormControl.value;
+        equipment.score = this.score;
+        console.log(equipment);
         this.equipmentService.return(equipment.id, equipment).subscribe(() => {
           this.commonService.success(() => {
           }, '归还成功');
@@ -212,5 +254,19 @@ export class DetailComponent implements OnInit {
 
   onClose(): void {
     this.showModel = false;
+  }
+
+  // 星星
+  // tslint:disable-next-line:typedef
+  clickStars(index) {
+    this.lists.forEach((star) => {
+      star.flag = 0;
+    });
+    this.lists.forEach((star, i) => {
+      if (i <= index) {
+        star.flag = 1;
+      }
+    });
+    this.score = index + 1;
   }
 }

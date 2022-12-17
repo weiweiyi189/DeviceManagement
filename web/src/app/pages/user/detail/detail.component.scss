@@ -1,0 +1,12 @@
+.stars {
+  text-align: center;
+}
+
+.stars>img {
+  width: 25px;
+}
+
+.stars>img:not(:first-child) {
+  margin-left: 8px;
+}
+
