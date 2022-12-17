@@ -35,7 +35,7 @@ export class Equipment {
   purpose: string;
 
   // 评分 满分5
-  score: string;
+  score: number;
 
   // tslint:disable-next-line:max-line-length
   constructor(data?: {

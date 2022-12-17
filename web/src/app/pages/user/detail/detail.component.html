@@ -37,14 +37,19 @@
         </div>
         <div class="modal-body" >
           <label class="mt-1">您的体验评分：</label>
-          <input type="number" max="5" min="0" [formControl]="scoreFormControl" class="form-control rounded" placeholder="请输入0~5的数字">
-          <small *ngIf="scoreFormControl.touched && (scoreFormControl.value > 5 ||  scoreFormControl.value < 0)"><code>
-            请输入0~5的数字
-          </code></small>
+<!--          <input type="number" max="5" min="0" [formControl]="scoreFormControl" class="form-control rounded" placeholder="请输入0~5的数字">-->
+<!--          <small *ngIf="scoreFormControl.touched && (scoreFormControl.value > 5 ||  scoreFormControl.value < 0)"><code>-->
+<!--            请输入0~5的数字-->
+<!--          </code></small>-->
+          <div class="stars">
+            <img [src]="pic.flag == 0 ? pic.grayStar: pic.yellowStar" alt="" *ngFor="let pic of lists; let i = index" (click)="clickStars(i)">
+<!--            <p>{{score+'星'}}</p>-->
+          </div>
         </div>
+
         <div class="modal-footer">
           <button (click)="onClose()" class="btn btn-default" type="button">取消</button>
-          <button [disabled]="scoreFormControl.invalid || scoreFormControl.pending === true || ((scoreFormControl.value > 5 ||  scoreFormControl.value < 0))"
+          <button [disabled]="this.score<=0"
                   class="btn btn-primary" type="button" (click)="return(equipment)">确认归还</button>
         </div>
       </div>

@@ -166,11 +166,11 @@ public class EquipmentServiceImpl implements EquipmentService{
                 + this.userService.getCurrentLoginUser().getName() + "   归还" +"\n" + "归还设备： " + equipment1.getName() + "\n"
                 + "归还时间： " + dateString);
 
-        if(equipment1.getPurpose() == null || equipment1.getNumber() == null) {
+        if(equipment1.getScore() == null || equipment1.getNumber() == null) {
             equipment1.setScore(equipment.getScore());
             equipment1.setNumber(1);
         } else {
-            Double score = (equipment1.getScore() + equipment.getScore()) / (equipment1.getNumber()+1);
+            Double score = (equipment1.getScore() * equipment1.getNumber()  + equipment.getScore()) / (equipment1.getNumber()+1);
             equipment1.setScore(score);
             equipment1.setNumber(equipment1.getNumber()+1);
         }
