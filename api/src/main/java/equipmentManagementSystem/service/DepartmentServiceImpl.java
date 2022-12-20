@@ -78,6 +78,7 @@ public class DepartmentServiceImpl implements DepartmentService{
         Department oldDepartment= this.getDepartmentById(id);
         oldDepartment.setName(department.getName());
         oldDepartment.setCode(department.getCode());
+        oldDepartment.setWebHook(department.getWebHook());
         User user=this.userMapper.findById(department.getUser().getId());
         oldDepartment.setUser(user);
         return this.departmentRepository.save(oldDepartment);
