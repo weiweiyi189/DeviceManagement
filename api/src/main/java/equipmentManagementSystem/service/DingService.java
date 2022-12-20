@@ -8,7 +8,7 @@ public interface DingService {
     //密钥
     static String secret = "";
     String encode() throws Exception;
-    void dingRequest(String message);
+    void dingRequest(String message, String webHook);
     void setDing(Ding ding);
     Ding getDing();
 }

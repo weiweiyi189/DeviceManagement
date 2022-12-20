@@ -23,8 +23,8 @@ public class DeleteDayLogSchedule {
     @Scheduled(cron = "0 0 8 ? * *")
     public void runTask(){
         LocalTime localTime = LocalTime.now();
-        dingService.dingRequest("日志推送");
-        dingService.dingRequest("执行定时任务" + localTime);
+//        dingService.dingRequest("日志推送");
+//        dingService.dingRequest("执行定时任务" + localTime);
         System.out.println("执行定时任务" + localTime);
     }
 }

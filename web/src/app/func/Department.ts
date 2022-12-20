@@ -15,10 +15,12 @@ export class Department {
 
   deleted: boolean;
 
+  webHook: string;
+
 
   /** 部门经理 */
   user: User;
-  constructor(data?: { id?: number, name?: string, code?: string, user?: User, deleted?: boolean}) {
+  constructor(data?: { id?: number, name?: string, code?: string, user?: User, deleted?: boolean,  webHook?: string}) {
     if (data) {
       if (data.id) {
         this.id = data.id;
@@ -38,6 +40,10 @@ export class Department {
 
       if (data.deleted) {
         this.deleted = data.deleted;
+      }
+
+      if (data.webHook) {
+        this.webHook = data.webHook;
       }
     }
 

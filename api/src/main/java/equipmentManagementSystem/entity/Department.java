@@ -23,6 +23,8 @@ public class Department implements SoftDelete {
 
     private Boolean deleted = false;
 
+    private String webHook = "";
+
     @OneToOne
     @JsonView(UserJsonView.class)
     private User user;
@@ -69,4 +71,12 @@ public class Department implements SoftDelete {
     }
 
     public interface UserJsonView{}
+
+    public String getWebHook() {
+        return webHook;
+    }
+
+    public void setWebHook(String webHook) {
+        this.webHook = webHook;
+    }
 }
