@@ -33,9 +33,6 @@ public class EquipmentController {
     @GetMapping("getAll")
     @JsonView(GetAllJsonView.class)
     public List<Equipment> page(@RequestParam int page, @RequestParam int size) {
-//        Equipment equipment = this.equipmentService.getEquipmentById(4L);
-//        CodeUpdatePwdVo codeUpdatePwdVo = new CodeUpdatePwdVo("chenyu","511393","chenyu");
-//        userService.codeUpdatePwd(codeUpdatePwdVo);
         return this.equipmentService.findAll(PageRequest.of(page, size));
     }
 
@@ -70,6 +67,7 @@ public class EquipmentController {
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String internalNumber,
             @RequestParam(required = false) String  place,
+            @RequestParam(required = false) String  purpose,
             @RequestParam(required = false) Long states,
             @RequestParam(required = false) Long type,
             Pageable pageable) {
@@ -77,6 +75,7 @@ public class EquipmentController {
                 name,
                 states,
                 place,
+                purpose,
                 internalNumber,
                 pageable,
                 type);

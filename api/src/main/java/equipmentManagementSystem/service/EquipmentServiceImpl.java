@@ -17,6 +17,7 @@ import javax.persistence.EntityNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class EquipmentServiceImpl implements EquipmentService{
@@ -61,7 +62,7 @@ public class EquipmentServiceImpl implements EquipmentService{
     }
 
     @Override
-    public Page<Equipment> quaryAll(String name, Long states, String place, String internalNumber, Pageable pageable, Long typeId) {
+    public Page<Equipment> quaryAll(String name, Long states, String place,String purpose, String internalNumber, Pageable pageable, Long typeId) {
         if (typeId != null){
             this.type = new Type();
             Type type1 = this.typeRepository.findById(typeId).get();
@@ -69,7 +70,7 @@ public class EquipmentServiceImpl implements EquipmentService{
         }else {
             this.type = null;
         }
-        return this.equipmentRepository.query(name,states, place, internalNumber, pageable, this.type);
+        return this.equipmentRepository.query(name,states, place,purpose, internalNumber, pageable, this.type);
     }
 
     @Override
@@ -79,6 +80,7 @@ public class EquipmentServiceImpl implements EquipmentService{
        oldEquipment.setInternalNumber(equipment.getInternalNumber());
        oldEquipment.setModel(equipment.getModel());
        oldEquipment.setName(equipment.getName());
+       oldEquipment.setPurpose(equipment.getPurpose());
        oldEquipment.setPlace(equipment.getPlace());
        oldEquipment.setType(equipment.getType());
         return this.equipmentRepository.save(oldEquipment);
@@ -91,8 +93,12 @@ public class EquipmentServiceImpl implements EquipmentService{
             equipment.setStates(0);
             this.equipmentRepository.save(equipment);
         } else {
-            dingService.dingRequest("新增推送" + "\n" + "用户  " +
-                    this.userService.getCurrentLoginUser().getName() + " 提交审批" + "\n" + "新增设备： " + equipment.getName());
+            if(equipment.getDepartment().getWebHook() != null) {
+                String message = "新增推送" + "\n" + "用户  " +
+                        this.userService.getCurrentLoginUser().getName()
+                        + " 提交审批" + "\n" + "新增设备： " + equipment.getName();
+                dingService.dingRequest(message,equipment.getDepartment().getWebHook());
+            }
             equipment.setStates(4);
             Approval approval = new Approval();
             approval.setCreateUser(userService.getCurrentLoginUser());
@@ -107,17 +113,24 @@ public class EquipmentServiceImpl implements EquipmentService{
     @Override
     public void delete(Long id) {
         Equipment equipment = this.equipmentMapper.findById(id);
-        dingService.dingRequest("删除推送" + "\n" +
-                "用户  " + this.userService.getCurrentLoginUser().getName() + "   删除" + "\n" + "删除设备： " + equipment.getName());
+        if(equipment.getDepartment().getWebHook() != null) {
+            String message = "删除推送" + "\n" +
+                    "用户  " + this.userService.getCurrentLoginUser().getName()
+                    + "   删除" + "\n" + "删除设备： " + equipment.getName();
+            dingService.dingRequest(message,equipment.getDepartment().getWebHook());
+        }
         this.equipmentMapper.deleteById(id);
     }
 
     @Override
     public Equipment report(Long id, Equipment equipment) {
         Equipment equipment1 = this.equipmentRepository.findById(id).get();
-
-        dingService.dingRequest("报修推送" + "\n" +"用户  "
-                + this.userService.getCurrentLoginUser().getName() + "申请报修" +"\n" + "报修设备： " + equipment1.getName());
+        if(equipment.getDepartment().getWebHook() != null) {
+            String message = "报修推送" + "\n" +"用户  "
+                    + this.userService.getCurrentLoginUser().getName()
+                    + "申请报修" +"\n" + "报修设备： " + equipment1.getName();
+            dingService.dingRequest(message,equipment.getDepartment().getWebHook());
+        }
         Approval approval = new Approval();
         approval.setEquipment(equipment1);
         equipment1.setStates(7);
@@ -144,10 +157,12 @@ public class EquipmentServiceImpl implements EquipmentService{
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateString = formatter.format(currentTime);
         Equipment equipment1 = this.equipmentRepository.findById(id).get();
-
-        dingService.dingRequest("借用推送" + "\n" +"用户  "
-                + this.userService.getCurrentLoginUser().getName() + " 申请借用" +"\n" + "借用设备： " + equipment1.getName() + "\n"
-        + "借用时间： " + dateString);
+        if(equipment.getDepartment().getWebHook() != null) {
+            String message = "借用推送" + "\n" +"用户  "
+                    + this.userService.getCurrentLoginUser().getName() + " 申请借用" +"\n" + "借用设备： " + equipment1.getName() + "\n"
+                    + "借用时间： " + dateString;
+            dingService.dingRequest(message,equipment.getDepartment().getWebHook());
+        }
         equipment1.setUser(this.userService.getCurrentLoginUser());
         equipment1.setStates(6);
         return this.equipmentRepository.save(equipment1);
@@ -159,10 +174,21 @@ public class EquipmentServiceImpl implements EquipmentService{
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateString = formatter.format(currentTime);
         Equipment equipment1 = this.equipmentRepository.findById(id).get();
+        if(equipment.getDepartment().getWebHook() != null) {
+            String message = "归还推送" + "\n" +"用户  "
+                    + this.userService.getCurrentLoginUser().getName() + "   归还" +"\n" + "归还设备： " + equipment1.getName() + "\n"
+                    + "归还时间： " + dateString;
+            dingService.dingRequest(message,equipment.getDepartment().getWebHook());
+        }
 
-        dingService.dingRequest("归还推送" + "\n" +"用户  "
-                + this.userService.getCurrentLoginUser().getName() + "   归还" +"\n" + "归还设备： " + equipment1.getName() + "\n"
-                + "归还时间： " + dateString);
+        if(equipment1.getScore() == null || equipment1.getNumber() == null) {
+            equipment1.setScore(equipment.getScore());
+            equipment1.setNumber(1);
+        } else {
+            Double score = (equipment1.getScore() * equipment1.getNumber()  + equipment.getScore()) / (equipment1.getNumber()+1);
+            equipment1.setScore(score);
+            equipment1.setNumber(equipment1.getNumber()+1);
+        }
         equipment1.setUser(null);
         equipment1.setStates(0);
         return this.equipmentRepository.save(equipment1);
@@ -192,8 +218,11 @@ public class EquipmentServiceImpl implements EquipmentService{
     @Override
     public Equipment scrap(Long id, Equipment equipment) {
         Equipment equipment1 = this.equipmentRepository.findById(id).get();
-        dingService.dingRequest("报废推送" + "\n"
-                +"申请报废设备： " + equipment1.getName() + "\n" + "用户  " + this.userService.getCurrentLoginUser().getName() + "  执行操作");
+        if(equipment.getDepartment().getWebHook() != null) {
+            String message = "报废推送" + "\n"
+                    +"申请报废设备： " + equipment1.getName() + "\n" + "用户  " + this.userService.getCurrentLoginUser().getName() + "  执行操作";
+            dingService.dingRequest(message,equipment.getDepartment().getWebHook());
+        }
         Approval approval = new Approval();
         approval.setEquipment(equipment1);
         equipment1.setStates(8);

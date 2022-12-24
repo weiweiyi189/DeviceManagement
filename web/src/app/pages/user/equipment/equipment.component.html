@@ -58,6 +58,10 @@
   <div class="col-lg-4">
   </div>
   <div class="col-lg-8 text-right button-group">
+    <a class="btn btn-info btn-sm text-white mr-2" routerLink="/equipment/recommend">
+      <i class="fas fa-thumbs-up"></i>
+      借用推荐
+    </a>
     <a class="btn btn-primary btn-sm text-white" routerLink="/equipment/add">
       <i class="fas fa-plus"></i>
       购入填报
@@ -112,7 +116,7 @@
         <i class="fas fa-tools"></i>
         报修
       </button>
-      <button type="button" class="btn btn-warning btn-sm mr-2" (click)="scrap(equipment)"
+      <button type="button" class="btn btn-secondary btn-sm mr-2" (click)="scrap(equipment)"
               [disabled]="equipment.states != 0">
         <i class="fab fa-strava"></i>
         报废

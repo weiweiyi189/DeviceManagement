@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Equipment} from '../../../func/Equipment';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {User} from '../../../func/User';
 import {EquipmentService} from '../../../service/equipment.service';
 import {CommonService} from '../../../service/common.service';
@@ -9,12 +9,27 @@ import {Type} from '../../../func/Type';
 import {config} from '../../../conf/app.conf';
 import {HttpErrorResponse} from '@angular/common/http';
 
+class HttpService {
+}
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
+
 export class DetailComponent implements OnInit {
+
+  constructor(private equipmentService: EquipmentService,
+              private commonService: CommonService,
+              private authService: AuthService) {
+    if (this.score > 0) {
+      for (let i = 0; i < this.score; i++) {
+        this.lists[i].flag = 1;
+      }
+    }
+  }
+
   /**
    * 分页信息
    */
@@ -22,6 +37,10 @@ export class DetailComponent implements OnInit {
     page: 0,
     size: 10,
   };
+
+  scoreFormControl = new FormControl(null, Validators.required);
+
+  showModel = false;
 
   /* 分页数据 */
   equipments = {
@@ -42,9 +61,37 @@ export class DetailComponent implements OnInit {
 
   currentUser: User;
   fontColor: any;
-  constructor(private equipmentService: EquipmentService,
-              private commonService: CommonService,
-              private authService: AuthService) { }
+
+
+
+  // 总体评价
+  public score = 0;
+  public lists: any = [{
+    grayStar: './assets/images/icon/starg2.png',
+    yellowStar: './assets/images/icon/stary2.png',
+    flag: 0
+  },
+    {
+      grayStar: './assets/images/icon/starg2.png',
+      yellowStar: './assets/images/icon/stary2.png',
+      flag: 0
+    },
+    {
+      grayStar: './assets/images/icon/starg2.png',
+      yellowStar: './assets/images/icon/stary2.png',
+      flag: 0
+    },
+    {
+      grayStar: './assets/images/icon/starg2.png',
+      yellowStar: './assets/images/icon/stary2.png',
+      flag: 0
+    },
+    {
+      grayStar: './assets/images/icon/starg2.png',
+      yellowStar: './assets/images/icon/stary2.png',
+      flag: 0
+    }
+  ];
 
   ngOnInit(): void {
     this.authService.getCurrentLoginUser$()
@@ -68,30 +115,24 @@ export class DetailComponent implements OnInit {
   getFontColor(status: number): any {
     if (status === 0) {
       this.fontColor = '#2e5fee';
-    }
-    else if (status === 1) {
+    } else if (status === 1) {
       this.fontColor = '#37be2e';
-    }
-    else if (status === 2) {
+    } else if (status === 2) {
       this.fontColor = '#ac3d09';
-    }
-    else if (status === 3) {
+    } else if (status === 3) {
       this.fontColor = '#df2e2e';
-    }
-    else if (status === 4) {
+    } else if (status === 4) {
       this.fontColor = '#fe9d2e';
-    }
-    else if (status === 5) {
+    } else if (status === 5) {
       this.fontColor = '#fe9d2e';
-    }
-    else if (status === 6) {
+    } else if (status === 6) {
       this.fontColor = '#fe9d2e';
     }
     return this.fontColor;
   }
 
   bindType(thType: Type): void {
-    if ( thType && thType.id) {
+    if (thType && thType.id) {
       // 合法，设置 college
       this.queryParams.type = thType.id;
     } else {
@@ -106,11 +147,21 @@ export class DetailComponent implements OnInit {
    */
   onCheckBoxChange($event: Event, reviewed: number): void {
     switch (reviewed) {
-      case 0: this.queryParams.states = 0; break;
-      case 1: this.queryParams.states = 1; break;
-      case 2: this.queryParams.states = 2; break;
-      case 3: this.queryParams.states = 3; break;
-      case 4: this.queryParams.states = null; break;
+      case 0:
+        this.queryParams.states = 0;
+        break;
+      case 1:
+        this.queryParams.states = 1;
+        break;
+      case 2:
+        this.queryParams.states = 2;
+        break;
+      case 3:
+        this.queryParams.states = 3;
+        break;
+      case 4:
+        this.queryParams.states = null;
+        break;
     }
     this.loadData();
   }
@@ -178,19 +229,44 @@ export class DetailComponent implements OnInit {
     }, '是否确认报修');
   }
 
+  open(): void {
+    this.showModel = true;
+  }
+
 
   return(equipment: Equipment): void {
     // 确认框
     this.commonService.confirm((confirm: boolean) => {
       if (confirm) {
+        equipment.score = this.score;
+        console.log(equipment);
         this.equipmentService.return(equipment.id, equipment).subscribe(() => {
           this.commonService.success(() => {
           }, '归还成功');
           this.pageAll();
+          this.showModel = false;
         }, (response: HttpErrorResponse) => {
           this.commonService.httpError(response);
         });
       }
     }, '是否确认归还');
+  }
+
+  onClose(): void {
+    this.showModel = false;
+  }
+
+  // 星星
+  // tslint:disable-next-line:typedef
+  clickStars(index) {
+    this.lists.forEach((star) => {
+      star.flag = 0;
+    });
+    this.lists.forEach((star, i) => {
+      if (i <= index) {
+        star.flag = 1;
+      }
+    });
+    this.score = index + 1;
   }
 }

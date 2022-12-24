@@ -8,6 +8,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {DepartmentService} from '../../../../service/department.service';
 import {UserService} from '../../../../service/user.service';
 import {Department} from '../../../../func/Department';
+import {SettingValidators} from "./setting-validators";
 
 @Component({
   selector: 'app-add',
@@ -40,6 +41,7 @@ export class AddComponent implements OnInit {
       name: ['', Validators.required],
       code: ['', Validators.required],
       userId: [''],
+      webHook: ['', SettingValidators.isRightWebhook]
     });
   }
 
@@ -56,12 +58,17 @@ export class AddComponent implements OnInit {
     return this.departmentForm.get('userId');
   }
 
+  get webHook(): AbstractControl {
+    return this.departmentForm.get('webHook');
+  }
+
 
 
   submit(): void {
     const department = new Department({
         name: this.name.value,
         code: this.code.value,
+        webHook: this.webHook.value,
         user: new User({
           id: this.userId.value
         })

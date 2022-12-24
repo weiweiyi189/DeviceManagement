@@ -20,10 +20,10 @@ public interface EquipmentRepository extends JpaRepository<Equipment, Long>, Pag
         Specification<Equipment> specification = EquipmentSpecs.isStatus(2L);
         return this.findAll(specification, pageable);
     };
-    default Page<Equipment> query(String name, Long states, String place, String internalNumber, Pageable pageable, Type type){
+    default Page<Equipment> query(String name, Long states, String place,String purpose, String internalNumber, Pageable pageable, Type type){
         Assert.notNull(pageable, "pageable不能为null");
         Specification<Equipment> specification = EquipmentSpecs.containingName(name).and(EquipmentSpecs.containingInternalNumber(internalNumber))
-                .and(EquipmentSpecs.containPlace(place)).and(EquipmentSpecs.isStatus(states)).and(EquipmentSpecs.isType(type));
+                .and(EquipmentSpecs.containPlace(place)).and(EquipmentSpecs.containPurpose(purpose)).and(EquipmentSpecs.isStatus(states)).and(EquipmentSpecs.isType(type));
         return this.findAll(specification, pageable);
     };
 

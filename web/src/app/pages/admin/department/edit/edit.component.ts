@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DepartmentService} from '../../../../service/department.service';
 import {Department} from '../../../../func/Department';
 import {UserService} from '../../../../service/user.service';
+import {SettingValidators} from "../add/setting-validators";
 
 @Component({
   selector: 'app-edit',
@@ -54,6 +55,7 @@ export class EditComponent implements OnInit {
       name: ['', Validators.required],
       code: ['', Validators.required],
       userId: [''],
+      webHook: ['', SettingValidators.isRightWebhook]
     });
   }
 
@@ -61,6 +63,7 @@ export class EditComponent implements OnInit {
     this.departmentForm.setValue({
       name: department.name,
       code: department.code,
+      webHook: department.webHook,
       userId: department.user?.id ? department.user?.id : null
     });
   }
@@ -78,11 +81,16 @@ export class EditComponent implements OnInit {
     return this.departmentForm.get('userId');
   }
 
+  get webHook(): AbstractControl {
+    return this.departmentForm.get('webHook');
+  }
+
 
   submit(): any {
     const department = new Department({
         name: this.name.value,
         code: this.code.value,
+        webHook: this.webHook.value,
         user: new User({
           id: this.userId.value
         })

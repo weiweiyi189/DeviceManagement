@@ -1,3 +1,56 @@
+<form>
+
+  <div class="input-group mb-3">
+
+    <label class="mt-1">设备名称：</label>
+    <input type="text" class="form-control rounded col-1 h-100" placeholder="" >
+
+    <label class="mt-1 ml-5">申请人：</label>
+    <input type="text" class="form-control col-1 rounded" placeholder="" >
+
+    <label class="mt-1 ml-5">所属部门：</label>
+    <input type="text" class="form-control col-1 rounded " placeholder="" >
+
+    <label class="mt-1 ml-5">审批员：</label>
+    <input type="text" class="form-control col-1 rounded " placeholder="" >
+
+    <button class="btn btn-sm btn-warning ml-5">
+      <i class="fas fa-trash-alt"></i>
+      清空
+    </button>
+  </div>
+  &nbsp;
+  <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio" [checked]="1" id="customRadioInline5" name="customRadioInline1" class="custom-control-input">
+    <label class="custom-control-label" for="customRadioInline5">全部</label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio" id="customRadioInline" name="customRadioInline1" class="custom-control-input">
+    <label class="custom-control-label" for="customRadioInline">转借</label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio" id="customRadioInline0" name="customRadioInline1" class="custom-control-input">
+    <label class="custom-control-label" for="customRadioInline0">维修</label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio"  id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+    <label class="custom-control-label" for="customRadioInline1">报废</label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio"  id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+    <label class="custom-control-label" for="customRadioInline2">购入</label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio"  id="customRadioInline3" name="customRadioInline1" class="custom-control-input">
+    <label class="custom-control-label" for="customRadioInline3">上报购入</label>
+
+    <button type="submit" class="btn btn-success btn-sm ml-xl-5"><i class="fas fa-search">&nbsp;</i>查询</button>
+  </div>
+
+
+</form>
+
+
 <table class="table table-striped table-bordered mt-2">
   <thead class="thead-light">
   <tr>

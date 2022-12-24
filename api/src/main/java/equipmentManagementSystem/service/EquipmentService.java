@@ -31,7 +31,7 @@ public interface EquipmentService {
 
     Equipment getEquipmentById(Long id);
 
-    Page<Equipment> quaryAll(String name, Long states, String place, String internalNumber, Pageable pageable, Long type);
+    Page<Equipment> quaryAll(String name, Long states, String place,String purpose,  String internalNumber, Pageable pageable, Long type);
 
     Equipment borrow(Long id, Equipment equipment);
 

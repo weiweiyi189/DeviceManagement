@@ -52,6 +52,7 @@ export class EditComponent implements OnInit {
       type: [null, Validators.required],
       internalNumber: ['', Validators.required],
       place: ['', Validators.required],
+      purpose: ['', Validators.required],
       department: [null, Validators.required],
     });
   }
@@ -64,6 +65,7 @@ export class EditComponent implements OnInit {
       type: equipment.type,
       internalNumber: equipment.internalNumber,
       place: equipment.place,
+      purpose: equipment.purpose,
       department: equipment.department,
     });
   }

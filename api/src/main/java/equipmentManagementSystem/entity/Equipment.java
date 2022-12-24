@@ -51,6 +51,15 @@ public class Equipment implements Serializable, SoftDelete {
      */
     private String place;
 
+    // 用途
+    private String purpose;
+
+    // 平均得分 满分5分
+    private Double score = 0.0;
+
+    // 评价次数
+    private Integer number = 0;
+
     private Boolean deleted = false;
 
     /**
@@ -174,6 +183,30 @@ public class Equipment implements Serializable, SoftDelete {
     // 设置为私有
     private void setDeleted(Boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public interface DepartmentJsonView{}

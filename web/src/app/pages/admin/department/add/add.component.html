@@ -29,6 +29,20 @@
       </select>
         </div>
       </div>
+      <div class="row mt-4">
+        <label class="col-md-4 text-right col-form-label" for="webhook">webhook</label>
+        <div class="col-md-8">
+          <input class="form-control" id="webhook" type="text" formControlName="webHook">
+          <small>
+            (可选)请输入钉钉机器人的webHook, 以推送设备消息到钉钉群
+          </small><br>
+          <small
+            *ngIf="departmentForm.get('webHook').errors && departmentForm.get('webHook').errors.isRightWebhook"
+            class="text-danger">
+            webhook格式不正确,必须是https或http开头
+          </small>
+        </div>
+      </div>
       <div class="row mt-5">
         <div class="offset-md-6">
           <button type="submit" class="btn btn-primary" [disabled]="departmentForm.invalid">

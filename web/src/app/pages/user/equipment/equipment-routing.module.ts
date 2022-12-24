@@ -5,6 +5,7 @@ import { EditComponent } from './edit/edit.component';
 import {EquipmentComponent} from './equipment.component';
 import {DetailComponent} from '../detail/detail.component';
 import {BorrowComponent} from "./borrow/borrow.component";
+import {RecommendComponent} from "./recommend/recommend.component";
 
 const routes: Routes = [
   {
@@ -40,6 +41,13 @@ const routes: Routes = [
     component: DetailComponent,
     data: {
       title: '借用'
+    }
+  },
+  {
+    path: 'recommend',
+    component: RecommendComponent,
+    data: {
+      title: '推荐'
     }
   }
 ];

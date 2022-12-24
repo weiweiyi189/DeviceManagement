@@ -53,7 +53,7 @@ public class DingServiceImpl implements DingService {
      ** 作用：把传入的message发送给钉钉机器人
      */
     @Override
-    public void dingRequest(String message){
+    public void dingRequest(String message, String webHook){
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         String url = null;
         try {

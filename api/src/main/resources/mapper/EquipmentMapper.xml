@@ -12,6 +12,7 @@
             <result column="model" property="model"/>
             <result column="place" property="place"/>
             <result column="states" property="states"/>
+            <result column="purpose" property="purpose"/>
             <result column="sale_time" property="saleTime"/>
             <result column="internal_number" property="internalNumber"/>
             <association property="type" column="type_id" select="equipmentManagementSystem.Mybatis.TypeMapper.findById"/>

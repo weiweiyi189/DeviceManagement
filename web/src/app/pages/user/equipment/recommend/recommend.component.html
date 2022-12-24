@@ -1,0 +1,64 @@
+<form >
+  <div class="row">
+    <div class="col-md-6 offset-md-1">
+      <div class="row">
+        <div class="col-md-4 text-right">
+          <label  class="form-text">请选择用途<code>*</code></label>
+        </div>
+        <div class="col-md-8">
+          <select  class="form-control" [(ngModel)]="purpose" [ngModelOptions]="{standalone: true}"
+                  (change)="change()">
+            <option [ngValue]="null" disabled>请选择用途, 我们将为您推荐空闲设备</option>
+            <option [ngValue]="null" disabled></option>
+            <option *ngFor="let value of purposeArray" [ngValue]="value">{{value}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-8 offset-md-2">
+      <table class="table table-striped table-bordered mt-6" *ngIf="pageEquipments.content.length !== 0">
+        <thead class="thead-light">
+        <tr>
+          <th scope="col">序号</th>
+          <th scope="col">名称</th>
+          <th scope="col">型号</th>
+          <th scope="col">种类</th>
+          <th scope="col">所属部门</th>
+          <th scope="col">存放位置</th>
+          <th scope="col">推荐度</th>
+          <th scope="col">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let equipment of pageEquipments.content; let $index = index;">
+          <td>{{$index + 1}}</td>
+          <td>{{equipment?.name}}</td>
+          <td>{{equipment?.model}}</td>
+          <td>{{equipment?.type?.name}}</td>
+          <td>{{equipment?.department?.name}}</td>
+          <td>{{equipment?.place}}</td>
+          <td *ngIf="!equipment.score">无</td>
+          <td *ngIf="equipment.score < 1 && equipment.score">😢</td>
+          <td *ngIf="equipment.score >= 1 && equipment.score < 2">⭐</td>
+          <td *ngIf="equipment.score >= 2 && equipment.score < 3">⭐⭐</td>
+          <td *ngIf="equipment.score >= 3 && equipment.score < 4">⭐⭐⭐</td>
+          <td *ngIf="equipment.score >= 4 ">⭐⭐⭐⭐</td>
+          <td *ngIf="equipment.score == 5 ">⭐⭐⭐⭐⭐</td>
+          <td>
+            <button type="button" class="btn btn-info btn-sm mr-2" routerLink="/equipment/borrow/{{equipment.id}}"
+                    [disabled]="equipment.states != 0">
+              <i class="fab fa-strava"></i>
+              借用
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</form>
+
