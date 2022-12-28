@@ -107,7 +107,7 @@ public class EquipmentController {
     @PutMapping("return/{id}")
     @JsonView(Department.UserJsonView.class)
     public Equipment  toReturn(@PathVariable Long id, @RequestBody Equipment equipment) {
-        return this.equipmentService.toReturn(id, equipment);
+     return this.equipmentService.toReturn(id, equipment);
     }
 
 

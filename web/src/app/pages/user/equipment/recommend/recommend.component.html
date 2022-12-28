@@ -44,8 +44,8 @@
           <td *ngIf="equipment.score >= 1 && equipment.score < 2">⭐</td>
           <td *ngIf="equipment.score >= 2 && equipment.score < 3">⭐⭐</td>
           <td *ngIf="equipment.score >= 3 && equipment.score < 4">⭐⭐⭐</td>
-          <td *ngIf="equipment.score >= 4 ">⭐⭐⭐⭐</td>
-          <td *ngIf="equipment.score == 5 ">⭐⭐⭐⭐⭐</td>
+          <td *ngIf="equipment.score >= 4 && equipment.score < 5">⭐⭐⭐⭐</td>
+          <td *ngIf="equipment.score >= 5 ">⭐⭐⭐⭐⭐</td>
           <td>
             <button type="button" class="btn btn-info btn-sm mr-2" routerLink="/equipment/borrow/{{equipment.id}}"
                     [disabled]="equipment.states != 0">

@@ -27,9 +27,9 @@
         update equipment set deleted = 1 where id=#{id}
     </update>
 
-    <select id="findById" resultMap="equipmentMap">
-        select *
-        from equipment
-        where id=#{id}
-    </select>
+<!--    <select id="findById" resultMap="equipmentMap">-->
+<!--        select *-->
+<!--        from equipment-->
+<!--        where id=#{id}-->
+<!--    </select>-->
 </mapper>

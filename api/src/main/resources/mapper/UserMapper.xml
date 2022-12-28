@@ -16,13 +16,17 @@
         <association property="department" column="department_id" select="equipmentManagementSystem.Mybatis.DepartmentMapper.findById"/>
     </resultMap>
 
-    <!-- 注意id和mapper层定义的方法一致-->
-    <!-- 修改用户密码 -->
+
+    <!--动态sql     -->
+    <!--参考https://mybatis.org/mybatis-3/zh/dynamic-sql.html     -->
     <update id="updatePwdByStaffNumber">
         update user
-        set password = #{password}
+        <set>
+            <if test="password != null">password = #{password}</if>
+        </set>
         where username = #{staffNumber}
     </update>
+
     <select id="findByName" resultType="equipmentManagementSystem.entity.User">
         select * from user where name like concat('%',#{name},'%')
     </select>
