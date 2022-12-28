@@ -180,15 +180,6 @@ public class EquipmentServiceImpl implements EquipmentService{
                     + "归还时间： " + dateString;
             dingService.dingRequest(message,equipment.getDepartment().getWebHook());
         }
-
-        if(equipment1.getScore() == null || equipment1.getNumber() == null) {
-            equipment1.setScore(equipment.getScore());
-            equipment1.setNumber(1);
-        } else {
-            Double score = (equipment1.getScore() * equipment1.getNumber()  + equipment.getScore()) / (equipment1.getNumber()+1);
-            equipment1.setScore(score);
-            equipment1.setNumber(equipment1.getNumber()+1);
-        }
         equipment1.setUser(null);
         equipment1.setStates(0);
         return this.equipmentRepository.save(equipment1);
