@@ -11,6 +11,8 @@ import {CommonModule} from '@angular/common';
 import { RepairComponent } from './pages/user/repair/repair.component';
 import { UserComponent } from './pages/user/user/user.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {YzUploaderModule} from '@yunzhi/ng-common';
+import {AttachmentService} from './service/attachment.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CommonModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    YzUploaderModule.forRoot({
+      uploaderService: AttachmentService
+    }),
   ],
   providers: [
     {

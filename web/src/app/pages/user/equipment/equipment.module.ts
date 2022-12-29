@@ -12,6 +12,7 @@ import { BorrowComponent } from './borrow/borrow.component';
 import {PartModule} from '../../../part/part.module';
 import {RecommendModule} from "./recommend/recommend.module";
 import {RecommendComponent} from "./recommend/recommend.component";
+import {UploaderModule} from "../attachment/uploader/uploader.module";
 
 @NgModule({
   declarations: [EquipmentComponent, AddComponent, EditComponent, BorrowComponent, RecommendComponent],
@@ -22,6 +23,7 @@ import {RecommendComponent} from "./recommend/recommend.component";
         FuncModule,
         FormsModule,
         PartModule,
+        UploaderModule,
     ],
   exports: [
     EquipmentComponent

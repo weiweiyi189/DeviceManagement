@@ -14,6 +14,7 @@
             <result column="states" property="states"/>
             <result column="purpose" property="purpose"/>
             <result column="sale_time" property="saleTime"/>
+            <result column="attachment_ids" property="attachmentIds"/>
             <result column="internal_number" property="internalNumber"/>
             <association property="type" column="type_id" select="equipmentManagementSystem.Mybatis.TypeMapper.findById"/>
             <association property="department" column="department_id" select="equipmentManagementSystem.Mybatis.DepartmentMapper.findById"/>

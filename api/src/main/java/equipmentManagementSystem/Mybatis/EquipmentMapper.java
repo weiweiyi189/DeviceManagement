@@ -1,8 +1,8 @@
 package equipmentManagementSystem.Mybatis;
 
-import com.sun.xml.internal.ws.org.objectweb.asm.Type;
 import equipmentManagementSystem.entity.Department;
 import equipmentManagementSystem.entity.Equipment;
+import equipmentManagementSystem.entity.Type;
 import equipmentManagementSystem.entity.User;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
@@ -30,6 +30,7 @@ public interface EquipmentMapper {
             @Result(property = "purpose", column = "purpose"),
             @Result(property = "saleTime", column = "sale_time"),
             @Result(property = "internalNumber", column = "internal_number"),
+            @Result(property = "attachmentIds", column = "attachment_ids"),
             @Result(
                     property = "type", column = "type_id", javaType = Type.class,
                     one = @One(select = "equipmentManagementSystem.Mybatis.TypeMapper.findById")
@@ -43,7 +44,7 @@ public interface EquipmentMapper {
                     one = @One(select = "equipmentManagementSystem.Mybatis.UserMapper.findById")
             )
     })
-    @Select("SELECT id,name,model,place,states,purpose,sale_time,internal_number,type_id,department_id,user_id FROM equipment WHERE id = #{id}")
+    @Select("SELECT id,name,model,place,states,purpose,sale_time,internal_number,attachment_ids,type_id,department_id,user_id FROM equipment WHERE id = #{id}")
     Equipment findById(Long id);
 
 

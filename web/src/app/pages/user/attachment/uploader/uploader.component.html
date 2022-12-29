@@ -1,0 +1,34 @@
+<span *ngIf="formControl.value">{{formControl.value.name}}</span>
+<button type="button" class="btn btn-sm btn-outline-primary _upload" (click)="showUploader = true">
+  <i class="fa fa-upload"></i>上传
+</button>
+
+<yz-uploader *ngIf="showUploader"
+             (beClose)="onClose()"
+             (beUpload)="onUpload($event)"
+             [maxSize]="maxSize">
+</yz-uploader>
+<table class="table col-12 mt-2" *ngIf="this.attachments.length > 0">
+  <thead>
+  <tr class="table-primary flex-row-reverse">
+    <th>附件名称</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let attachment of attachments;index as i">
+    <td>
+      {{attachment.name}}
+    </td>
+    <td>
+      <button type="button" class="btn btn-sm btn-outline-primary _upload" (click)="download(i)">
+        <i class="fa fa-download"></i>下载
+      </button>
+      <button type="button" class="btn btn-sm btn-danger _upload" (click)="onDelete(i)">
+        <i class="fas fa-trash-alt"></i>
+        删除
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
