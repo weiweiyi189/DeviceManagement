@@ -54,6 +54,7 @@ export class EditComponent implements OnInit {
       place: ['', Validators.required],
       purpose: ['', Validators.required],
       department: [null, Validators.required],
+      attachmentIds: [''],
     });
   }
 
@@ -67,6 +68,7 @@ export class EditComponent implements OnInit {
       place: equipment.place,
       purpose: equipment.purpose,
       department: equipment.department,
+      attachmentIds: equipment.attachmentIds,
     });
   }
 

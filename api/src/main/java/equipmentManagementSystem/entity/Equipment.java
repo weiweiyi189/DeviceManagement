@@ -39,6 +39,8 @@ public class Equipment implements Serializable, SoftDelete {
     //@JsonProperty("internal_number")
     private String internalNumber;
 
+    private String attachmentIds = "";
+
     /**
      * 所属部门
      */
@@ -209,7 +211,18 @@ public class Equipment implements Serializable, SoftDelete {
         this.number = number;
     }
 
+    public String getAttachmentIds() {
+        return attachmentIds;
+    }
+
+    public void setAttachmentIds(String attachmentIds) {
+        this.attachmentIds = attachmentIds;
+    }
+
     public interface DepartmentJsonView{}
     public interface UserJsonView{}
+
+    public interface AttachmentIdsJsonView {
+    }
 }
 
