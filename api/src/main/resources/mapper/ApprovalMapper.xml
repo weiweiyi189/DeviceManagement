@@ -25,9 +25,9 @@
     </update>
 
 
-    <select id="findById" resultMap="approvalResultMap">
-        select *
-        from approval
-        where id=#{id}
-    </select>
+<!--    <select id="findById" resultMap="approvalResultMap">-->
+<!--        select *-->
+<!--        from approval-->
+<!--        where id=#{id}-->
+<!--    </select>-->
 </mapper>

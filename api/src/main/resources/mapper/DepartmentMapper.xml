@@ -22,9 +22,9 @@
     </update>
 
 
-    <select id="findById" resultMap="departmentResultMap">
-        select *
-        from department
-        where id=#{id}
-    </select>
+<!--    <select id="findById" resultMap="departmentResultMap">-->
+<!--        select *-->
+<!--        from department-->
+<!--        where id=#{id}-->
+<!--    </select>-->
 </mapper>

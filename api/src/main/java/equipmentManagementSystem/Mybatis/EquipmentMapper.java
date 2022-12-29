@@ -14,8 +14,6 @@ import java.util.List;
 
 @Repository
 public interface EquipmentMapper {
-    List<Equipment> findAll();
-
     /**
      * 注解的方式
      * 参考https://www.cnblogs.com/SQLyang/p/15033720.html
@@ -46,6 +44,7 @@ public interface EquipmentMapper {
     @Select("SELECT id,name,model,place,states,purpose,sale_time,internal_number,type_id,department_id,user_id FROM equipment WHERE id = #{id}")
     Equipment findById(Long id);
 
+    List<Equipment> findAll();
 
     void deleteById(Long id);
 }

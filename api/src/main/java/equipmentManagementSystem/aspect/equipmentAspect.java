@@ -2,6 +2,8 @@ package equipmentManagementSystem.aspect;
 
 import equipmentManagementSystem.entity.Equipment;
 import equipmentManagementSystem.respority.EquipmentRepository;
+import equipmentManagementSystem.service.DingService;
+import equipmentManagementSystem.service.UserService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class equipmentAspect {
+
     @Autowired
     private EquipmentRepository equipmentRepository;
 
@@ -33,4 +36,21 @@ public class equipmentAspect {
 
         joinPoint.proceed();
     }
+
+//    /**
+//     * 添加设备成功，切入钉钉推送
+//     * 可参考 https://juejin.cn/post/6999570632409088008
+//     */
+//    @Around("execution(* equipmentManagementSystem.controller.EquipmentController.add(..)) && args(equipment)")
+//    public void addEquipment(final ProceedingJoinPoint joinPoint, Equipment equipment) throws Throwable {
+//        joinPoint.proceed();
+//        if(equipment.getDepartment().getWebHook() != null) {
+//            String message = "新增推送" + "\n" + "用户  " +
+//                    this.userService.getCurrentLoginUser().getName()
+//                    + " 提交审批" + "\n" + "新增设备： " + equipment.getName();
+//            dingService.dingRequest(message,equipment.getDepartment().getWebHook());
+//        }
+//    }
+
+
 }

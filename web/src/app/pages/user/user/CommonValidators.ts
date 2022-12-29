@@ -29,7 +29,6 @@ export class CommonValidators {
           console.log(15);
           return exists && user.username !== control.value ? {usernameExist: true} : null;
         }
-
         return exists ? {usernameExist: true} : null;
       }));
     };
