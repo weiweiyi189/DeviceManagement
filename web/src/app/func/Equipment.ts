@@ -37,11 +37,13 @@ export class Equipment {
   // 评分 满分5
   score: number;
 
+  attachmentIds: string;
+
   // tslint:disable-next-line:max-line-length
   constructor(data?: {
     id?: number, name?: string, type?: Type, model?: string,
     internalNumber?: string, department?: Department, place?: string,
-    states?: number, user?: User, deleted?: boolean, purpose?: string;
+    states?: number, user?: User, deleted?: boolean, purpose?: string; attachmentIds?: string;
   }) {
     if (data) {
       if (data.id) {
@@ -83,6 +85,10 @@ export class Equipment {
 
       if (data.purpose) {
         this.purpose = data.purpose;
+      }
+
+      if (data.attachmentIds) {
+        this.attachmentIds = data.attachmentIds;
       }
     }
 

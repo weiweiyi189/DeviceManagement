@@ -45,6 +45,7 @@ export class AddComponent implements OnInit {
       place: ['', Validators.required],
       purpose: ['', Validators.required],
       department: [null, Validators.required],
+      attachmentIds: [''],
     });
   }
 

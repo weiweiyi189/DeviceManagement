@@ -83,6 +83,7 @@ public class EquipmentServiceImpl implements EquipmentService{
        oldEquipment.setPurpose(equipment.getPurpose());
        oldEquipment.setPlace(equipment.getPlace());
        oldEquipment.setType(equipment.getType());
+       oldEquipment.setAttachmentIds(equipment.getAttachmentIds());
         return this.equipmentRepository.save(oldEquipment);
     }
 

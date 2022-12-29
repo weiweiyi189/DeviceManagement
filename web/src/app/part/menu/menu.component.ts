@@ -14,7 +14,9 @@ import {MenuService} from '../../service/menu.service';
   styleUrls: [ './menu.component.css' ]
 })
 export class MenuComponent implements OnInit, OnDestroy {
+
   menus: Array<Menu>;
+
   currentLoginUser: User;
 
   environment = environment;
