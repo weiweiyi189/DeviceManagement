@@ -85,7 +85,6 @@ public class EquipmentController {
     public void add(@RequestBody Equipment equipment) {
         this.equipmentService.add(equipment);
     }
-
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         this.equipmentService.delete(id);

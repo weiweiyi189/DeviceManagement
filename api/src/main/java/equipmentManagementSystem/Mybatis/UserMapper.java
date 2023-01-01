@@ -35,16 +35,19 @@ public interface UserMapper {
             )
     })
 
+//    @Select("SELECT * FROM User WHERE deleted = 0")
     List<User> findByName(String name);
 
+//    @Select("SELECT * FROM User WHERE deleted = 0")
     List<User> findAll();
 
-
+//    @Update("update user set deleted = 1 where id=#{id}")
     void deleteById(Long id);
 
     @Select("SELECT * FROM User WHERE id = #{id}")
     User findById(Long id);
 
+//    @Update("update user set password = #{password} where username = #{staffNumber}")
     int updatePwdByStaffNumber(@Param("staffNumber") String staffNumber, @Param("password") String password);
 
 }

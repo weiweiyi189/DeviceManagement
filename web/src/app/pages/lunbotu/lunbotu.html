@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div id="slidershow" class="carousel slide" data-ride="carousel" data-interval = 2000 data-pause = "hover" data-wrap="true" style="margin-top: 5rem; width: 50%;height: 50%; margin-left:auto; margin-right:auto;">
+  <!-- 设置图片轮播的顺序 -->
+  <ol class="carousel-indicators">
+    <li class="active" data-target="#slidershow" data-slide-to="0" ></li>
+    <li data-target="#slidershow" data-slide-to="1"></li>
+    <li data-target="#slidershow" data-slide-to="2"></li>
+  </ol>
+  <!--设置轮播的图片-->
+  <div class="carousel-inner">
+    <div class="item active">
+      <a href="##"><img src="./img/pics01.jpg" alt="cat1"></a>
+    </div>
+    <div class="item">
+      <a href="##"><img src="./img/pics02.jpg" alt="cat2"></a>
+    </div>
+    <div class="item">
+      <a href="##"><img src="./img/pics03.jpg" alt="cat3"></a>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#slidershow" role="button" data-slide="prev" >
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#slidershow" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+</body>
+</html>

@@ -1,7 +1,6 @@
 package equipmentManagementSystem.aspect;
 
 import equipmentManagementSystem.entity.Constants;
-import equipmentManagementSystem.entity.Equipment;
 import equipmentManagementSystem.redis.RedisCache;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

@@ -42,6 +42,6 @@
 <!--    <select id="findById" resultMap="userResultMap">-->
 <!--        select *-->
 <!--        from user-->
-<!--        where id=#{id}-->
+<!--        <where> <if test="id != null"> id=#{id} </if> </where>-->
 <!--    </select>-->
 </mapper>

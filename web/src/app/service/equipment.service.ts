@@ -90,7 +90,6 @@ export class EquipmentService {
       page: String(page),
       size: String(size),
     };
-
     return this.httpClient.get<Array<Equipment>>(`${this.url}/getAll`, {params});
   }
 
@@ -101,6 +100,7 @@ export class EquipmentService {
     return this.httpClient.put<Equipment>(`${this.url}/scrap/${equipmentId.toString()}`, equipment);
   }
 
+  // tslint:disable-next-line:max-line-length
   query(params: { size?: number; name?: any; page?: number; internalNumber?: any; type?: any, place?: any; states?: any; purpose?: any }): any {
     /** 初始化分页参数 */
     const PARAMS: { [key: string]: any } = {
