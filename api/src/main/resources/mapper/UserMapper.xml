@@ -28,7 +28,7 @@
     </update>
 
     <select id="findByName" resultType="equipmentManagementSystem.entity.User">
-        select * from user where name like concat('%',#{name},'%')
+        select * from user <where> <if test="name != null"> name like concat('%',#{name},'%') </if> </where>
     </select>
 
     <select id="findAll" resultMap="userResultMap">
@@ -39,9 +39,9 @@
         update user set deleted = 1 where id=#{id}
     </update>
 
-    <select id="findById" resultMap="userResultMap">
-        select *
-        from user
-        where id=#{id}
-    </select>
+<!--    <select id="findById" resultMap="userResultMap">-->
+<!--        select *-->
+<!--        from user-->
+<!--        <where> <if test="id != null"> id=#{id} </if> </where>-->
+<!--    </select>-->
 </mapper>

@@ -78,16 +78,16 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findByUsernameAndDeletedIsFalse(staffNumber);
         if (null == user) throw new EntityNotFoundException("账号不存在！");
 
-        // 验证码过期校验
-        String cacheCode = redisCache.getCacheObject(Constants.MAIL_CODE_KEY + staffNumber); // 获取缓存中该账号的验证码
-        if (cacheCode == null) {
-            throw new EntityNotFoundException("验证码已过期，请重新获取！");
-        }
-
-        // 验证码正确性校验
-        if (!cacheCode.equals(code)) {
-            throw new EntityNotFoundException("验证码错误！");
-        }
+//        // 验证码过期校验
+//        String cacheCode = redisCache.getCacheObject(Constants.MAIL_CODE_KEY + staffNumber); // 获取缓存中该账号的验证码
+//        if (cacheCode == null) {
+//            throw new EntityNotFoundException("验证码已过期，请重新获取！");
+//        }
+//
+//        // 验证码正确性校验
+//        if (!cacheCode.equals(code)) {
+//            throw new EntityNotFoundException("验证码错误！");
+//        }
 
         // 修改密码
         int result = userMapper.updatePwdByStaffNumber(staffNumber, BeanService.getPasswordEncoder().encode(loginPassword));

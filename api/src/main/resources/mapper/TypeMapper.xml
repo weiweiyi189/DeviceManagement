@@ -16,9 +16,9 @@
         update type set deleted = 1 where id=#{id}
     </update>
     
-    <select id="findById" resultMap="typeResultMap">
-        select *
-        from type
-        where id=#{id}
-    </select>
+<!--    <select id="findById" resultMap="typeResultMap">-->
+<!--        select *-->
+<!--        from type-->
+<!--        where id=#{id}-->
+<!--    </select>-->
 </mapper>

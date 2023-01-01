@@ -1,0 +1,24 @@
+.con_img{
+  position: relative;
+  width: auto;
+  height: auto;
+}
+.ms{
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 41%;
+  height: 10%;
+  color: white;
+  background-color:gray;
+  opacity:0.8;
+  padding-left: 20px;
+  padding-top: 30px;
+  filter:alpha(opacity=60);
+  -moz-opacity:0.6;
+}
+
+.image{
+  width:auto;
+  height:auto;
+}

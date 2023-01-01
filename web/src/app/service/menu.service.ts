@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Menu} from '../func/Menu';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -26,10 +25,8 @@ export class MenuService {
     // tslint:disable-next-line:max-line-length
     new Menu({name: '个人中心', icon: 'fas fa-user',  url: 'personalCenter',  roles: [Menu.ROLE_ADMIN, Menu.ROLE_COMMON, Menu.ROLE_REPAIR, Menu.ROLE_MANAGER]})
   ]);
-
   constructor() {
   }
-
   getAll(): Observable<Array<Menu>> {
     return this.menusSubject.asObservable();
   }
